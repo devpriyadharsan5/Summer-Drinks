@@ -1,0 +1,45 @@
+<svg width="700" height="40" viewBox="0 0 700 40" xmlns="http://www.w3.org/2000/svg">
+  <rect width="700" height="40" rx="8" fill="#FAF6EF" stroke="#D9CCBA" stroke-width="1.5"/>
+
+  <!-- Quote 1 -->
+  <text x="350" y="26" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#7C5832" opacity="0">
+    💧 Water is fine but have you tried nannari sherbet at 2pm in Dindigul?
+    <animate attributeName="opacity" values="0;1;1;0" dur="56s" begin="0s" repeatCount="indefinite"/>
+  </text>
+
+  <!-- Quote 2 -->
+  <text x="350" y="26" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#C1440E" opacity="0">
+    🥭 Dindigul summer survival kit: 110 drinks, 0 excuses, infinite sweat.
+    <animate attributeName="opacity" values="0;1;1;0" dur="56s" begin="8s" repeatCount="indefinite"/>
+  </text>
+
+  <!-- Quote 3 -->
+  <text x="350" y="26" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#5C7A5A" opacity="0">
+    🌴 My gym routine: walk to the kitchen, blend something, pretend it's pre-workout.
+    <animate attributeName="opacity" values="0;1;1;0" dur="56s" begin="16s" repeatCount="indefinite"/>
+  </text>
+
+  <!-- Quote 4 -->
+  <text x="350" y="26" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#0E7490" opacity="0">
+    ☀️ Dindigul heat said 42°C. I said hold my pomegranate juice.
+    <animate attributeName="opacity" values="0;1;1;0" dur="56s" begin="24s" repeatCount="indefinite"/>
+  </text>
+
+  <!-- Quote 5 -->
+  <text x="350" y="26" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#7C5832" opacity="0">
+    🌙 Ashwagandha milk at 10pm hits different when you've been on a laptop since 8am.
+    <animate attributeName="opacity" values="0;1;1;0" dur="56s" begin="32s" repeatCount="indefinite"/>
+  </text>
+
+  <!-- Quote 6 -->
+  <text x="350" y="26" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#C1440E" opacity="0">
+    🍋 Data analyst by day. Juice researcher by summer. Legend by 110 drinks.
+    <animate attributeName="opacity" values="0;1;1;0" dur="56s" begin="40s" repeatCount="indefinite"/>
+  </text>
+
+  <!-- Quote 7 -->
+  <text x="350" y="26" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#5C7A5A" opacity="0">
+    🌿 Amma said drink water. I said I'll have 109 other options first.
+    <animate attributeName="opacity" values="0;1;1;0" dur="56s" begin="48s" repeatCount="indefinite"/>
+  </text>
+</svg>
