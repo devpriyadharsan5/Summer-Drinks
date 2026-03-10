@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>🥭 Dindigul Summer Drinks</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --morning: #f59e0b;
+    --morning-soft: #fef3c7;
+    --morning-deep: #92400e;
+    --noon: #0ea5e9;
+    --noon-soft: #e0f2fe;
+    --noon-deep: #0c4a6e;
+    --evening: #8b5cf6;
+    --evening-soft: #ede9fe;
+    --evening-deep: #4c1d95;
+    --night: #1e3a5f;
+    --night-soft: #e2e8f0;
+    --night-deep: #0f172a;
+    --bg: #0a0f1e;
+    --surface: #111827;
+    --surface2: #1f2937;
+    --text: #f1f5f9;
+    --text-muted: #94a3b8;
+    --gold: #fbbf24;
+    --green: #10b981;
+    --radius: 16px;
+    --shadow: 0 8px 32px rgba(0,0,0,0.4);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ────────────────────────────────────────────────────── */
+  .hero {
+    background: linear-gradient(135deg, #0f3460 0%, #1a1a4e 40%, #0a0f1e 100%);
+    padding: 28px 20px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(245,158,11,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 20%, rgba(14,165,233,0.10) 0%, transparent 50%);
+  }
+  .hero-emoji { font-size: 48px; display: block; margin-bottom: 8px; position: relative; animation: floaty 3s ease-in-out infinite; }
+  @keyframes floaty { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 6vw, 34px);
+    font-weight: 900;
+    background: linear-gradient(135deg, #fbbf24, #f97316, #fbbf24);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    position: relative;
+  }
+  .hero p { color: #93c5fd; font-size: 13px; margin-top: 6px; position: relative; }
+
+  /* ── STATS BAR ─────────────────────────────────────────────── */
+  .stats-bar {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 10px; padding: 16px 14px; background: var(--surface);
+    border-bottom: 1px solid #1e2d3d;
+  }
+  .stat-card {
+    background: var(--surface2); border-radius: 12px;
+    padding: 10px 8px; text-align: center;
+    border: 1px solid #2d3748;
+  }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; }
+  .stat-label { font-size: 10px; color: var(--text-muted); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .stat-card.morning .stat-num { color: var(--morning); }
+  .stat-card.noon .stat-num { color: var(--noon); }
+  .stat-card.evening .stat-num { color: var(--evening); }
+  .stat-card.night .stat-num { color: #64748b; }
+
+  /* ── PROGRESS ─────────────────────────────────────────────── */
+  .progress-wrap { padding: 14px 14px 0; }
+  .progress-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .progress-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .progress-count { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--gold); }
+  .progress-bar { height: 8px; background: var(--surface2); border-radius: 99px; overflow: hidden; }
+  .progress-fill {
+    height: 100%; border-radius: 99px;
+    background: linear-gradient(90deg, #f59e0b, #10b981);
+    transition: width 0.5s cubic-bezier(.4,0,.2,1);
+  }
+  .milestone { font-size: 11px; color: var(--green); margin-top: 6px; min-height: 16px; text-align: center; }
+
+  /* ── CONTROLS ─────────────────────────────────────────────── */
+  .controls { padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+  .search-wrap { position: relative; }
+  .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 15px; }
+  .search-input {
+    width: 100%; padding: 11px 12px 11px 36px;
+    background: var(--surface2); border: 1px solid #2d3748;
+    border-radius: 12px; color: var(--text); font-family: 'DM Sans', sans-serif;
+    font-size: 14px; outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-input:focus { border-color: var(--gold); }
+  .search-input::placeholder { color: var(--text-muted); }
+
+  .filter-row { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
+  .filter-row::-webkit-scrollbar { display: none; }
+  .filter-btn {
+    flex-shrink: 0; padding: 7px 14px; border-radius: 99px;
+    border: 1.5px solid #2d3748; background: transparent;
+    color: var(--text-muted); font-family: 'DM Sans', sans-serif;
+    font-size: 12px; font-weight: 500; cursor: pointer;
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .filter-btn.active { color: #0a0f1e; font-weight: 600; border-color: transparent; }
+  .filter-btn[data-filter="all"].active { background: var(--gold); }
+  .filter-btn[data-filter="morning"].active { background: var(--morning); }
+  .filter-btn[data-filter="noon"].active { background: var(--noon); }
+  .filter-btn[data-filter="evening"].active { background: var(--evening); }
+  .filter-btn[data-filter="night"].active { background: #475569; color: #fff; }
+  .filter-btn[data-filter="fav"].active { background: #ef4444; color: #fff; }
+  .filter-btn[data-filter="tried"].active { background: var(--green); }
+  .filter-btn[data-filter="untried"].active { background: #6366f1; color: #fff; }
+
+  /* ── SECTION HEADER ─────────────────────────────────────── */
+  .section-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 16px 14px 8px;
+    position: sticky; top: 0; z-index: 10;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .section-header.morning { background: rgba(10,15,30,0.92); border-left: 3px solid var(--morning); }
+  .section-header.noon    { background: rgba(10,15,30,0.92); border-left: 3px solid var(--noon); }
+  .section-header.evening { background: rgba(10,15,30,0.92); border-left: 3px solid var(--evening); }
+  .section-header.night   { background: rgba(10,15,30,0.92); border-left: 3px solid #475569; }
+  .section-emoji { font-size: 22px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; }
+  .section-count { margin-left: auto; font-size: 11px; color: var(--text-muted); background: var(--surface2); padding: 3px 10px; border-radius: 99px; }
+  .section-header.morning .section-title { color: var(--morning); }
+  .section-header.noon    .section-title { color: var(--noon); }
+  .section-header.evening .section-title { color: var(--evening); }
+  .section-header.night   .section-title { color: #94a3b8; }
+
+  /* ── DRINK CARD ─────────────────────────────────────────── */
+  .drinks-list { padding: 0 14px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
+
+  .drink-card {
+    background: var(--surface); border-radius: var(--radius);
+    border: 1px solid #1e2d3d;
+    overflow: hidden;
+    transition: transform 0.15s, box-shadow 0.15s;
+    animation: cardIn 0.3s ease both;
+  }
+  @keyframes cardIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+  .drink-card:active { transform: scale(0.99); }
+  .drink-card.tried { border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.04); }
+  .drink-card.fav-card { border-color: rgba(239,68,68,0.3); }
+  .drink-card.hidden { display: none; }
+
+  .card-main {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px; cursor: pointer;
+  }
+
+  /* Number badge */
+  .drink-num {
+    flex-shrink: 0; width: 32px; height: 32px;
+    border-radius: 10px; display: flex; align-items: center;
+    justify-content: center; font-size: 11px; font-weight: 700;
+    margin-top: 1px;
+  }
+  .morning .drink-num  { background: rgba(245,158,11,0.15); color: var(--morning); }
+  .noon    .drink-num  { background: rgba(14,165,233,0.15); color: var(--noon); }
+  .evening .drink-num  { background: rgba(139,92,246,0.15); color: var(--evening); }
+  .night   .drink-num  { background: rgba(71,85,105,0.2);   color: #94a3b8; }
+  .card-custom .drink-num { background: rgba(16,185,129,0.15); color: var(--green); }
+
+  .card-info { flex: 1; min-width: 0; }
+  .card-name { font-weight: 600; font-size: 15px; line-height: 1.3; }
+  .card-custom-tag { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.5px; padding: 1px 6px; border-radius: 99px; background: rgba(16,185,129,0.2); color: var(--green); margin-left: 6px; vertical-align: middle; }
+  .card-best { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+
+  .card-actions { flex-shrink: 0; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+
+  /* Checkbox */
+  .check-btn {
+    width: 28px; height: 28px; border-radius: 8px;
+    border: 2px solid #2d3748; background: transparent;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: 14px; transition: all 0.2s; color: transparent;
+  }
+  .check-btn.checked { background: var(--green); border-color: var(--green); color: #fff; }
+  .morning  .check-btn.checked { background: var(--morning); border-color: var(--morning); }
+  .noon     .check-btn.checked { background: var(--noon);    border-color: var(--noon); }
+  .evening  .check-btn.checked { background: var(--evening); border-color: var(--evening); }
+
+  /* Fav */
+  .fav-btn {
+    width: 28px; height: 28px; border-radius: 8px;
+    border: none; background: transparent;
+    cursor: pointer; font-size: 16px; display: flex;
+    align-items: center; justify-content: center;
+    transition: transform 0.2s;
+  }
+  .fav-btn:active { transform: scale(1.3); }
+
+  /* ── EXPAND PANEL ───────────────────────────────────────── */
+  .card-expand {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(.4,0,.2,1);
+    border-top: 0px solid #1e2d3d;
+  }
+  .card-expand.open {
+    max-height: 600px;
+    border-top: 1px solid #1e2d3d;
+  }
+  .expand-inner { padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+
+  .expand-section { display: flex; flex-direction: column; gap: 5px; }
+  .expand-label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.8px; color: var(--text-muted);
+  }
+  .expand-text { font-size: 13px; line-height: 1.6; color: #cbd5e1; }
+
+  .recipe-steps { display: flex; flex-direction: column; gap: 6px; }
+  .recipe-step { display: flex; gap: 10px; align-items: flex-start; }
+  .step-num {
+    flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; margin-top: 1px;
+  }
+  .morning  .step-num { background: rgba(245,158,11,0.2); color: var(--morning); }
+  .noon     .step-num { background: rgba(14,165,233,0.2); color: var(--noon); }
+  .evening  .step-num { background: rgba(139,92,246,0.2); color: var(--evening); }
+  .night    .step-num { background: rgba(71,85,105,0.3);  color: #94a3b8; }
+  .step-text { font-size: 13px; line-height: 1.55; color: #cbd5e1; }
+
+  .benefits-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .benefit-pill {
+    font-size: 11px; padding: 3px 10px; border-radius: 99px;
+    font-weight: 500;
+  }
+  .morning  .benefit-pill { background: rgba(245,158,11,0.12); color: #fcd34d; }
+  .noon     .benefit-pill { background: rgba(14,165,233,0.12);  color: #7dd3fc; }
+  .evening  .benefit-pill { background: rgba(139,92,246,0.12);  color: #c4b5fd; }
+  .night    .benefit-pill { background: rgba(71,85,105,0.2);    color: #94a3b8; }
+  .card-custom .benefit-pill { background: rgba(16,185,129,0.12); color: #6ee7b7; }
+
+  .mark-tried-btn {
+    width: 100%; padding: 10px;
+    border-radius: 10px; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 13px;
+    font-weight: 600; transition: all 0.2s;
+  }
+  .mark-tried-btn.not-tried { background: var(--surface2); color: var(--text); border: 1.5px solid #2d3748; }
+  .mark-tried-btn.is-tried  { background: rgba(16,185,129,0.15); color: var(--green); border: 1.5px solid rgba(16,185,129,0.3); }
+
+  /* ── EMPTY STATE ────────────────────────────────────────── */
+  .empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); display: none; }
+  .empty-state.show { display: block; }
+  .empty-state .empty-icon { font-size: 48px; margin-bottom: 12px; }
+  .empty-state p { font-size: 14px; }
+
+  /* ── TOAST ──────────────────────────────────────────────── */
+  .toast {
+    position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: var(--surface2); color: var(--text); padding: 10px 20px;
+    border-radius: 99px; font-size: 13px; font-weight: 500;
+    box-shadow: var(--shadow); opacity: 0; pointer-events: none;
+    transition: all 0.3s; z-index: 999; white-space: nowrap;
+    border: 1px solid #2d3748;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* ── BOTTOM NAV ─────────────────────────────────────────── */
+  .bottom-nav {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: rgba(17,24,39,0.97); border-top: 1px solid #1e2d3d;
+    display: flex; padding: 8px 0 env(safe-area-inset-bottom, 8px);
+    backdrop-filter: blur(20px); z-index: 100;
+  }
+  .nav-btn {
+    flex: 1; display: flex; flex-direction: column; align-items: center;
+    gap: 3px; padding: 6px 4px; border: none; background: transparent;
+    cursor: pointer; color: var(--text-muted); font-family: 'DM Sans', sans-serif;
+    font-size: 10px; font-weight: 500; transition: color 0.2s;
+  }
+  .nav-btn.active { color: var(--gold); }
+  .nav-btn span:first-child { font-size: 18px; }
+
+  .content { padding-bottom: 80px; }
+
+  /* scroll to top */
+  .scroll-top {
+    position: fixed; bottom: 72px; right: 16px;
+    width: 40px; height: 40px; border-radius: 12px;
+    background: var(--surface2); border: 1px solid #2d3748;
+    color: var(--text-muted); cursor: pointer; font-size: 18px;
+    display: none; align-items: center; justify-content: center;
+    box-shadow: var(--shadow); z-index: 99;
+  }
+  .scroll-top.show { display: flex; }
+
+  .no-results { display: none; text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 14px; }
+  .no-results.show { display: block; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-emoji">🥭</span>
+  <h1>Dindigul Summer Drinks</h1>
+  <p>110 refreshing drinks · Track · Discover · Enjoy</p>
+</div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap" style="padding:14px;">
+  <div class="progress-header">
+    <span class="progress-label">🏆 Your Journey</span>
+    <span class="progress-count" id="progressCount">0 / 110 tried</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  <div class="milestone" id="milestone"></div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-card morning">
+    <div class="stat-num" id="statM">0</div>
+    <div class="stat-label">🌅 Morning</div>
+  </div>
+  <div class="stat-card noon">
+    <div class="stat-num" id="statN">0</div>
+    <div class="stat-label">☀️ Noon</div>
+  </div>
+  <div class="stat-card evening">
+    <div class="stat-num" id="statE">0</div>
+    <div class="stat-label">🌇 Evening</div>
+  </div>
+  <div class="stat-card night">
+    <div class="stat-num" id="statNt">0</div>
+    <div class="stat-label">🌙 Night</div>
+  </div>
+</div>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input class="search-input" type="search" id="searchInput" placeholder="Search drinks or ingredients…">
+  </div>
+  <div class="filter-row">
+    <button class="filter-btn active" data-filter="all">All Drinks</button>
+    <button class="filter-btn" data-filter="morning">🌅 Morning</button>
+    <button class="filter-btn" data-filter="noon">☀️ Noon</button>
+    <button class="filter-btn" data-filter="evening">🌇 Evening</button>
+    <button class="filter-btn" data-filter="night">🌙 Night</button>
+    <button class="filter-btn" data-filter="fav">❤️ Favs</button>
+    <button class="filter-btn" data-filter="tried">✅ Tried</button>
+    <button class="filter-btn" data-filter="untried">⭕ Untried</button>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content" id="mainContent"></div>
+<div class="no-results" id="noResults">😕 No drinks match your search.<br>Try a different keyword!</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- SCROLL TOP -->
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <button class="nav-btn active" onclick="filterDrinks('all'); setNav(this)"><span>🥤</span><span>All</span></button>
+  <button class="nav-btn" onclick="filterDrinks('fav'); setNav(this)"><span>❤️</span><span>Favs</span></button>
+  <button class="nav-btn" onclick="filterDrinks('tried'); setNav(this)"><span>✅</span><span>Tried</span></button>
+  <button class="nav-btn" onclick="filterDrinks('untried'); setNav(this)"><span>⭕</span><span>Untried</span></button>
+</div>
+
+<script>
+// ─── DATA ──────────────────────────────────────────────────────────────────
+const DRINKS = [
+  // time, id, name, isCustom, ingredients, recipe (steps array), benefits array, bestFor
+  // ── MORNING ────────────────────────────────────────────────────────────────
+  ["morning","M01","Amla Honey Juice",false,
+    "3 fresh amla, 1 tsp honey, lemon juice, 200ml water",
+    ["Blend amla pieces with 200ml water.", "Strain through a fine mesh sieve.", "Add honey and a squeeze of lemon. Stir well.", "Serve cold or over ice."],
+    ["20x Vitamin C of oranges","Lowers cortisol","Immune booster","Liver detox"],
+    "Empty stomach"],
+  ["morning","M02","Lemon Honey Ginger Drink",false,
+    "1 lemon, 1 tsp honey, ½ tsp ginger juice, 250ml warm water",
+    ["Squeeze lemon juice into a glass of warm water.", "Grate fresh ginger and squeeze out the juice.", "Add ginger juice and honey. Stir well.", "Drink warm for best effect."],
+    ["Detoxifies liver","Boosts metabolism","Anti-bacterial","Aids digestion"],
+    "Empty stomach"],
+  ["morning","M03","Beetroot Carrot Orange Juice",false,
+    "1 small beetroot, 1 carrot, 1 orange, ½ tsp ginger",
+    ["Peel and chop beetroot, carrot and ginger.", "Juice all ingredients together in a juicer.", "Squeeze orange juice and combine.", "Add a pinch of black salt. Serve chilled."],
+    ["Iron-rich","Beta-carotene for skin","Nitric oxide for circulation","Anti-anemic"],
+    "6–8 AM"],
+  ["morning","M04","Ginger Turmeric Shot",false,
+    "1 tsp ginger juice, ½ tsp turmeric, pinch of pepper, lemon",
+    ["Grate fresh ginger and extract juice.", "Mix ginger juice, turmeric and pepper in a shot glass.", "Add 30ml warm water and a squeeze of lemon.", "Shoot it in one go!"],
+    ["Powerful anti-inflammatory","Gut healing","Immunity boost","Cortisol reducer"],
+    "Empty stomach"],
+  ["morning","M05","Orange Carrot Juice",false,
+    "2 oranges, 1 carrot, ½ tsp turmeric, honey",
+    ["Blend carrot with a little water until smooth.", "Juice the oranges separately.", "Combine both, add turmeric and honey.", "Strain and serve chilled."],
+    ["Vitamin C","Beta-carotene","Skin health","Eye protection"],
+    "7–9 AM"],
+  ["morning","M06","Pomegranate Juice",false,
+    "1 full pomegranate, pinch of black salt, lemon juice",
+    ["Deseed the pomegranate carefully.", "Blend seeds lightly for 10 seconds only.", "Strain through a muslin cloth.", "Add black salt and lemon. Serve cold."],
+    ["Raises testosterone naturally","Rich in antioxidants","Heart health","Anti-inflammatory"],
+    "Morning"],
+  ["morning","M07","Guava Lemon Juice",false,
+    "2 ripe guavas, juice of 1 lemon, pinch of black salt, water",
+    ["Chop guava into pieces (include skin).", "Blend with 150ml water until smooth.", "Strain through a sieve.", "Add lemon juice and black salt. Serve cold."],
+    ["Highest Vitamin C in India","Antibacterial","Digestive fibre","Skin health"],
+    "7–9 AM"],
+  ["morning","M08","Pineapple Turmeric Juice",false,
+    "1 cup pineapple, ½ tsp turmeric, 1 tsp ginger, lemon, water",
+    ["Blend pineapple chunks and ginger with water.", "Strain through a fine mesh.", "Stir in turmeric powder and lemon juice.", "Serve chilled."],
+    ["Bromelain enzyme","Anti-inflammatory","Liver support","Digestion aid"],
+    "Morning"],
+  ["morning","M09","Green Tea Iced",false,
+    "2 green tea bags, 400ml water, honey, lemon, mint",
+    ["Brew tea in hot water for 3 minutes (don't over-steep).", "Cool to room temperature.", "Add honey and lemon juice.", "Serve over ice with fresh mint leaves."],
+    ["Antioxidant-rich","Boosts metabolism","Reduces cortisol","Brain focus"],
+    "Morning"],
+  ["morning","M10","Tulsi Herbal Drink",false,
+    "10 fresh tulsi leaves, 1 tsp honey, lemon, 250ml warm water",
+    ["Wash tulsi leaves thoroughly.", "Boil in water for 5 minutes.", "Cool and strain.", "Add honey and lemon. Drink warm."],
+    ["Adaptogen","Reduces stress hormones","Antibacterial","Immunity"],
+    "Empty stomach"],
+  ["morning","M11","Aloe Vera Juice",false,
+    "2 tbsp fresh aloe vera gel, lemon juice, 1 tsp honey, 200ml water",
+    ["Slice open an aloe leaf and scoop out clear gel.", "Blend gel with water and lemon.", "Strain to remove fibrous bits.", "Add honey and serve cold immediately."],
+    ["Gut lining repair","Skin glow","Reduces acidity","Hydrates deeply"],
+    "Early morning"],
+  ["morning","M12","Banana Oats Shake",false,
+    "1 banana, 3 tbsp oats, 200ml milk, 1 tsp honey, cinnamon",
+    ["Soak oats in milk for 5 minutes.", "Add banana, honey and cinnamon.", "Blend until completely smooth.", "Serve chilled."],
+    ["Sustained energy","High fibre","Cholesterol reduction","Filling breakfast"],
+    "Breakfast"],
+  ["morning","M13","Apple Cinnamon Smoothie",false,
+    "1 apple (chopped), ½ tsp cinnamon, 200ml curd, 1 tsp honey",
+    ["Core and chop the apple.", "Blend apple, curd, cinnamon and honey together.", "Add a pinch of cardamom for flavour.", "Serve chilled immediately."],
+    ["Blood sugar control","Gut health","Vitamin C","Anti-inflammatory"],
+    "7–9 AM"],
+  ["morning","M14","Banana Almond Shake",false,
+    "1 banana, 10 soaked almonds, 200ml milk, 1 tsp honey",
+    ["Soak almonds overnight and peel the skin.", "Blend almonds with banana and milk.", "Add honey and blend again.", "Serve cold."],
+    ["Brain fuel (Vitamin E)","Energy","Protein","Healthy fats"],
+    "Breakfast"],
+  ["morning","M15","Lemon Chia Drink",false,
+    "Juice of 2 lemons, 1 tbsp chia seeds, 1 tsp honey, 300ml water",
+    ["Soak chia seeds in water for 15 minutes until they swell.", "Add lemon juice and honey.", "Stir well and serve cold.", "Can refrigerate overnight for a thicker texture."],
+    ["Omega-3","Fibre","Vitamin C","Hydrating","Weight management"],
+    "Morning"],
+  ["morning","M16","Pineapple Ginger Juice",false,
+    "1 cup pineapple, 1 tsp fresh ginger, lemon, pinch of pepper",
+    ["Blend pineapple chunks until smooth.", "Grate ginger and squeeze out juice.", "Strain pineapple. Combine with ginger juice.", "Add lemon and a pinch of pepper. Serve cold."],
+    ["Bromelain aids digestion","Anti-nausea","Circulation boost","Anti-bloat"],
+    "7–9 AM"],
+  ["morning","M17","Apple Oats Smoothie",false,
+    "1 apple, 3 tbsp rolled oats, 200ml milk, 1 tsp jaggery, cinnamon",
+    ["Soak oats in milk for 10 minutes.", "Core and chop the apple.", "Blend all together with jaggery and cinnamon.", "Serve chilled."],
+    ["Sustained energy","Fibre","Heart health","Filling breakfast"],
+    "7–9 AM"],
+  ["morning","M18","Cucumber Lemon Detox Water",false,
+    "1 cucumber sliced, 2 lemons sliced, 10 mint leaves, 1L water",
+    ["Slice cucumber and lemons thinly.", "Combine in a jar with mint leaves and cold water.", "Refrigerate overnight.", "Drink first thing in the morning."],
+    ["Kidney cleanse","Reduces bloating","Alkalises body","Skin glow"],
+    "Empty stomach"],
+  ["morning","M19","Herbal Cooling Decoction",false,
+    "Coriander seeds, fennel seeds, cumin — 1 tsp each, 400ml water",
+    ["Combine all three seeds in a pot.", "Boil in water for 8 minutes.", "Cool completely and strain.", "Add lemon juice if desired. Sip slowly."],
+    ["Liver cleanse","Reduces body heat","Digestive enzymes","Ayurvedic classic"],
+    "Empty stomach"],
+  ["morning","M20","Orange Banana Smoothie",false,
+    "2 oranges (juiced), 1 banana, 100ml curd, 1 tsp honey",
+    ["Juice the oranges fresh.", "Blend with banana, curd and honey.", "Serve immediately (Vitamin C is best fresh).", "Can add ice cubes."],
+    ["Vitamin C + potassium combo","Energy","Gut-friendly probiotic","Filling"],
+    "Breakfast"],
+  // ── My Added Morning ─────────────────────────────────────────────────────
+  ["morning","M21","Mango Banana Power Shake",true,
+    "1 ripe Banganapalli mango + 1 banana + 200ml milk + 1 tsp honey + pinch cardamom",
+    ["Peel and chop mango, slice banana.", "Blend all ingredients together until creamy.", "Add cardamom and blend 5 more seconds.", "Serve chilled with ice cubes."],
+    ["Energy booster","Vitamin C","Potassium","Pre-workout fuel","Testosterone support"],
+    "Pre-workout / Breakfast"],
+  ["morning","M22","Amla Ginger Citrus Blast",true,
+    "3 amla + 1 tsp grated ginger + juice of 1 lemon + 1 tsp honey + 200ml water",
+    ["Blend amla with water.", "Strain well through a fine mesh.", "Mix in ginger juice, lemon and honey.", "Serve very cold — this one is intense!"],
+    ["Highest natural Vitamin C","Lowers cortisol","Liver detox","Immunity","Anti-aging"],
+    "Empty stomach"],
+  ["morning","M23","Pomegranate Beetroot T-Booster",true,
+    "½ cup pomegranate seeds + ½ beetroot (boiled) + lemon juice + pinch black salt",
+    ["Boil beetroot until soft, cool and chop.", "Blend pomegranate seeds lightly.", "Juice beetroot separately.", "Combine both, add lemon and black salt. Serve cold."],
+    ["Clinically raises testosterone","Iron-rich","Nitric oxide boost","Heart health","Antioxidant"],
+    "Morning (men especially)"],
+  ["morning","M24","Papaya Coconut Glow Smoothie",true,
+    "1 cup papaya + 3 tbsp fresh coconut milk + 5 soaked almonds + 1 tsp honey",
+    ["Peel soaked almonds.", "Blend papaya until smooth.", "Add coconut milk, almonds and honey.", "Blend again until creamy. Serve chilled."],
+    ["Papain enzyme for digestion","Skin glow","Vitamin E","Gut health","Anti-inflammatory"],
+    "Breakfast"],
+  ["morning","M25","Guava Ginger Green Blast",true,
+    "2 ripe guavas + 1 tsp grated ginger + lemon + handful of mint + water",
+    ["Blend guava and mint with water.", "Strain through a sieve.", "Add ginger juice and lemon.", "Serve cold over ice."],
+    ["Antibacterial","Anti-inflammatory","Highest Vitamin C fruit","Skin health","Detox"],
+    "7–9 AM"],
+
+  // ── NOON ──────────────────────────────────────────────────────────────────
+  ["noon","N01","Tender Coconut Water",false,
+    "Fresh tender coconut water, squeeze of lime (optional)",
+    ["Crack or get tender coconut from a stall.", "Pour coconut water directly into a glass.", "Add a squeeze of lime if desired.", "Drink fresh and cold."],
+    ["Best natural electrolyte","Kidney health","Rehydrates","Heat stroke prevention"],
+    "Anytime / Heat exhaustion"],
+  ["noon","N02","Nungu Coconut Cooler",false,
+    "Palm nungu (ice apple) pieces, tender coconut water, pinch of cardamom",
+    ["Peel and slice nungu (ice apple / palm fruit).", "Place pieces in a glass.", "Pour tender coconut water over.", "Add cardamom and serve very cold."],
+    ["Deep cooling","Prevents heat stroke","Natural electrolyte","Light on stomach"],
+    "12–3 PM"],
+  ["noon","N03","Watermelon Mint Juice",false,
+    "2 cups watermelon, 10 mint leaves, lime juice, pinch of rock salt",
+    ["Blend watermelon chunks until smooth.", "Strain to remove fibrous bits.", "Add freshly torn mint leaves, lime and rock salt.", "Serve over plenty of ice."],
+    ["Deep hydration","Reduces body heat","Citrulline for circulation","Anti-bloat"],
+    "12–4 PM"],
+  ["noon","N04","Muskmelon Lime Juice",false,
+    "1 cup muskmelon (kharbooja), lime juice, rock salt, cold water",
+    ["Peel and deseed muskmelon.", "Blend with a little cold water.", "Strain, add lime juice and rock salt.", "Serve chilled with ice."],
+    ["Cooling","Vitamin A","Digestive","Reduces acidity"],
+    "Noon / Post-lunch"],
+  ["noon","N05","Mango Lassi",false,
+    "1 cup mango pulp, 150ml thick curd, 1 tsp jaggery, pinch of cardamom",
+    ["Blend ripe mango pulp until smooth.", "Add thick curd and jaggery.", "Blend until frothy.", "Add cardamom and serve over ice."],
+    ["Probiotic","Protein","Cools body","Vitamin A","Energy"],
+    "Lunch / 12–2 PM"],
+  ["noon","N06","Cucumber Mint Cooler",false,
+    "1 cucumber, 10 mint leaves, lime, rock salt, cold water",
+    ["Blend cucumber and mint with cold water.", "Strain through a fine mesh.", "Add lime juice and rock salt.", "Serve chilled — very refreshing!"],
+    ["Silica for skin","Anti-bloat","Kidney-friendly","Refreshing"],
+    "1–4 PM"],
+  ["noon","N07","Buttermilk Neer Mor",false,
+    "Thin curd, water, curry leaves, green chilli, ginger, mustard, rock salt",
+    ["Dilute curd with water in 1:3 ratio.", "Make a tadka with mustard seeds, curry leaves and ginger.", "Mix tadka into buttermilk.", "Add salt and sliced green chilli. Serve cold."],
+    ["Best Dindigul probiotic","Cools body","Relieves gas and acidity","Digestion"],
+    "Post-lunch"],
+  ["noon","N08","Sweet Lime Juice",false,
+    "4 mosambi (sweet lime), 1 tsp honey, pinch of rock salt, cumin powder",
+    ["Juice the mosambi fresh.", "Add honey, rock salt and a pinch of cumin powder.", "Stir well.", "Serve chilled."],
+    ["Vitamin C","Digestive tonic","Liver cleanser","Relieves nausea"],
+    "Noon / Post-meal"],
+  ["noon","N09","Nannari Sherbet",false,
+    "2 tbsp nannari syrup, cold water, lemon, pinch of rock salt",
+    ["Mix nannari syrup into a glass of cold water.", "Add lemon juice and rock salt.", "Stir well.", "Serve very cold — Dindigul's finest summer drink!"],
+    ["Reduces body heat","Purifies blood","Classic Dindigul drink","Cooling"],
+    "2–5 PM"],
+  ["noon","N10","Watermelon Lime Slush",false,
+    "3 cups watermelon, lime juice, pinch of salt, ice cubes",
+    ["Blend watermelon with ice cubes.", "Add lime juice and salt.", "Blend again to a slush consistency.", "Pour and serve immediately."],
+    ["Deep hydration","Cooling","Electrolytes","Citrulline"],
+    "12–4 PM"],
+  ["noon","N11","Lychee Juice",false,
+    "10–12 fresh lychees (peeled, deseeded), water, 1 tsp lemon juice",
+    ["Peel and deseed lychees carefully.", "Blend with a little water.", "Strain for a clear juice.", "Add lemon juice and serve chilled."],
+    ["Vitamin C","Skin health","Antioxidant","Anti-inflammatory"],
+    "Noon / Afternoon"],
+  ["noon","N12","Tamarind Ginger Cooler",false,
+    "Tamarind water, 1 tsp jeera powder, jaggery, black salt, ginger, mint",
+    ["Soak tamarind in warm water, extract pulp.", "Strain tamarind water.", "Mix in jeera powder, jaggery, black salt and ginger juice.", "Garnish with mint. Serve cold."],
+    ["Electrolyte-rich","Treats heat exhaustion","Digestive","Iron source"],
+    "2–5 PM"],
+  ["noon","N13","Buttermilk / Masala Buttermilk",false,
+    "Thin curd, water, roasted cumin, black pepper, coriander, green chilli",
+    ["Dilute curd with water.", "Dry roast cumin seeds and grind with pepper.", "Add masala, coriander and chilli to buttermilk.", "Whisk and serve cold."],
+    ["Probiotic","Aids digestion","Replaces electrolytes","Cooling"],
+    "Post-lunch / Noon"],
+  ["noon","N14","Sugarcane Juice",false,
+    "Fresh sugarcane juice, 1 tsp ginger juice, lime, black salt",
+    ["Get freshly pressed sugarcane juice from local stalls.", "Add ginger juice, lime and black salt.", "Stir and serve over ice.", "Best consumed immediately."],
+    ["Instant energy","Liver tonic","Rehydrates","Iron-rich"],
+    "Anytime"],
+  ["noon","N15","Aam Panna (Raw Mango)",false,
+    "2 boiled raw mangoes, jeera powder, black salt, jaggery, mint",
+    ["Boil raw mangoes until soft, cool and extract pulp.", "Mix pulp with jaggery, jeera powder and black salt.", "Dilute with cold water to desired strength.", "Add fresh mint and serve over ice."],
+    ["Prevents heat stroke","Iron source","Electrolyte balance","Cooling"],
+    "2–5 PM — summer classic"],
+  ["noon","N16","Peanut Banana Smoothie",false,
+    "1 banana, 1 tbsp groundnut butter or 15 roasted peanuts, 200ml milk",
+    ["If using whole peanuts, blend with milk first.", "Add banana and blend until smooth.", "Add honey if needed.", "Serve chilled."],
+    ["Protein","Healthy fats","Zinc for testosterone","Energy sustaining"],
+    "Lunch / Filling noon drink"],
+  ["noon","N17","Papaya Pineapple Smoothie",false,
+    "1 cup papaya + 1 cup pineapple + 100ml curd + 1 tsp honey",
+    ["Chop papaya and pineapple.", "Blend all ingredients together.", "Serve immediately (enzymes are most active fresh).", "Add ice cubes."],
+    ["Double digestive enzymes (papain + bromelain)","Gut health","Anti-bloat","Vitamin C"],
+    "Post-lunch"],
+  ["noon","N18","Coconut Mint Cooler",false,
+    "200ml tender coconut water, 10 mint leaves, lime juice, 1 tsp honey",
+    ["Blend mint leaves with a little coconut water.", "Strain.", "Mix with remaining coconut water, lime and honey.", "Serve very cold."],
+    ["Electrolytes","Cooling","Digestive","Natural sweetness"],
+    "12–3 PM"],
+  ["noon","N19","Lime Soda",false,
+    "2 limes, 200ml soda water, 1 tsp honey or jaggery syrup, pinch of salt",
+    ["Squeeze lime juice into a glass.", "Add honey and a pinch of rock salt.", "Top with chilled soda water.", "Serve immediately."],
+    ["Vitamin C","Rehydrating","Cooling","Digestive aid"],
+    "Noon / Afternoon"],
+  ["noon","N20","Salted Lemon Cooler",false,
+    "2 lemons, rock salt, roasted cumin powder, 300ml cold water",
+    ["Squeeze lemons into cold water.", "Add rock salt and roasted cumin powder.", "Stir and taste.", "Adjust seasoning and serve over ice."],
+    ["Electrolytes","Prevents heat exhaustion","Digestive","Vitamin C"],
+    "2–5 PM"],
+  ["noon","N21","Grape Mint Juice",false,
+    "1 cup grapes, 8 mint leaves, lemon, pinch of black salt",
+    ["Blend grapes and mint together.", "Strain through a fine mesh.", "Add lemon juice and black salt.", "Serve chilled."],
+    ["Resveratrol antioxidant","Cooling","Liver health","Anti-aging"],
+    "Noon / Snack time"],
+  ["noon","N22","Carrot Mango Smoothie",false,
+    "1 medium carrot (boiled/blended), 1 cup mango pulp, 100ml milk, honey",
+    ["Blend boiled carrot until completely smooth.", "Add mango pulp, milk and honey.", "Blend together.", "Strain if needed. Serve cold."],
+    ["Beta-carotene","Vitamin A for eyes and skin","Energy","Filling"],
+    "Noon snack"],
+  ["noon","N23","Fruity Detox Water",false,
+    "1 lemon sliced, ½ cucumber sliced, mint leaves, ½ orange sliced, 1L water",
+    ["Slice all fruits thinly.", "Combine in a large jar with mint.", "Fill with cold water.", "Refrigerate 2 hours and sip throughout the afternoon."],
+    ["Kidney cleanse","Vitamin C","Reduces bloating","Skin hydration"],
+    "Throughout afternoon"],
+  ["noon","N24","Papaya Banana Smoothie",false,
+    "1 cup papaya, 1 banana, 100ml curd, 1 tsp honey",
+    ["Chop papaya and banana.", "Blend with curd and honey.", "Serve immediately.", "Can add a pinch of cardamom."],
+    ["Papain enzyme","Potassium","Gut health","Probiotic curd"],
+    "Noon / Light lunch"],
+  ["noon","N25","Cucumber Lemon Juice",false,
+    "1 cucumber, juice of 2 lemons, rock salt, water, mint",
+    ["Blend cucumber with water.", "Strain well.", "Add lemon juice, rock salt and mint.", "Serve very cold."],
+    ["Silica for skin","Anti-bloat","Kidney-friendly","Hydrating"],
+    "Afternoon"],
+  // ── My Added Noon ──────────────────────────────────────────────────────────
+  ["noon","N26","Mango Coconut Noon Smoothie",true,
+    "1 cup ripe mango pulp + 200ml fresh coconut milk + 1 tsp honey + pinch cardamom",
+    ["Blend mango pulp with coconut milk until smooth.", "Add honey and cardamom.", "Blend 5 more seconds.", "Serve chilled over ice."],
+    ["Cooling","Medium-chain fats","Vitamin A","Energy sustaining","Gut-friendly"],
+    "12–2 PM"],
+  ["noon","N27","Watermelon Basil Cooler",true,
+    "2 cups watermelon + 5 tulsi (basil) leaves + lime + pinch of black salt + ice",
+    ["Blend watermelon with tulsi leaves.", "Strain through a fine mesh.", "Add lime juice and black salt.", "Serve over ice immediately."],
+    ["Anti-inflammatory","Fever reducing","Deep hydration","Citrulline","Refreshing"],
+    "Noon heat relief"],
+  ["noon","N28","Pineapple Lemon Ginger Juice",true,
+    "1 cup pineapple + 1 tsp ginger + lemon juice + 1 tsp honey + cold water",
+    ["Blend pineapple chunks with water.", "Grate ginger and extract juice.", "Strain pineapple. Combine with ginger juice.", "Add lemon and honey. Serve chilled."],
+    ["Bromelain digestive enzyme","Anti-nausea","Circulation boost","Anti-bloat","Post-meal"],
+    "Post-lunch / Noon"],
+  ["noon","N29","Cucumber Coconut Hydrator",true,
+    "½ cucumber blended + 200ml tender coconut water + lemon juice + mint",
+    ["Blend cucumber.", "Strain and combine with coconut water.", "Add lemon juice and fresh mint.", "Serve over ice during peak heat."],
+    ["Ultimate heat hydration","Silica for skin","Kidney-friendly","Electrolytes"],
+    "Peak afternoon heat"],
+  ["noon","N30","Tamarind Jal Jeera Special",true,
+    "Tamarind water + 1 tsp jeera powder + black salt + jaggery + mint + lime",
+    ["Soak tamarind in warm water 20 mins. Strain well.", "Dissolve jaggery and mix in jeera powder and black salt.", "Add lime juice and fresh mint.", "Serve very cold. Dindigul classic!"],
+    ["Electrolytes","Prevents heat exhaustion","Iron","Digestive tonic","Classic summer"],
+    "2–5 PM Dindigul classic"],
+
+  // ── EVENING ────────────────────────────────────────────────────────────────
+  ["evening","E01","Hibiscus Iced Tea",false,
+    "Dried hibiscus flowers (chembarathi), honey, lemon, cold water",
+    ["Boil hibiscus flowers in water for 10 minutes.", "Cool completely to room temperature.", "Add honey and lemon juice.", "Serve over ice with mint."],
+    ["Lowers blood pressure","Antioxidant","Kidney protection","Cooling"],
+    "4–7 PM"],
+  ["evening","E02","Lemongrass Iced Tea",false,
+    "2 lemongrass stalks, 400ml water, honey, lemon, ice",
+    ["Crush lemongrass stalks to release flavour.", "Boil in water for 10 minutes.", "Cool and strain.", "Add honey and lemon. Serve over ice."],
+    ["Anti-anxiety","Digestive","Anti-microbial","Reduces bloating"],
+    "Evening"],
+  ["evening","E03","Ginger Lemon Cooler",false,
+    "1-inch ginger, juice of 2 lemons, 1 tsp honey, 300ml cold water",
+    ["Grate ginger and squeeze out the juice.", "Mix with lemon juice, honey and cold water.", "Stir well.", "Serve cold."],
+    ["Anti-inflammatory","Digestive","Anti-nausea","Metabolism boost"],
+    "4–7 PM"],
+  ["evening","E04","Strawberry Banana Smoothie",false,
+    "6 strawberries (or jamun/black plum), 1 banana, 100ml curd, honey",
+    ["Hull strawberries (or deseed jamun).", "Blend with banana, curd and honey.", "Serve immediately.", "Add ice cubes."],
+    ["Antioxidant anthocyanins","Probiotic","Skin brightening","Vitamin C"],
+    "Evening snack"],
+  ["evening","E05","Mixed Fruit Smoothie",false,
+    "Mango + banana + papaya + guava (½ cup each), 100ml curd, honey",
+    ["Chop all fruits.", "Blend together with curd and honey.", "Serve cold immediately.", "Adjust sweetness to taste."],
+    ["Broad spectrum vitamins","Gut health","Energy replenishment","Probiotic"],
+    "4–6 PM"],
+  ["evening","E06","Jackfruit Smoothie",false,
+    "1 cup ripe jackfruit pods (seeds removed), 100ml milk, 1 tsp honey, cardamom",
+    ["Remove jackfruit pods and deseed.", "Blend with milk, honey and cardamom.", "Serve chilled.", "Dindigul summer seasonal special!"],
+    ["Vitamin B6","Potassium","Fibre","Seasonal Dindigul treat"],
+    "Evening"],
+  ["evening","E07","Chikku (Sapota) Smoothie",false,
+    "2 ripe chikku, 200ml milk, 1 tsp honey, pinch of cardamom",
+    ["Peel and deseed chikku.", "Blend with milk, honey and cardamom.", "Serve chilled.", "Best when chikku is very ripe."],
+    ["Natural iron","Calcium","Energy-dense","Calms nervous system"],
+    "Evening snack"],
+  ["evening","E08","Dragon Fruit Smoothie",false,
+    "1 ripe dragon fruit, 100ml coconut milk, 1 tsp honey",
+    ["Cut dragon fruit in half, scoop out flesh.", "Blend with coconut milk and honey.", "Serve cold.", "Stunning pink colour — great for photos!"],
+    ["Antioxidant-rich","Gut-friendly prebiotic fibre","Skin health","Hydrating"],
+    "Evening"],
+  ["evening","E09","Pineapple Mint Smoothie",false,
+    "1 cup pineapple, 10 mint leaves, 100ml coconut milk, honey",
+    ["Blend all ingredients together.", "Taste and adjust sweetness.", "Serve over ice.", "Add a mint sprig for garnish."],
+    ["Digestive enzyme bromelain","Cooling","Anti-bloat","Refreshing"],
+    "4–6 PM"],
+  ["evening","E10","Rose Lemon Water",false,
+    "1 tsp rose water (gulab jal), lemon juice, 1 tsp honey, 300ml water, ice",
+    ["Mix rose water with lemon juice.", "Add honey and cold water.", "Stir well.", "Serve over ice."],
+    ["Calming","Reduces skin inflammation","Antioxidant","Refreshing"],
+    "Evening / After work"],
+  ["evening","E11","Basil Seed (Sabja) Drink",false,
+    "1 tbsp basil seeds soaked 20 mins, rose water, lemon, honey, cold water",
+    ["Soak sabja seeds in cold water for 20 minutes.", "They swell to 10x their size.", "Mix with rose water, lemon, honey and cold water.", "Serve cold — unique texture!"],
+    ["Gut cooling","Weight management","Blood sugar control","Hydrating"],
+    "4–7 PM"],
+  ["evening","E12","Kokum Sherbet",false,
+    "Dried kokum soaked in water, jaggery, rock salt, cumin, mint",
+    ["Soak kokum in warm water 30 minutes.", "Extract deep red juice by squeezing.", "Add jaggery, rock salt and cumin.", "Garnish with mint. Serve cold."],
+    ["Alkalises body","Prevents acidity","Liver tonic","Reduces bloating"],
+    "Evening"],
+  ["evening","E13","Watermelon Yogurt Smoothie",false,
+    "2 cups watermelon, 150ml thick curd, 1 tsp honey, pinch of cardamom",
+    ["Blend watermelon first.", "Add curd, honey and cardamom.", "Blend together.", "Serve immediately."],
+    ["Probiotic + deep hydration combo","Cooling","Protein","Gut health"],
+    "4–6 PM"],
+  ["evening","E14","Avocado Banana Smoothie",false,
+    "½ avocado, 1 banana, 200ml milk, 1 tsp honey, pinch of cardamom",
+    ["Scoop avocado flesh.", "Blend with banana, milk, honey and cardamom.", "Serve immediately (avocado oxidises fast).", "Can add a handful of ice."],
+    ["Healthy fats","Magnesium (sleep aid)","Brain fuel","Testosterone support"],
+    "Evening meal / filling snack"],
+  ["evening","E15","Jackfruit Milk Shake",false,
+    "1 cup ripe jackfruit, 200ml full-fat milk, 1 tsp honey, cardamom",
+    ["Deseed jackfruit pods.", "Blend with milk, honey and cardamom until creamy.", "Serve chilled.", "Seasonal and local to Dindigul!"],
+    ["Protein","Fibre","B vitamins","Natural sweetness","Energy"],
+    "Evening"],
+  ["evening","E16","Chocolate Banana Smoothie",false,
+    "1 banana, 1 tbsp cacao/cocoa powder, 200ml milk, 1 tsp honey",
+    ["Blend banana with milk.", "Add cacao powder and honey.", "Blend until smooth.", "Serve chilled — tastes like dessert!"],
+    ["Magnesium from cacao (sleep)","Energy","Mood lifter","Protein"],
+    "Evening treat"],
+  ["evening","E17","Mint Soda",false,
+    "10 fresh mint leaves muddled, lime juice, rock salt, 200ml soda",
+    ["Muddle mint leaves in the glass with a spoon.", "Add lime juice and rock salt.", "Top with chilled soda water.", "Serve immediately."],
+    ["Digestive","Refreshing","Anti-bloat","Cooling"],
+    "Evening / Sundowner"],
+  ["evening","E18","Ginger Soda",false,
+    "1 tsp ginger juice, lime juice, 1 tsp honey, 200ml soda water",
+    ["Mix ginger juice with honey and lime.", "Taste and adjust.", "Top with chilled soda water.", "Serve immediately — it fizzes up!"],
+    ["Anti-nausea","Digestive","Metabolism boost","Refreshing"],
+    "Evening"],
+  ["evening","E19","Berry Yogurt Smoothie",false,
+    "Jamun / black plum or berries, 150ml thick curd, honey",
+    ["Deseed jamun or prepare berries.", "Blend with curd and honey.", "Adjust sweetness.", "Serve cold."],
+    ["Anthocyanins","Probiotic","Blood sugar control","Anti-aging"],
+    "Evening snack"],
+  ["evening","E20","Cold Brew Coffee",false,
+    "2 tbsp coarse ground coffee, 400ml cold water",
+    ["Combine coffee grounds with cold water in a jar.", "Stir well and cover.", "Refrigerate for 12–18 hours.", "Strain and serve over ice. Add milk if desired."],
+    ["Sustained energy without acidity","Antioxidant","Alertness","No blood sugar spike"],
+    "4–6 PM"],
+  ["evening","E21","Palm Sugar Lemon Drink",false,
+    "1 tbsp palm sugar (karupatti), lemon, cold water",
+    ["Dissolve palm sugar in a little warm water.", "Let it cool.", "Add lemon juice and mix with cold water.", "Serve chilled."],
+    ["Natural low-GI sweetener","Iron","Cooling","Vitamin B complex"],
+    "Evening cooldown"],
+  ["evening","E22","Guava Yogurt Smoothie",false,
+    "2 ripe guavas, 150ml curd, 1 tsp honey, pinch of cardamom",
+    ["Blend guava with curd and honey.", "Strain if needed.", "Add cardamom.", "Serve cold."],
+    ["Highest Vitamin C","Probiotic","Digestive fibre","Skin health"],
+    "Evening snack"],
+  ["evening","E23","Lychee Coconut Cooler",false,
+    "8 fresh lychees, 100ml tender coconut water, lime, honey",
+    ["Peel and deseed lychees.", "Blend with coconut water.", "Add lime and honey.", "Serve very cold."],
+    ["Vitamin C","Electrolytes","Anti-inflammatory","Skin health"],
+    "4–6 PM"],
+  ["evening","E24","Peanut Milk Shake",false,
+    "2 tbsp groundnut butter or roasted peanuts, 200ml milk, 1 tsp honey, pinch of cardamom",
+    ["Blend peanuts with a little milk first.", "Add remaining milk, honey and cardamom.", "Blend until completely smooth.", "Serve chilled."],
+    ["Protein","Zinc for testosterone","Healthy fats","Filling"],
+    "Evening snack"],
+  ["evening","E25","Beet Banana Smoothie",false,
+    "½ small beetroot (boiled), 1 banana, 150ml milk, 1 tsp honey",
+    ["Boil beetroot until soft, cool and chop.", "Blend with banana, milk and honey.", "Serve immediately.", "Beautiful deep pink colour!"],
+    ["Iron","Nitric oxide for circulation","Potassium","Energy"],
+    "Evening"],
+  // ── My Added Evening ────────────────────────────────────────────────────────
+  ["evening","E26","Banana Date Sesame Shake",true,
+    "1 banana + 3 seedless dates + 1 tsp gingelly (sesame) oil + 200ml milk",
+    ["Blend banana, dates and milk together.", "Add gingelly oil (sesame oil).", "Blend 10 more seconds.", "Serve cold — zinc powerhouse!"],
+    ["High zinc for testosterone","Slow energy release","Muscle recovery","Healthy fats","Iron"],
+    "Pre-workout / Evening"],
+  ["evening","E27","Papaya Lime Refresher",true,
+    "1 cup papaya + juice of 1 lime + 1 tsp honey + pinch of rock salt + ice",
+    ["Blend papaya until smooth.", "Add lime juice, honey and rock salt.", "Blend with ice.", "Serve immediately."],
+    ["Papain enzyme","Skin brightening","Vitamin C","Digestive","Anti-inflammatory"],
+    "Evening snack"],
+  ["evening","E28","Mango Ginger Lassi",true,
+    "1 cup mango pulp + 150ml thick curd + 1 tsp grated ginger + jaggery",
+    ["Blend mango and curd together.", "Stir in ginger juice.", "Add jaggery to sweeten.", "Serve cold."],
+    ["Probiotic gut health","Anti-inflammatory ginger","Protein","Vitamin A","Cooling"],
+    "Post-workout / Evening"],
+  ["evening","E29","Hibiscus Lemon Iced Tea",true,
+    "Dried hibiscus flowers (chembarathi) + lemon + honey + cold water + ice",
+    ["Brew hibiscus flowers in hot water 10 minutes.", "Cool completely — do not rush.", "Add lemon juice and honey.", "Serve over ice with a mint sprig."],
+    ["Lowers blood pressure","Antioxidant","Kidney care","Cooling","Anti-inflammatory"],
+    "4–7 PM evening cooler"],
+  ["evening","E30","Rose Milk Probiotic Cooler",true,
+    "200ml chilled thick curd + 1 tbsp rose syrup (gulab) + pinch of cardamom + ice",
+    ["Blend curd with rose syrup and cardamom.", "Serve very cold over ice.", "Garnish with a few dried rose petals if available.", "Tastes like dessert!"],
+    ["Probiotic","Calming","Anti-inflammatory","Dessert-worthy","Cooling"],
+    "Evening / Before bed"],
+
+  // ── NIGHT ──────────────────────────────────────────────────────────────────
+  ["night","Nt01","Turmeric Milk Cooler",false,
+    "200ml warm milk, ½ tsp turmeric, pinch of pepper, 1 tsp coconut oil, jaggery",
+    ["Warm milk gently (don't boil).", "Stir in turmeric and black pepper.", "Add coconut oil and jaggery.", "Drink warm, slowly."],
+    ["Anti-inflammatory","Heals gut lining","Promotes deep sleep","Calming"],
+    "9–10 PM"],
+  ["night","Nt02","Cardamom Milk",false,
+    "200ml warm milk, 3 cardamom pods (crushed), 1 tsp honey or jaggery",
+    ["Crush cardamom pods open.", "Boil milk with cardamom for 3 minutes.", "Strain through a sieve.", "Sweeten with honey. Drink warm."],
+    ["Calming","Aids deep sleep","Tryptophan + melatonin pathway","Digestive"],
+    "Before bed"],
+  ["night","Nt03","Badam Milk",false,
+    "10 soaked almonds (peeled), 200ml warm milk, 1 tsp honey, saffron, cardamom",
+    ["Soak almonds overnight. Peel the skin.", "Blend almonds with a little milk until smooth.", "Add to warmed milk with honey and cardamom.", "Add saffron steeped in 1 tbsp warm milk."],
+    ["Brain-boosting Vitamin E","Calcium","Promotes deep sleep","Anti-aging"],
+    "Before bed"],
+  ["night","Nt04","Honey Ginger Tea",false,
+    "1-inch ginger, 1 tsp honey, 1 tsp lemon, 250ml warm water",
+    ["Grate ginger and steep in warm water 5 minutes.", "Strain.", "Add honey and lemon juice.", "Sip slowly while warm."],
+    ["Anti-inflammatory","Soothes throat","Digestive","Calming"],
+    "8–10 PM"],
+  ["night","Nt05","Chamomile Iced Tea",false,
+    "2 chamomile tea bags, 400ml water, honey, lemon",
+    ["Brew chamomile in hot water 5 minutes.", "Cool completely.", "Sweeten with honey.", "Serve chilled or at room temperature."],
+    ["Promotes sleep","Reduces anxiety","Anti-inflammatory","Gut soothing"],
+    "9 PM onwards"],
+  ["night","Nt06","Cinnamon Apple Tea",false,
+    "1 stick cinnamon, 1 apple slice, 1 tsp honey, 300ml warm water",
+    ["Boil cinnamon stick and apple slice in water.", "Steep 8 minutes.", "Strain and pour.", "Add honey. Drink warm."],
+    ["Blood sugar control","Warming","Digestive","Calming","Anti-microbial"],
+    "After dinner"],
+  ["night","Nt07","Turmeric Ginger Tea",false,
+    "½ tsp turmeric, ½ tsp ginger powder, 1 tsp honey, 1 tsp lemon, 250ml warm water",
+    ["Mix turmeric and ginger powder in warm water.", "Add honey and lemon.", "Stir thoroughly.", "Drink warm after dinner."],
+    ["Powerful anti-inflammatory","Gut healing","Reduces nighttime cortisol","Sleep aid"],
+    "After dinner"],
+  ["night","Nt08","Clove Herbal Water",false,
+    "4–5 cloves, 300ml warm water, ½ tsp honey",
+    ["Boil cloves in water 5 minutes.", "Strain.", "Add honey.", "Sip warm — strong and medicinal."],
+    ["Anti-bacterial","Reduces toothache","Digestive","Anti-bloating"],
+    "After dinner"],
+  ["night","Nt09","Jeera Coriander Digestive",false,
+    "1 tsp cumin + 1 tsp coriander seeds, 350ml water, lemon",
+    ["Boil seeds in water 5 minutes.", "Cool and strain.", "Add a squeeze of lemon.", "Sip before bed."],
+    ["Reduces bloating","Stimulates digestive enzymes","Ayurvedic classic","Anti-gas"],
+    "After dinner / before bed"],
+  ["night","Nt10","Ragi Ambli",false,
+    "3 tbsp ragi (finger millet) flour, 400ml water, pinch of salt",
+    ["Mix ragi in a little cold water to make a paste.", "Add to 400ml water and cook on medium heat.", "Stir continuously until thin porridge texture.", "Cool and serve — can add curd."],
+    ["Iron","Calcium","Cooling","Sustained overnight energy","Gut health"],
+    "Before bed"],
+  ["night","Nt11","Cooling Herbal Tea",false,
+    "Mint + tulsi + fennel seeds boiled together, honey, lemon",
+    ["Boil mint, tulsi and fennel seeds in water.", "Steep 8 minutes.", "Strain.", "Add honey and lemon. Drink warm."],
+    ["Cooling","Digestive","Reduces acidity","Calming","Promotes sleep"],
+    "8–10 PM"],
+  ["night","Nt12","Cold Sukku Coffee",false,
+    "Dry ginger (sukku), 1 tsp coffee decoction, warm milk, jaggery",
+    ["Prepare sukku (dry ginger) decoction.", "Mix with mild coffee decoction.", "Add warm milk and jaggery.", "Sip warm after dinner."],
+    ["Digestive","Anti-bloat","Warming","Classic South Indian night drink"],
+    "After dinner"],
+  ["night","Nt13","Rose Milk",false,
+    "200ml chilled milk, 1 tbsp rose syrup, pinch of cardamom",
+    ["Mix rose syrup into chilled milk.", "Add cardamom.", "Stir well.", "Serve cold — beloved Tamil Nadu classic."],
+    ["Calming","Cooling","Anti-inflammatory","Delicious bedtime treat"],
+    "Before bed"],
+  ["night","Nt14","Jigarthanda",false,
+    "Milk + nannari syrup + China grass jelly + ice cream — Madurai-Dindigul classic",
+    ["Soak and dissolve China grass (agar agar) in warm milk, cool to set.", "Layer nannari syrup at the bottom.", "Add chilled thin milk.", "Top with China grass jelly and a scoop of ice cream."],
+    ["Cooling","Energy","Calcium","Probiotic","Iconic regional summer drink"],
+    "Evening / Night treat"],
+  ["night","Nt15","Palm Fruit Milk",false,
+    "2 ripe palm fruit (nungu pulp), 200ml cold milk, 1 tsp honey",
+    ["Peel palm fruit and extract soft white pulp.", "Blend with cold milk and honey.", "Serve chilled.", "Traditional Tamil summer classic."],
+    ["Cooling","Light","Natural electrolytes","Traditional Tamil drink"],
+    "Before bed / Evening"],
+  ["night","Nt16","Mint Green Tea",false,
+    "1 green tea bag, 8 fresh mint leaves, 1 tsp honey, 300ml warm water",
+    ["Brew green tea in warm water 3 minutes.", "Add fresh mint leaves.", "Steep 2 more minutes.", "Strain, add honey. Serve warm."],
+    ["Antioxidant","Calming","Digestive","Mild metabolism boost"],
+    "Evening / Early night"],
+  ["night","Nt17","Coriander Lemon Cooler",false,
+    "1 tsp coriander seeds, 1 tsp lemon juice, rock salt, 300ml water",
+    ["Boil coriander seeds in water 5 minutes.", "Cool and strain.", "Add lemon juice and rock salt.", "Serve slightly warm or at room temp."],
+    ["Anti-inflammatory","Reduces body heat","Digestive","Kidney-friendly"],
+    "Evening / Night"],
+  ["night","Nt18","Lavender Herbal Tea",false,
+    "1 tsp dried lavender petals, honey, warm water",
+    ["Steep lavender petals in hot water 5 minutes.", "Strain carefully.", "Add honey.", "Drink warm for sleep."],
+    ["Deep sleep induction","Reduces anxiety","Calming nervous system","Anti-inflammatory"],
+    "9–10 PM"],
+  ["night","Nt19","Almond Saffron Milk",false,
+    "8 soaked almonds, 3 saffron strands, 200ml warm milk, 1 tsp honey, cardamom",
+    ["Peel soaked almonds, blend with a little milk.", "Steep saffron in 1 tbsp warm milk.", "Combine blended almond milk with warmed milk.", "Add saffron, honey and cardamom. Drink warm."],
+    ["Deep sleep","Anti-anxiety","Vitamin E","Hormone support","Skin glow"],
+    "9–10 PM"],
+  ["night","Nt20","Spiced Warm Rasam Drink",false,
+    "Thin rasam — tamarind + tomato + spices, served warm as a digestive",
+    ["Prepare thin rasam with tamarind water, tomato, cumin and black pepper.", "Add curry leaves and coriander.", "Serve hot as a drinking soup.", "Extremely comforting after dinner."],
+    ["Digestive","Anti-inflammatory spices","Vitamin C from tamarind","Warming"],
+    "After dinner"],
+  // ── My Added Night ──────────────────────────────────────────────────────────
+  ["night","Nt21","Turmeric Golden Milk",true,
+    "200ml warm milk + ½ tsp turmeric + pinch of black pepper + 1 tsp coconut oil + jaggery",
+    ["Warm milk gently.", "Stir in turmeric and black pepper (pepper boosts curcumin absorption 2000%).", "Add coconut oil and jaggery.", "Drink warm before bed."],
+    ["Anti-inflammatory","Heals gut lining","Promotes deep sleep","Testosterone support","Curcumin"],
+    "9–10 PM — before bed"],
+  ["night","Nt22","Banana Dates Bedtime Shake",true,
+    "1 banana + 3 dates + 200ml warm milk + pinch of nutmeg + 1 tsp honey",
+    ["Blend banana and dates with warm milk.", "Add nutmeg (natural sleep inducer).", "Add honey.", "Serve warm or slightly cooled."],
+    ["Magnesium + tryptophan for deep sleep","Zinc for overnight testosterone","Melatonin pathway","Calming"],
+    "30 mins before bed"],
+  ["night","Nt23","Jeera Fennel Digestive Tea",true,
+    "1 tsp cumin (jeera) + 1 tsp fennel (sombu) + 300ml water + lemon",
+    ["Boil jeera and sombu seeds together in water.", "Steep 7 minutes.", "Strain.", "Add lemon. Sip warm after dinner."],
+    ["Reduces gas and bloating","Anti-acidity","Stimulates digestive repair overnight","Calming"],
+    "After dinner"],
+  ["night","Nt24","Ashwagandha Warm Milk",true,
+    "200ml warm milk + ½ tsp ashwagandha powder + 1 tsp honey + pinch of cardamom",
+    ["Warm milk gently.", "Whisk in ashwagandha powder until dissolved.", "Add honey and cardamom.", "Drink warm 30 minutes before bed."],
+    ["Adaptogen: reduces cortisol","Supports testosterone production","Promotes deep sleep","Stress relief"],
+    "30 mins before bed"],
+  ["night","Nt25","Saffron Cardamom Milk",true,
+    "200ml warm full-fat milk + 4 saffron strands + 2 cardamom pods + 1 tsp honey",
+    ["Steep saffron in 1 tbsp warm milk for 5 minutes.", "Boil milk with crushed cardamom pods.", "Combine and add honey.", "Sip slowly. Deeply calming."],
+    ["Mood-elevating","Anti-anxiety","Deep sleep promoter","Skin glow","Anti-aging","Luxury nightcap"],
+    "9–10 PM bedtime ritual"],
+];
+
+// ─── STATE ─────────────────────────────────────────────────────────────────
+const STORAGE_KEY = 'dindigul_drinks_v3';
+let state = { tried: {}, favs: {} };
+
+function loadState() {
+  try { state = JSON.parse(localStorage.getItem(STORAGE_KEY)) || { tried:{}, favs:{} }; }
+  catch(e) { state = { tried:{}, favs:{} }; }
+}
+function saveState() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e){}
+}
+
+// ─── BUILD UI ───────────────────────────────────────────────────────────────
+let currentFilter = 'all';
+let searchTerm = '';
+
+const SECTIONS = [
+  { id:'morning', emoji:'🌅', label:'Morning', time:'6 AM – 11 AM' },
+  { id:'noon',    emoji:'☀️',  label:'Noon & Afternoon', time:'11 AM – 4 PM' },
+  { id:'evening', emoji:'🌇', label:'Evening', time:'4 PM – 8 PM' },
+  { id:'night',   emoji:'🌙', label:'Night & Bedtime', time:'8 PM – 10 PM' },
+];
+
+function buildAll() {
+  const container = document.getElementById('mainContent');
+  container.innerHTML = '';
+  SECTIONS.forEach(sec => {
+    const secEl = document.createElement('div');
+    secEl.dataset.section = sec.id;
+
+    // Section header
+    const hdr = document.createElement('div');
+    hdr.className = `section-header ${sec.id}`;
+    hdr.innerHTML = `<span class="section-emoji">${sec.emoji}</span>
+      <div>
+        <div class="section-title">${sec.label}</div>
+        <div style="font-size:11px;color:#64748b;margin-top:1px">${sec.time}</div>
+      </div>
+      <div class="section-count" id="count-${sec.id}"></div>`;
+    secEl.appendChild(hdr);
+
+    // Cards list
+    const list = document.createElement('div');
+    list.className = 'drinks-list';
+    list.id = `list-${sec.id}`;
+
+    DRINKS.filter(d => d[0] === sec.id).forEach((d, idx) => {
+      const [time, id, name, isCustom, ingredients, steps, benefits, bestFor] = d;
+      const card = buildCard(id, name, isCustom, ingredients, steps, benefits, bestFor, time);
+      list.appendChild(card);
+    });
+
+    secEl.appendChild(list);
+    container.appendChild(secEl);
+  });
+
+  updateStats();
+}
+
+function buildCard(id, name, isCustom, ingredients, steps, benefits, bestFor, time) {
+  const card = document.createElement('div');
+  card.className = `drink-card ${time}${isCustom ? ' card-custom' : ''}`;
+  card.dataset.id = id;
+  card.dataset.name = name.toLowerCase();
+  card.dataset.ing = ingredients.toLowerCase();
+  card.dataset.time = time;
+
+  if (state.tried[id]) card.classList.add('tried');
+  if (state.favs[id]) card.classList.add('fav-card');
+
+  const checked = state.tried[id] ? 'checked' : '';
+  const fav = state.favs[id] ? '❤️' : '🤍';
+  const customBadge = isCustom ? `<span class="card-custom-tag">✦ CUSTOM</span>` : '';
+
+  card.innerHTML = `
+    <div class="card-main" onclick="toggleExpand('${id}')">
+      <div class="drink-num">${id}</div>
+      <div class="card-info">
+        <div class="card-name">${name}${customBadge}</div>
+        <div class="card-best">🕐 ${bestFor}</div>
+      </div>
+      <div class="card-actions" onclick="event.stopPropagation()">
+        <button class="check-btn ${checked}" onclick="toggleTried('${id}', this)" title="Mark as tried">✓</button>
+        <button class="fav-btn" onclick="toggleFav('${id}', this)" title="Favourite">${fav}</button>
+      </div>
+    </div>
+    <div class="card-expand" id="expand-${id}">
+      <div class="expand-inner">
+        <div class="expand-section">
+          <div class="expand-label">🌿 Key Ingredients</div>
+          <div class="expand-text">${ingredients}</div>
+        </div>
+        <div class="expand-section">
+          <div class="expand-label">📋 Step-by-Step Recipe</div>
+          <div class="recipe-steps">
+            ${steps.map((s,i) => `<div class="recipe-step"><div class="step-num">${i+1}</div><div class="step-text">${s}</div></div>`).join('')}
+          </div>
+        </div>
+        <div class="expand-section">
+          <div class="expand-label">💚 Health Benefits</div>
+          <div class="benefits-pills">
+            ${benefits.map(b => `<span class="benefit-pill">${b}</span>`).join('')}
+          </div>
+        </div>
+        <button class="mark-tried-btn ${state.tried[id] ? 'is-tried' : 'not-tried'}" id="markBtn-${id}" onclick="toggleTried('${id}', null, this)">
+          ${state.tried[id] ? '✅ Tried! Mark as Untried' : '☑️ Mark as Tried'}
+        </button>
+      </div>
+    </div>`;
+
+  return card;
+}
+
+function toggleExpand(id) {
+  const exp = document.getElementById(`expand-${id}`);
+  const isOpen = exp.classList.contains('open');
+  // Close all others
+  document.querySelectorAll('.card-expand.open').forEach(e => e.classList.remove('open'));
+  if (!isOpen) exp.classList.add('open');
+}
+
+function toggleTried(id, checkBtn, markBtn) {
+  state.tried[id] = !state.tried[id];
+  saveState();
+
+  const card = document.querySelector(`.drink-card[data-id="${id}"]`);
+  if (card) { card.classList.toggle('tried', state.tried[id]); }
+
+  // Update check button
+  const cb = checkBtn || card?.querySelector('.check-btn');
+  if (cb) cb.classList.toggle('checked', state.tried[id]);
+
+  // Update mark button
+  const mb = markBtn || document.getElementById(`markBtn-${id}`);
+  if (mb) {
+    mb.className = `mark-tried-btn ${state.tried[id] ? 'is-tried' : 'not-tried'}`;
+    mb.textContent = state.tried[id] ? '✅ Tried! Mark as Untried' : '☑️ Mark as Tried';
+  }
+
+  updateStats();
+  applyFilters();
+  showToast(state.tried[id] ? `✅ ${getDrinkName(id)} marked as tried!` : `⭕ Unmarked`);
+}
+
+function toggleFav(id, btn) {
+  state.favs[id] = !state.favs[id];
+  saveState();
+  const card = document.querySelector(`.drink-card[data-id="${id}"]`);
+  if (card) card.classList.toggle('fav-card', state.favs[id]);
+  if (btn) btn.textContent = state.favs[id] ? '❤️' : '🤍';
+  updateStats();
+  applyFilters();
+  showToast(state.favs[id] ? `❤️ Added to favourites!` : `💔 Removed from favourites`);
+}
+
+function getDrinkName(id) {
+  const d = DRINKS.find(x => x[1] === id);
+  return d ? d[2] : id;
+}
+
+function updateStats() {
+  const total = DRINKS.length;
+  const triedCount = Object.values(state.tried).filter(Boolean).length;
+  const pct = Math.round(triedCount / total * 100);
+
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressCount').textContent = `${triedCount} / ${total} tried (${pct}%)`;
+
+  const milestones = [
+    [10,'🌱 Great start — keep going!'],
+    [25,'🌿 25% done — you\'re on a roll!'],
+    [50,'🌳 Halfway through the summer journey!'],
+    [75,'🏆 75% complete — almost there!'],
+    [100,'🎉 ALL 110 DRINKS TRIED! Legend!'],
+  ];
+  let msg = '';
+  for (const [n, m] of milestones) {
+    if (triedCount >= n) msg = m;
+  }
+  document.getElementById('milestone').textContent = msg;
+
+  // Per-section stats
+  ['morning','noon','evening','night'].forEach(sec => {
+    const secDrinks = DRINKS.filter(d => d[0] === sec);
+    const triedSec = secDrinks.filter(d => state.tried[d[1]]).length;
+    const el = document.getElementById('stat' + {morning:'M',noon:'N',evening:'E',night:'Nt'}[sec]);
+    if (el) el.textContent = `${triedSec}/${secDrinks.length}`;
+  });
+
+  // Update section counts
+  SECTIONS.forEach(sec => {
+    const el = document.getElementById(`count-${sec.id}`);
+    if (el) {
+      const secDrinks = DRINKS.filter(d => d[0] === sec.id);
+      const tried = secDrinks.filter(d => state.tried[d[1]]).length;
+      el.textContent = `${tried}/${secDrinks.length} tried`;
+    }
+  });
+}
+
+function applyFilters() {
+  let visibleCount = 0;
+  document.querySelectorAll('.drink-card').forEach(card => {
+    const id = card.dataset.id;
+    const name = card.dataset.name;
+    const ing = card.dataset.ing;
+    const time = card.dataset.time;
+
+    const matchesSearch = !searchTerm || name.includes(searchTerm) || ing.includes(searchTerm);
+    let matchesFilter = true;
+    if (currentFilter === 'fav') matchesFilter = !!state.favs[id];
+    else if (currentFilter === 'tried') matchesFilter = !!state.tried[id];
+    else if (currentFilter === 'untried') matchesFilter = !state.tried[id];
+    else if (['morning','noon','evening','night'].includes(currentFilter)) matchesFilter = time === currentFilter;
+
+    const show = matchesSearch && matchesFilter;
+    card.classList.toggle('hidden', !show);
+    if (show) visibleCount++;
+  });
+
+  // Show/hide section headers
+  SECTIONS.forEach(sec => {
+    const sectionEl = document.querySelector(`[data-section="${sec.id}"]`);
+    if (!sectionEl) return;
+    const visibleCards = sectionEl.querySelectorAll('.drink-card:not(.hidden)').length;
+    sectionEl.style.display = visibleCards > 0 ? 'block' : 'none';
+  });
+
+  document.getElementById('noResults').classList.toggle('show', visibleCount === 0);
+}
+
+function filterDrinks(filter) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.filter === filter);
+  });
+  applyFilters();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function setNav(btn) {
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// ─── INIT ───────────────────────────────────────────────────────────────────
+loadState();
+buildAll();
+updateStats();
+applyFilters();
+
+// Search
+document.getElementById('searchInput').addEventListener('input', e => {
+  searchTerm = e.target.value.toLowerCase().trim();
+  applyFilters();
+});
+
+// Filter buttons
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterDrinks(btn.dataset.filter);
+    // sync nav
+    const navMap = { fav:1, tried:2, untried:3 };
+    const navBtns = document.querySelectorAll('.nav-btn');
+    navBtns.forEach(b => b.classList.remove('active'));
+    if (btn.dataset.filter === 'all') navBtns[0].classList.add('active');
+  });
+});
+
+// Scroll top
+window.addEventListener('scroll', () => {
+  document.getElementById('scrollTop').classList.toggle('show', window.scrollY > 400);
+});
+</script>
+</body>
+</html>
