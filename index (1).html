@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>📻 Dindigul Summer Sips</title>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Tiro+Tamil:ital@0;1&family=Boogaloo&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --saffron:#F4A300; --saffron-lt:#FFD166;
+  --vermil:#D94F2B;  --vermil-dk:#8B1A00;
+  --cream:#FFF8EC;   --parch:#F5EDDA;   --aged:#EDE0C4;
+  --ink:#1C0A00;     --ink-lt:#3D1A00;
+  --rust:#8B2500;    --teal:#0D6B6B;    --leaf:#2D6A2D;
+  --gold:#C8860A;    --dusty:#D4C49A;   --border:#A0733A;
+  --muted:#7A5C38;   --crack:#6B4423;
+
+  --m-c:#E8940A; --m-bg:#FFF0CC; --m-dk:#6B3D00;
+  --n-c:#0A6B6B; --n-bg:#C8EDED; --n-dk:#002D2D;
+  --e-c:#2D6A2D; --e-bg:#D0EAD0; --e-dk:#0A2D0A;
+  --nt-c:#8B2500; --nt-bg:#F0C8B8; --nt-dk:#3D0A00;
+
+  --grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+
+/* ── AGED PAPER BODY ── */
+body {
+  font-family:'Outfit',sans-serif;
+  background-color: var(--aged);
+  background-image:
+    var(--grain),
+    repeating-linear-gradient(0deg, transparent, transparent 28px, rgba(160,115,58,0.07) 28px, rgba(160,115,58,0.07) 29px),
+    repeating-linear-gradient(90deg, transparent, transparent 28px, rgba(160,115,58,0.05) 28px, rgba(160,115,58,0.05) 29px);
+  color:var(--ink);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* ════════════════════════════════════════════
+   RADIO SPLASH SCREEN
+════════════════════════════════════════════ */
+#splash {
+  position:fixed;inset:0;z-index:1000;
+  background: radial-gradient(ellipse at 50% 40%, #3D1A00 0%, #1C0A00 60%, #0A0400 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:20px;
+  transition:opacity 1s ease, transform 1s ease;
+}
+#splash.hide{opacity:0;transform:scale(1.04);pointer-events:none;}
+
+/* vintage border */
+.splash-frame {
+  position:absolute;inset:10px;
+  border:2px solid rgba(244,163,0,0.25);border-radius:4px;pointer-events:none;
+}
+.splash-frame2 {
+  position:absolute;inset:16px;
+  border:1px solid rgba(244,163,0,0.12);border-radius:2px;pointer-events:none;
+}
+
+/* RADIO SVG */
+.radio-wrap {
+  position:relative;width:200px;height:130px;margin-bottom:20px;
+  animation:radiobob 3s ease-in-out infinite;
+}
+@keyframes radiobob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.radio-body {
+  width:200px;height:120px;
+  background:linear-gradient(160deg,#5C3010 0%,#3D1A00 50%,#2A1000 100%);
+  border-radius:16px 16px 10px 10px;
+  border:3px solid #8B5A2B;
+  box-shadow:0 0 0 1px #C8860A, inset 0 2px 8px rgba(255,200,100,0.1), 6px 6px 20px rgba(0,0,0,0.6);
+  position:relative;overflow:hidden;
+}
+.radio-body::before {
+  content:'';position:absolute;top:0;left:0;right:0;height:40%;
+  background:linear-gradient(180deg,rgba(255,200,100,0.08),transparent);
+}
+.radio-speaker {
+  position:absolute;left:12px;top:12px;width:70px;height:70px;
+  border-radius:50%;border:2px solid #8B5A2B;
+  background:radial-gradient(circle,#1C0A00 0%,#3D1A00 60%,#5C3010 100%);
+  box-shadow:inset 0 0 12px rgba(0,0,0,0.8);
+  display:grid;place-items:center;
+}
+.radio-speaker::after {
+  content:'';width:30px;height:30px;border-radius:50%;
+  background:radial-gradient(circle,#C8860A,#8B5A2B);
+  box-shadow:0 0 8px rgba(244,163,0,0.4);
+  animation:speakerpulse 1s ease-in-out infinite;
+}
+@keyframes speakerpulse{0%,100%{box-shadow:0 0 8px rgba(244,163,0,0.4)}50%{box-shadow:0 0 20px rgba(244,163,0,0.8)}}
+.radio-dial-area {
+  position:absolute;right:12px;top:10px;width:80px;
+}
+.radio-dial {
+  width:36px;height:36px;border-radius:50%;
+  background:radial-gradient(circle,#F4A300,#C8860A);
+  border:2px solid #8B5A2B;margin:0 auto 6px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.5);
+  animation:dialturn 4s linear infinite;
+}
+@keyframes dialturn{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.radio-dial::after {
+  content:'';display:block;width:3px;height:14px;
+  background:#1C0A00;border-radius:2px;margin:4px auto 0;
+}
+.radio-freq {
+  font-family:'DM Mono',monospace;font-size:8px;
+  color:var(--saffron);letter-spacing:1px;text-align:center;
+}
+.radio-buttons {
+  display:flex;gap:5px;margin-top:4px;justify-content:center;
+}
+.radio-btn {
+  width:12px;height:12px;border-radius:50%;border:1px solid #8B5A2B;
+}
+.radio-btn:nth-child(1){background:#D94F2B;}
+.radio-btn:nth-child(2){background:#F4A300;box-shadow:0 0 6px #F4A300;}
+.radio-btn:nth-child(3){background:#2D6A2D;}
+.radio-bar {
+  position:absolute;bottom:10px;left:12px;right:12px;
+  height:14px;background:#0A0400;border-radius:3px;border:1px solid #5C3010;
+  display:flex;align-items:center;padding:0 6px;gap:3px;overflow:hidden;
+}
+.radio-bar-line {
+  height:6px;width:3px;background:var(--saffron);border-radius:1px;flex-shrink:0;
+  animation:equalize 0.5s ease-in-out infinite alternate;
+}
+.radio-bar-line:nth-child(2n){animation-delay:0.1s;animation-duration:0.4s;}
+.radio-bar-line:nth-child(3n){animation-delay:0.2s;animation-duration:0.6s;}
+.radio-bar-line:nth-child(4n){animation-delay:0.15s;animation-duration:0.35s;}
+@keyframes equalize{from{height:3px}to{height:10px}}
+.radio-ticker {
+  font-family:'DM Mono',monospace;font-size:7px;color:rgba(244,163,0,0.6);
+  margin-left:4px;white-space:nowrap;
+  animation:ticker 8s linear infinite;
+}
+@keyframes ticker{from{transform:translateX(100%)}to{transform:translateX(-400%)}}
+
+/* name entry */
+.splash-name-wrap {
+  text-align:center;margin-bottom:16px;
+  animation:fadeup 0.6s ease 0.5s both;
+}
+.splash-name-label {
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;
+  text-transform:uppercase;color:rgba(244,163,0,0.6);margin-bottom:8px;
+}
+.splash-name-input {
+  background:rgba(244,163,0,0.08);border:1.5px solid rgba(244,163,0,0.3);
+  border-radius:8px;padding:10px 16px;
+  font-family:'Boogaloo',cursive;font-size:20px;color:var(--saffron);
+  text-align:center;outline:none;width:220px;
+  transition:border-color 0.2s;
+}
+.splash-name-input::placeholder{color:rgba(244,163,0,0.25);}
+.splash-name-input:focus{border-color:rgba(244,163,0,0.7);}
+
+.splash-title {
+  font-family:'Abril Fatface',serif;
+  font-size:clamp(32px,9vw,48px);color:var(--cream);
+  text-align:center;line-height:1;
+  text-shadow:3px 3px 0 rgba(0,0,0,0.5);
+  animation:fadeup 0.6s ease 0.3s both;
+}
+.splash-title span{color:var(--saffron);}
+.splash-sub {
+  font-family:'Tiro Tamil',serif;font-size:16px;color:rgba(244,163,0,0.7);
+  text-align:center;margin:6px 0 20px;letter-spacing:1px;
+  animation:fadeup 0.6s ease 0.4s both;
+}
+.splash-brewing {
+  font-family:'DM Mono',monospace;font-size:11px;
+  color:rgba(255,248,236,0.45);letter-spacing:2px;text-align:center;
+  animation:blink 1.2s ease-in-out infinite;margin-bottom:16px;
+}
+@keyframes blink{0%,100%{opacity:0.3}50%{opacity:1}}
+
+.splash-loader-wrap{width:180px;margin-bottom:8px;}
+.splash-loader-track {
+  height:4px;background:rgba(255,255,255,0.08);border-radius:99px;overflow:hidden;
+}
+.splash-loader-fill {
+  height:100%;background:linear-gradient(90deg,var(--vermil),var(--saffron));
+  border-radius:99px;animation:loadfill 5s ease forwards;
+}
+@keyframes loadfill{from{width:0%}to{width:100%}}
+.splash-pct {
+  font-family:'DM Mono',monospace;font-size:10px;color:rgba(244,163,0,0.4);
+  text-align:right;margin-top:4px;
+}
+
+.splash-enter-btn {
+  margin-top:16px;padding:12px 32px;border-radius:10px;
+  border:2px solid var(--saffron);background:var(--saffron);
+  font-family:'Abril Fatface',serif;font-size:18px;color:var(--ink);
+  cursor:pointer;box-shadow:3px 3px 0 var(--gold);
+  animation:fadeup 0.6s ease 0.8s both;
+  display:none;
+}
+.splash-enter-btn.show{display:block;}
+
+.kolam-row {
+  display:flex;gap:6px;margin-top:14px;
+  animation:fadeup 0.6s ease 1.2s both;
+}
+.kd{width:6px;height:6px;border-radius:50%;background:rgba(244,163,0,0.4);}
+.kd:nth-child(3n){background:rgba(217,79,43,0.5);}
+.kd:nth-child(2){transform:scale(1.4);background:rgba(244,163,0,0.7);}
+
+@keyframes fadeup{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* ════════════════════════════════════════════
+   MADURAI SHOP SIGN HERO
+════════════════════════════════════════════ */
+.hero {
+  background:var(--vermil);
+  padding:20px 16px 0;
+  position:relative;overflow:hidden;
+}
+/* cracked paint texture */
+.hero::before {
+  content:'';position:absolute;inset:0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 10 Q25 5 30 15 Q35 8 28 20' stroke='rgba(0,0,0,0.15)' stroke-width='1' fill='none'/%3E%3Cpath d='M60 30 Q65 20 75 35 Q80 25 70 40' stroke='rgba(0,0,0,0.12)' stroke-width='0.8' fill='none'/%3E%3Cpath d='M10 60 Q15 55 22 65' stroke='rgba(0,0,0,0.1)' stroke-width='0.7' fill='none'/%3E%3Cpath d='M80 70 Q85 65 90 75 Q95 68 88 80' stroke='rgba(0,0,0,0.13)' stroke-width='0.9' fill='none'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(-55deg,transparent,transparent 15px,rgba(0,0,0,0.03) 15px,rgba(0,0,0,0.03) 16px);
+  pointer-events:none;mix-blend-mode:multiply;
+}
+.hero::after {
+  content:'';position:absolute;bottom:0;left:0;right:0;height:20px;
+  background:var(--aged);
+  clip-path:polygon(0 100%,100% 100%,100% 60%,95% 80%,90% 40%,85% 75%,80% 30%,75% 70%,70% 45%,65% 80%,60% 35%,55% 75%,50% 40%,45% 80%,40% 50%,35% 85%,30% 45%,25% 75%,20% 40%,15% 70%,10% 50%,5% 80%,0 60%);
+}
+
+/* Madurai shop sign typography */
+.hero-inner{position:relative;z-index:1;}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;}
+.shop-sign {
+  background:rgba(0,0,0,0.25);
+  border:2px solid rgba(244,163,0,0.5);
+  border-radius:4px;
+  padding:6px 10px;
+  margin-bottom:8px;
+  display:inline-block;
+}
+.shop-sign-top {
+  font-family:'DM Mono',monospace;font-size:8px;letter-spacing:3px;
+  text-transform:uppercase;color:rgba(244,163,0,0.7);
+  border-bottom:1px solid rgba(244,163,0,0.3);padding-bottom:3px;margin-bottom:4px;
+}
+.hero-name {
+  font-family:'Boogaloo',cursive;font-size:16px;color:var(--saffron);
+}
+.hero-title {
+  font-family:'Abril Fatface',serif;
+  font-size:clamp(26px,7vw,38px);color:var(--cream);line-height:1;
+  text-shadow:3px 3px 0 rgba(0,0,0,0.4);
+}
+.hero-title em{color:var(--saffron);font-style:italic;display:block;}
+.hero-tamil {
+  font-family:'Tiro Tamil',serif;font-size:13px;
+  color:rgba(255,248,236,0.55);margin-top:2px;letter-spacing:1px;
+}
+.hero-streak {
+  background:rgba(0,0,0,0.3);
+  border:2px solid rgba(244,163,0,0.4);border-radius:10px;
+  padding:10px 12px;text-align:center;cursor:pointer;
+  backdrop-filter:blur(4px);flex-shrink:0;margin-left:10px;
+}
+.streak-fire{font-size:20px;}
+.streak-num{font-family:'Abril Fatface',serif;font-size:26px;color:var(--saffron);line-height:1;}
+.streak-lbl{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,248,236,0.4);margin-top:1px;}
+
+/* XP bar in hero */
+.hero-xp-row{margin-top:10px;margin-bottom:4px;}
+.xp-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;}
+.xp-level{font-family:'Abril Fatface',serif;font-size:13px;color:var(--saffron);}
+.xp-pts{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,248,236,0.5);}
+.xp-track{height:6px;background:rgba(0,0,0,0.3);border-radius:99px;overflow:hidden;border:1px solid rgba(244,163,0,0.2);}
+.xp-fill{height:100%;background:linear-gradient(90deg,var(--vermil-dk),var(--saffron));border-radius:99px;transition:width 0.8s cubic-bezier(.4,0,.2,1);}
+
+/* ornament */
+.ornament {
+  text-align:center;padding:10px 0 6px;color:var(--saffron);
+  letter-spacing:6px;font-size:16px;opacity:0.65;position:relative;
+}
+
+/* ════════════════════════════════════════════
+   DOTD — DRINK OF THE DAY
+════════════════════════════════════════════ */
+.dotd {
+  margin:16px 14px 0;
+  background:var(--ink);
+  border:2px solid var(--saffron);border-radius:14px;
+  box-shadow:4px 4px 0 var(--gold);
+  overflow:hidden;position:relative;
+}
+.dotd::before {
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(-45deg,transparent,transparent 10px,rgba(244,163,0,0.03) 10px,rgba(244,163,0,0.03) 11px);
+}
+.dotd-inner{display:flex;align-items:center;gap:12px;padding:12px;position:relative;}
+.dotd-star{font-size:28px;flex-shrink:0;animation:starspin 4s linear infinite;}
+@keyframes starspin{0%,100%{transform:rotate(-5deg)scale(1)}50%{transform:rotate(5deg)scale(1.1)}}
+.dotd-info{flex:1;}
+.dotd-eyebrow{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--saffron);opacity:0.7;}
+.dotd-name{font-family:'Abril Fatface',serif;font-size:17px;color:var(--cream);line-height:1.1;margin-top:2px;}
+.dotd-sub{font-size:11px;color:rgba(255,248,236,0.45);margin-top:3px;font-family:'DM Mono',monospace;}
+.dotd-btn{
+  padding:8px 14px;border-radius:8px;border:2px solid var(--saffron);
+  background:var(--saffron);color:var(--ink);
+  font-family:'Abril Fatface',serif;font-size:13px;cursor:pointer;
+  flex-shrink:0;box-shadow:2px 2px 0 var(--gold);
+}
+
+/* ════════════════════════════════════════════
+   ACTION BUTTONS
+════════════════════════════════════════════ */
+.action-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px 14px 0;}
+.action-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  padding:14px;border-radius:14px;border:2px solid var(--border);
+  background:var(--cream);cursor:pointer;
+  font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--ink);
+  transition:all 0.15s;
+  box-shadow:3px 3px 0 var(--border);
+  position:relative;overflow:hidden;
+}
+.action-btn::before{
+  content:'';position:absolute;inset:0;
+  background:var(--grain);opacity:0.5;pointer-events:none;
+}
+.action-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--border);}
+.action-btn .btn-icon{font-size:22px;}
+.action-btn.spin{background:var(--saffron);border-color:var(--gold);box-shadow:3px 3px 0 var(--gold);}
+.action-btn.random{background:var(--teal);border-color:#043030;box-shadow:3px 3px 0 #043030;color:var(--cream);}
+
+/* ════════════════════════════════════════════
+   PROGRESS PANEL
+════════════════════════════════════════════ */
+.prog-panel {
+  margin:12px 14px;background:var(--cream);
+  border:2px solid var(--border);border-radius:14px;
+  padding:14px;
+  box-shadow:4px 4px 0 var(--border);
+  position:relative;overflow:hidden;
+}
+.prog-panel::before{content:'';position:absolute;inset:0;background:var(--grain);opacity:0.4;pointer-events:none;}
+.prog-panel::after{
+  content:'🥭';position:absolute;right:-6px;top:-6px;
+  font-size:52px;opacity:0.06;transform:rotate(25deg);
+}
+.prog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.prog-title{font-family:'Abril Fatface',serif;font-size:16px;color:var(--vermil);}
+.prog-pct{font-family:'Abril Fatface',serif;font-size:28px;color:var(--saffron);}
+.prog-track{height:14px;background:var(--aged);border-radius:99px;overflow:hidden;border:2px solid var(--border);}
+.prog-fill{
+  height:100%;border-radius:99px;
+  background:repeating-linear-gradient(45deg,var(--vermil),var(--vermil) 8px,var(--saffron) 8px,var(--saffron) 16px);
+  transition:width 0.8s cubic-bezier(.4,0,.2,1);
+  background-size:200% 100%;animation:barberpole 2s linear infinite;
+}
+@keyframes barberpole{from{background-position:0 0}to{background-position:40px 0}}
+.prog-sub{display:flex;justify-content:space-between;margin-top:7px;}
+.prog-count{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);}
+.prog-mile{font-size:11px;font-weight:700;color:var(--leaf);}
+.sec-bars{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px;}
+.sec-bar{text-align:center;}
+.sec-bar-label{font-family:'DM Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);margin-bottom:4px;}
+.sec-bar-track{height:4px;background:var(--aged);border-radius:99px;overflow:hidden;border:1px solid var(--dusty);}
+.sec-bar-fill{height:100%;border-radius:99px;transition:width 0.5s;}
+.sec-bar-fill.m{background:var(--m-c)}.sec-bar-fill.n{background:var(--n-c)}.sec-bar-fill.e{background:var(--e-c)}.sec-bar-fill.nt{background:var(--nt-c)}
+.sec-bar-num{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-top:2px;}
+
+/* ════════════════════════════════════════════
+   ACHIEVEMENTS STRIP
+════════════════════════════════════════════ */
+.ach-strip{padding:0 14px 4px;overflow-x:auto;display:flex;gap:8px;scrollbar-width:none;}
+.ach-strip::-webkit-scrollbar{display:none;}
+.ach-badge{
+  flex-shrink:0;display:flex;flex-direction:column;align-items:center;
+  gap:3px;padding:8px 12px;border-radius:10px;
+  border:2px solid var(--border);background:var(--cream);
+  box-shadow:2px 2px 0 var(--border);
+  position:relative;min-width:72px;
+}
+.ach-badge.locked{opacity:0.4;filter:grayscale(1);}
+.ach-badge.unlocked{border-color:var(--gold);background:#FFF8E0;box-shadow:2px 2px 0 var(--gold);}
+.ach-badge::before{content:'';position:absolute;inset:0;background:var(--grain);opacity:0.3;border-radius:8px;pointer-events:none;}
+.ach-icon{font-size:22px;}
+.ach-name{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:0.3px;text-transform:uppercase;color:var(--muted);text-align:center;line-height:1.2;}
+.ach-badge.unlocked .ach-name{color:var(--gold);}
+
+/* ════════════════════════════════════════════
+   KOLAM SECTION DIVIDER
+════════════════════════════════════════════ */
+.kolam-div{
+  display:flex;align-items:center;gap:0;padding:14px 14px 6px;
+}
+.kolam-line{flex:1;height:2px;background:repeating-linear-gradient(90deg,var(--border),var(--border) 4px,transparent 4px,transparent 8px);}
+.kolam-center{
+  display:flex;gap:4px;align-items:center;padding:0 10px;flex-shrink:0;
+}
+.kolam-center span{font-size:10px;color:var(--border);}
+
+/* ════════════════════════════════════════════
+   CONTROLS
+════════════════════════════════════════════ */
+.controls{
+  padding:10px 14px 8px;
+  position:sticky;top:0;z-index:50;
+  background:var(--parch);
+  border-bottom:2px solid var(--border);
+  box-shadow:0 2px 0 var(--border);
+}
+.controls::before{content:'';position:absolute;inset:0;background:var(--grain);opacity:0.3;pointer-events:none;}
+.search-box{
+  display:flex;align-items:center;gap:8px;
+  background:var(--cream);border:2px solid var(--border);
+  border-radius:10px;padding:9px 12px;
+  box-shadow:2px 2px 0 var(--border);margin-bottom:8px;
+  position:relative;transition:border-color 0.2s;
+}
+.search-box:focus-within{border-color:var(--vermil);}
+.search-box input{flex:1;border:none;background:transparent;outline:none;font-family:'Outfit',sans-serif;font-size:14px;color:var(--ink);}
+.search-box input::placeholder{color:var(--muted);}
+.filter-row{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;}
+.filter-row::-webkit-scrollbar{display:none;}
+.chip{
+  flex-shrink:0;padding:5px 12px;border-radius:6px;
+  border:2px solid var(--border);background:var(--cream);
+  font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.5px;
+  text-transform:uppercase;cursor:pointer;color:var(--muted);
+  transition:all 0.15s;white-space:nowrap;
+  box-shadow:2px 2px 0 var(--border);
+}
+.chip:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--border);}
+.chip.on-all{background:var(--ink);border-color:var(--ink);color:var(--cream);box-shadow:2px 2px 0 #000;}
+.chip.on-morning{background:var(--m-c);border-color:var(--m-dk);color:var(--ink);box-shadow:2px 2px 0 var(--m-dk);}
+.chip.on-noon{background:var(--n-c);border-color:var(--n-dk);color:var(--cream);box-shadow:2px 2px 0 var(--n-dk);}
+.chip.on-evening{background:var(--e-c);border-color:var(--e-dk);color:var(--cream);box-shadow:2px 2px 0 var(--e-dk);}
+.chip.on-night{background:var(--nt-c);border-color:var(--nt-dk);color:var(--cream);box-shadow:2px 2px 0 var(--nt-dk);}
+.chip.on-fav{background:#C0392B;border-color:#7B0000;color:#fff;box-shadow:2px 2px 0 #7B0000;}
+.chip.on-tried{background:var(--leaf);border-color:#0A2D0A;color:#fff;box-shadow:2px 2px 0 #0A2D0A;}
+.chip.on-untried{background:var(--teal);border-color:var(--n-dk);color:#fff;box-shadow:2px 2px 0 var(--n-dk);}
+
+/* ════════════════════════════════════════════
+   SECTION HEADER
+════════════════════════════════════════════ */
+.sec-hdr{
+  display:flex;align-items:center;gap:10px;
+  padding:14px 14px 6px;
+}
+.sec-hdr-badge{
+  width:38px;height:38px;border-radius:10px;border:2px solid;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;
+  box-shadow:2px 2px 0;
+}
+.morning .sec-hdr-badge{background:var(--m-bg);border-color:var(--m-c);box-shadow-color:var(--m-dk);box-shadow:2px 2px 0 var(--m-dk);}
+.noon    .sec-hdr-badge{background:var(--n-bg);border-color:var(--n-c);box-shadow:2px 2px 0 var(--n-dk);}
+.evening .sec-hdr-badge{background:var(--e-bg);border-color:var(--e-c);box-shadow:2px 2px 0 var(--e-dk);}
+.night   .sec-hdr-badge{background:var(--nt-bg);border-color:var(--nt-c);box-shadow:2px 2px 0 var(--nt-dk);}
+.sec-hdr-info{flex:1;}
+.sec-hdr-title{font-family:'Abril Fatface',serif;font-size:17px;color:var(--ink);}
+.sec-hdr-sub{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-top:1px;}
+.sec-hdr-count{font-family:'Abril Fatface',serif;font-size:13px;padding:4px 10px;border-radius:99px;border:1.5px solid;}
+.morning .sec-hdr-count{color:var(--m-dk);border-color:var(--m-c);background:var(--m-bg);}
+.noon    .sec-hdr-count{color:var(--n-dk);border-color:var(--n-c);background:var(--n-bg);}
+.evening .sec-hdr-count{color:var(--e-dk);border-color:var(--e-c);background:var(--e-bg);}
+.night   .sec-hdr-count{color:var(--nt-dk);border-color:var(--nt-c);background:var(--nt-bg);}
+
+/* ════════════════════════════════════════════
+   POSTAGE STAMP CARDS
+════════════════════════════════════════════ */
+.cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:4px 12px 12px;}
+
+.dcard{
+  background:var(--cream);
+  position:relative;
+  border-radius:6px;
+  cursor:pointer;
+  animation:cardpop 0.4s cubic-bezier(.34,1.4,.64,1) both;
+  /* Postage stamp perforated border */
+  border:2px solid var(--border);
+  box-shadow:3px 3px 0 var(--border);
+  /* stamp perforation illusion */
+  outline:2px dashed rgba(160,115,58,0.3);
+  outline-offset:3px;
+  transition:transform 0.15s,box-shadow 0.15s;
+  overflow:visible;
+}
+.dcard::before{
+  content:'';position:absolute;inset:0;
+  background:var(--grain);opacity:0.35;
+  border-radius:4px;pointer-events:none;z-index:0;
+}
+.dcard:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--border);}
+.dcard.tried-card{background:#F0FAF0;border-color:var(--leaf);box-shadow:3px 3px 0 var(--leaf);outline-color:rgba(45,106,45,0.3);}
+.dcard.fav-card{border-color:#C0392B;box-shadow:3px 3px 0 #C0392B;outline-color:rgba(192,57,43,0.3);}
+.dcard.hidden{display:none;}
+@keyframes cardpop{from{opacity:0;transform:scale(0.82) rotate(-2deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+
+/* stamp top band */
+.card-stamp-top{
+  height:10px;border-radius:4px 4px 0 0;position:relative;z-index:1;
+}
+.morning  .card-stamp-top{background:repeating-linear-gradient(90deg,var(--m-c),var(--m-c) 8px,#FFD166 8px,#FFD166 16px);}
+.noon     .card-stamp-top{background:repeating-linear-gradient(90deg,var(--n-c),var(--n-c) 8px,#0A9999 8px,#0A9999 16px);}
+.evening  .card-stamp-top{background:repeating-linear-gradient(90deg,var(--e-c),var(--e-c) 8px,#52A852 8px,#52A852 16px);}
+.night    .card-stamp-top{background:repeating-linear-gradient(90deg,var(--nt-c),var(--nt-c) 8px,#C03A00 8px,#C03A00 16px);}
+
+.card-body{padding:10px;position:relative;z-index:1;}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;}
+
+.card-emoji{
+  font-size:32px;line-height:1;display:inline-block;
+  animation:wobble 3s ease-in-out infinite;
+}
+@keyframes wobble{0%,100%{transform:rotate(-3deg)scale(1)}25%{transform:rotate(4deg)scale(1.06)}50%{transform:rotate(-2deg)scale(1)}75%{transform:rotate(3deg)scale(1.04)}}
+.dcard:nth-child(odd) .card-emoji{animation-delay:0.6s;}
+.dcard:nth-child(3n) .card-emoji{animation-delay:1.2s;}
+
+.card-actions{display:flex;flex-direction:column;gap:4px;}
+.ca-btn{
+  width:26px;height:26px;border-radius:6px;
+  border:1.5px solid var(--border);background:var(--parch);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:13px;transition:all 0.15s;
+  box-shadow:1px 1px 0 var(--border);
+}
+.ca-btn:active{transform:translate(1px,1px);box-shadow:none;}
+.ca-btn.fav.on{background:#C0392B;border-color:#7B0000;box-shadow:1px 1px 0 #7B0000;}
+.ca-btn.chk{color:transparent;}
+.ca-btn.chk.on{color:#fff;border-color:transparent;}
+.morning .ca-btn.chk.on{background:var(--m-c);}
+.noon    .ca-btn.chk.on{background:var(--n-c);}
+.evening .ca-btn.chk.on{background:var(--e-c);}
+.night   .ca-btn.chk.on{background:var(--nt-c);}
+
+.card-name{font-family:'Abril Fatface',serif;font-size:12px;color:var(--ink);line-height:1.2;margin-bottom:4px;}
+.custom-badge{font-size:7px;font-weight:700;padding:1px 4px;border-radius:3px;background:#D0EAD0;color:var(--leaf);margin-left:3px;vertical-align:middle;}
+.card-time{font-family:'DM Mono',monospace;font-size:9px;padding:2px 6px;border-radius:4px;display:inline-block;margin-bottom:5px;letter-spacing:0.3px;}
+.morning .card-time{background:var(--m-bg);color:var(--m-dk);}
+.noon    .card-time{background:var(--n-bg);color:var(--n-dk);}
+.evening .card-time{background:var(--e-bg);color:var(--e-dk);}
+.night   .card-time{background:var(--nt-bg);color:var(--nt-dk);}
+.card-ing{font-size:10px;color:var(--muted);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+
+/* try counter on card */
+.card-try-count{
+  position:absolute;top:14px;right:6px;
+  background:var(--ink);color:var(--saffron);
+  font-family:'DM Mono',monospace;font-size:9px;
+  padding:2px 6px;border-radius:4px;
+  border:1px solid var(--saffron);
+  display:none;z-index:2;
+}
+.card-try-count.show{display:block;}
+
+/* RUBBER STAMP overlay */
+.tried-stamp{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%) rotate(-15deg);
+  font-family:'Abril Fatface',serif;
+  font-size:22px;color:rgba(45,106,45,0.55);
+  border:3px solid rgba(45,106,45,0.45);
+  padding:3px 8px;border-radius:4px;
+  letter-spacing:2px;pointer-events:none;
+  white-space:nowrap;z-index:3;
+  display:none;
+  text-shadow:1px 1px 0 rgba(45,106,45,0.2);
+}
+.tried-card .tried-stamp{display:block;}
+
+.card-open-btn{
+  width:100%;margin-top:8px;padding:7px;border-radius:7px;
+  border:1.5px solid var(--border);background:var(--parch);
+  cursor:pointer;font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;
+  color:var(--muted);transition:all 0.15s;
+  display:flex;align-items:center;justify-content:center;gap:4px;
+  box-shadow:1px 1px 0 var(--border);position:relative;z-index:1;
+}
+.card-open-btn:active{background:var(--aged);}
+
+/* ════════════════════════════════════════════
+   CINEMA TICKET SHEET
+════════════════════════════════════════════ */
+.overlay{position:fixed;inset:0;z-index:100;background:rgba(28,10,0,0.7);opacity:0;pointer-events:none;transition:opacity 0.3s;backdrop-filter:blur(6px);}
+.overlay.on{opacity:1;pointer-events:all;}
+
+.sheet{
+  position:fixed;bottom:0;left:0;right:0;z-index:101;
+  background:var(--cream);
+  border-radius:0;
+  transform:translateY(100%);
+  transition:transform 0.4s cubic-bezier(.34,1.1,.64,1);
+  max-height:92vh;overflow-y:auto;overscroll-behavior:contain;
+  padding-bottom:env(safe-area-inset-bottom,20px);
+  border-top:3px solid var(--border);
+}
+.sheet.on{transform:translateY(0);}
+
+/* ticket top stub */
+.ticket-stub{
+  background:var(--vermil);padding:16px;
+  position:relative;overflow:hidden;
+}
+.ticket-stub::before{
+  content:'';position:absolute;inset:0;
+  background:var(--grain);opacity:0.4;pointer-events:none;
+}
+.ticket-stub::after{
+  content:'';position:absolute;bottom:-1px;left:0;right:0;height:14px;
+  background:var(--cream);
+  clip-path:polygon(0 100%,4% 0,8% 100%,12% 0,16% 100%,20% 0,24% 100%,28% 0,32% 100%,36% 0,40% 100%,44% 0,48% 100%,52% 0,56% 100%,60% 0,64% 100%,68% 0,72% 100%,76% 0,80% 100%,84% 0,88% 100%,92% 0,96% 100%,100% 0,100% 100%);
+}
+.ticket-num{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;
+  color:rgba(255,248,236,0.5);text-transform:uppercase;margin-bottom:6px;
+  position:relative;
+}
+.ticket-emoji{font-size:48px;display:block;margin-bottom:6px;animation:wobble 3s ease-in-out infinite;position:relative;}
+.ticket-title{font-family:'Abril Fatface',serif;font-size:22px;color:var(--cream);line-height:1.1;position:relative;text-shadow:2px 2px 0 rgba(0,0,0,0.3);}
+.ticket-title .custom-badge{font-size:10px;}
+.ticket-time-pill{
+  font-family:'DM Mono',monospace;font-size:10px;
+  padding:3px 10px;border-radius:5px;
+  display:inline-block;margin-top:6px;letter-spacing:0.5px;position:relative;
+}
+
+/* ticket tear line */
+.ticket-tear{
+  display:flex;align-items:center;gap:0;margin:0 0 0;
+  position:relative;
+}
+.tear-circle-l,.tear-circle-r{
+  width:20px;height:20px;border-radius:50%;
+  background:var(--aged);flex-shrink:0;
+  border:2px solid var(--border);
+}
+.tear-circle-l{margin-left:-10px;}
+.tear-circle-r{margin-right:-10px;}
+.tear-line{
+  flex:1;border-top:2px dashed var(--border);margin:0 4px;
+}
+.ticket-counter-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px 4px;
+}
+.ticket-counter{
+  display:flex;align-items:center;gap:10px;
+}
+.counter-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.counter-controls{display:flex;align-items:center;gap:8px;}
+.counter-btn{
+  width:30px;height:30px;border-radius:8px;border:2px solid var(--border);
+  background:var(--parch);cursor:pointer;font-size:16px;font-weight:700;
+  color:var(--ink);box-shadow:2px 2px 0 var(--border);
+  display:flex;align-items:center;justify-content:center;
+  transition:all 0.1s;font-family:'DM Mono',monospace;
+}
+.counter-btn:active{transform:translate(1px,1px);box-shadow:none;}
+.counter-num{
+  font-family:'Abril Fatface',serif;font-size:24px;color:var(--vermil);
+  min-width:30px;text-align:center;
+}
+.obsessed-badge{
+  font-size:10px;font-weight:700;padding:3px 8px;border-radius:5px;
+  background:var(--saffron);color:var(--ink);border:1.5px solid var(--gold);
+  display:none;
+}
+.obsessed-badge.show{display:block;}
+
+.sheet-btns{display:flex;gap:10px;padding:8px 14px 0;}
+.s-btn{flex:1;padding:12px;border-radius:12px;border:2px solid;cursor:pointer;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;transition:all 0.15s;box-shadow:2px 2px 0;}
+.s-btn:active{transform:translate(1px,1px);box-shadow:1px 1px 0;}
+.s-try{background:var(--leaf);border-color:#0A2D0A;color:#fff;box-shadow:2px 2px 0 #0A2D0A;}
+.s-try.on{background:#D0EAD0;border-color:var(--leaf);color:var(--leaf);box-shadow:2px 2px 0 var(--leaf);}
+.s-fav{background:var(--cream);border-color:#C0392B;color:#C0392B;box-shadow:2px 2px 0 #C0392B;}
+.s-fav.on{background:#C0392B;border-color:#7B0000;color:#fff;box-shadow:2px 2px 0 #7B0000;}
+
+.sheet-sec{padding:12px 16px 8px;}
+.sheet-sec-title{
+  font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:10px;
+  display:flex;align-items:center;gap:8px;
+}
+.sheet-sec-title::after{content:'';flex:1;height:1px;background:var(--dusty);}
+.ing-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.ing-chip{
+  font-size:12px;padding:5px 11px;border-radius:7px;
+  background:var(--parch);border:1.5px solid var(--border);
+  color:var(--ink);font-weight:500;cursor:pointer;
+  transition:all 0.15s;box-shadow:1px 1px 0 var(--border);
+}
+.ing-chip:active{transform:translate(1px,1px);box-shadow:none;background:var(--aged);}
+.steps-list{display:flex;flex-direction:column;gap:10px;}
+.step-row{display:flex;gap:12px;align-items:flex-start;}
+.step-n{
+  flex-shrink:0;width:24px;height:24px;border-radius:6px;border:2px solid;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'DM Mono',monospace;font-size:11px;font-weight:500;margin-top:1px;
+}
+.morning .step-n{border-color:var(--m-c);color:var(--m-dk);background:var(--m-bg);}
+.noon    .step-n{border-color:var(--n-c);color:var(--n-dk);background:var(--n-bg);}
+.evening .step-n{border-color:var(--e-c);color:var(--e-dk);background:var(--e-bg);}
+.night   .step-n{border-color:var(--nt-c);color:var(--nt-dk);background:var(--nt-bg);}
+.step-txt{font-size:13.5px;line-height:1.6;color:var(--ink);}
+.ben-chips{display:flex;flex-wrap:wrap;gap:6px;padding-bottom:16px;}
+.ben-chip{font-size:11px;padding:4px 10px;border-radius:6px;font-weight:600;border:1.5px solid;}
+.morning .ben-chip{background:var(--m-bg);color:var(--m-dk);border-color:var(--m-c);}
+.noon    .ben-chip{background:var(--n-bg);color:var(--n-dk);border-color:var(--n-c);}
+.evening .ben-chip{background:var(--e-bg);color:var(--e-dk);border-color:var(--e-c);}
+.night   .ben-chip{background:var(--nt-bg);color:var(--nt-dk);border-color:var(--nt-c);}
+
+/* ════════════════════════════════════════════
+   INGREDIENT SPOTLIGHT
+════════════════════════════════════════════ */
+.ing-spotlight{position:fixed;inset:0;z-index:200;background:rgba(28,10,0,0.75);display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s;backdrop-filter:blur(8px);}
+.ing-spotlight.on{opacity:1;pointer-events:all;}
+.ing-card{background:var(--cream);width:100%;border-radius:0;border-top:3px solid var(--border);padding:20px 20px 40px;transform:translateY(100%);transition:transform 0.4s cubic-bezier(.34,1.1,.64,1);position:relative;}
+.ing-card::before{content:'';position:absolute;inset:0;background:var(--grain);opacity:0.3;pointer-events:none;}
+.ing-spotlight.on .ing-card{transform:translateY(0);}
+.ing-card-handle{width:40px;height:4px;background:var(--border);border-radius:99px;margin:0 auto 16px;}
+.ing-card-emoji{font-size:48px;text-align:center;margin-bottom:8px;position:relative;}
+.ing-card-name{font-family:'Abril Fatface',serif;font-size:24px;text-align:center;color:var(--vermil);margin-bottom:16px;position:relative;}
+.ing-facts{display:flex;flex-direction:column;gap:10px;position:relative;}
+.ing-fact{display:flex;gap:12px;align-items:flex-start;padding:10px;background:var(--parch);border-radius:10px;border:1.5px solid var(--dusty);box-shadow:2px 2px 0 var(--dusty);}
+.ing-fact-icon{font-size:20px;flex-shrink:0;}
+.ing-fact-label{font-size:10px;font-family:'DM Mono',monospace;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.ing-fact-val{font-size:13px;font-weight:600;color:var(--ink);margin-top:2px;}
+.ing-close{width:100%;margin-top:16px;padding:13px;border-radius:12px;border:2px solid var(--border);background:var(--ink);color:var(--cream);font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;cursor:pointer;box-shadow:3px 3px 0 var(--border);position:relative;}
+
+/* ════════════════════════════════════════════
+   SPIN WHEEL
+════════════════════════════════════════════ */
+.wheel-modal{position:fixed;inset:0;z-index:200;background:rgba(28,10,0,0.85);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s;backdrop-filter:blur(8px);padding:20px;}
+.wheel-modal.on{opacity:1;pointer-events:all;}
+.wheel-box{background:var(--cream);border-radius:18px;border:3px solid var(--border);box-shadow:6px 6px 0 var(--border);padding:20px;width:100%;max-width:340px;text-align:center;transform:scale(0.8);transition:transform 0.4s cubic-bezier(.34,1.4,.64,1);position:relative;overflow:hidden;}
+.wheel-box::before{content:'';position:absolute;inset:0;background:var(--grain);opacity:0.3;pointer-events:none;}
+.wheel-modal.on .wheel-box{transform:scale(1);}
+.wheel-title{font-family:'Abril Fatface',serif;font-size:20px;color:var(--vermil);margin-bottom:2px;position:relative;}
+.wheel-sub{font-size:11px;color:var(--muted);margin-bottom:16px;font-family:'DM Mono',monospace;position:relative;}
+.wheel-wrap{position:relative;width:200px;height:200px;margin:0 auto 16px;}
+canvas#wheelCanvas{border-radius:50%;border:4px solid var(--border);box-shadow:4px 4px 0 var(--border);}
+.wheel-pointer{position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-size:26px;z-index:2;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.4));}
+.wheel-result{min-height:50px;padding:10px;background:var(--parch);border-radius:10px;border:2px solid var(--border);margin-bottom:12px;display:none;box-shadow:2px 2px 0 var(--border);position:relative;}
+.wheel-result.show{display:block;}
+.wheel-result-name{font-family:'Abril Fatface',serif;font-size:15px;color:var(--vermil);margin-bottom:3px;}
+.wheel-result-sub{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;}
+.wheel-spin-btn{width:100%;padding:13px;border-radius:12px;border:2px solid var(--gold);background:var(--saffron);font-family:'Abril Fatface',serif;font-size:18px;color:var(--ink);cursor:pointer;box-shadow:3px 3px 0 var(--gold);transition:all 0.15s;position:relative;}
+.wheel-spin-btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--gold);}
+.wheel-close{width:100%;margin-top:8px;padding:10px;border-radius:10px;border:2px solid var(--border);background:transparent;font-family:'Outfit',sans-serif;font-weight:600;font-size:12px;color:var(--muted);cursor:pointer;position:relative;}
+
+/* ════════════════════════════════════════════
+   RANDOM DRINK
+════════════════════════════════════════════ */
+.random-modal{position:fixed;inset:0;z-index:200;background:rgba(28,10,0,0.85);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s;backdrop-filter:blur(8px);padding:20px;}
+.random-modal.on{opacity:1;pointer-events:all;}
+.random-box{background:var(--cream);border-radius:18px;border:3px solid var(--border);box-shadow:6px 6px 0 var(--border);padding:22px 18px;width:100%;max-width:340px;text-align:center;transform:scale(0.8);transition:transform 0.4s cubic-bezier(.34,1.4,.64,1);position:relative;overflow:hidden;}
+.random-box::before{content:'';position:absolute;inset:0;background:var(--grain);opacity:0.3;pointer-events:none;}
+.random-modal.on .random-box{transform:scale(1);}
+.random-emoji{font-size:56px;margin-bottom:8px;display:block;animation:wobble 2s ease-in-out infinite;position:relative;}
+.random-title{font-family:'Abril Fatface',serif;font-size:20px;color:var(--vermil);margin-bottom:4px;position:relative;}
+.random-time{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:12px;position:relative;}
+.random-ing{font-size:12px;color:var(--muted);line-height:1.6;background:var(--parch);border-radius:10px;padding:10px;border:1.5px solid var(--dusty);margin-bottom:12px;text-align:left;box-shadow:2px 2px 0 var(--dusty);position:relative;}
+.random-btns{display:flex;gap:8px;position:relative;}
+.random-try{flex:1;padding:12px;border-radius:12px;border:2px solid var(--gold);background:var(--saffron);font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--ink);cursor:pointer;box-shadow:2px 2px 0 var(--gold);}
+.random-again{flex:1;padding:12px;border-radius:12px;border:2px solid var(--border);background:var(--cream);font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:var(--ink);cursor:pointer;box-shadow:2px 2px 0 var(--border);}
+.random-close{width:100%;margin-top:8px;padding:10px;border-radius:10px;border:1.5px solid var(--border);background:transparent;font-family:'Outfit',sans-serif;font-weight:600;font-size:12px;color:var(--muted);cursor:pointer;position:relative;}
+
+/* ════════════════════════════════════════════
+   CONFETTI + TOAST + NAV
+════════════════════════════════════════════ */
+.confetti-piece{position:fixed;width:10px;height:10px;border-radius:2px;pointer-events:none;z-index:9999;animation:confall 1.2s ease-in forwards;}
+@keyframes confall{0%{transform:translateY(0) rotate(0deg);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
+.toast{position:fixed;bottom:76px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--ink);color:var(--cream);border:2px solid var(--border);padding:10px 22px;border-radius:10px;font-family:'DM Mono',monospace;font-size:11px;letter-spacing:0.5px;opacity:0;pointer-events:none;transition:all 0.25s;z-index:300;white-space:nowrap;box-shadow:3px 3px 0 var(--border);}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--ink);border-top:3px solid var(--border);display:flex;padding:6px 0 env(safe-area-inset-bottom,6px);z-index:99;}
+.bnav{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px;border:none;background:transparent;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:0.3px;text-transform:uppercase;cursor:pointer;color:rgba(255,248,236,0.3);transition:color 0.2s;}
+.bnav span:first-child{font-size:18px;}
+.bnav.active{color:var(--saffron);}
+.content{padding-bottom:80px;}
+.empty{display:none;text-align:center;padding:60px 20px;}
+.empty.on{display:block;}
+.empty-icon{font-size:56px;margin-bottom:12px;}
+.empty p{color:var(--muted);font-family:'DM Mono',monospace;font-size:12px;}
+.scroll-top{position:fixed;bottom:68px;right:12px;width:38px;height:38px;border-radius:10px;background:var(--ink);color:var(--cream);border:2px solid var(--border);font-size:16px;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:2px 2px 0 var(--border);z-index:90;}
+.scroll-top.on{display:flex;}
+
+/* XP Level up popup */
+.levelup-popup{
+  position:fixed;top:20%;left:50%;transform:translateX(-50%) scale(0);
+  background:var(--ink);border:3px solid var(--saffron);border-radius:16px;
+  padding:20px 30px;text-align:center;z-index:400;
+  box-shadow:6px 6px 0 var(--gold);
+  transition:transform 0.4s cubic-bezier(.34,1.6,.64,1),opacity 0.4s;
+  opacity:0;pointer-events:none;
+}
+.levelup-popup.show{transform:translateX(-50%) scale(1);opacity:1;}
+.levelup-emoji{font-size:40px;}
+.levelup-text{font-family:'Abril Fatface',serif;font-size:22px;color:var(--saffron);margin:6px 0 2px;}
+.levelup-sub{font-family:'DM Mono',monospace;font-size:12px;color:rgba(255,248,236,0.6);}
+</style>
+</head>
+<body>
+
+<!-- ════ SPLASH ════ -->
+<div id="splash">
+  <div class="splash-frame"></div><div class="splash-frame2"></div>
+  <div class="radio-wrap">
+    <div class="radio-body">
+      <div class="radio-speaker"></div>
+      <div class="radio-dial-area">
+        <div class="radio-dial"></div>
+        <div class="radio-freq" id="radioFreq">98.3 FM</div>
+        <div class="radio-buttons">
+          <div class="radio-btn"></div><div class="radio-btn"></div><div class="radio-btn"></div>
+        </div>
+      </div>
+      <div class="radio-bar">
+        <div class="radio-bar-line"></div><div class="radio-bar-line"></div>
+        <div class="radio-bar-line"></div><div class="radio-bar-line"></div>
+        <div class="radio-bar-line"></div><div class="radio-bar-line"></div>
+        <div class="radio-bar-line"></div><div class="radio-bar-line"></div>
+        <div class="radio-bar-line"></div><div class="radio-bar-line"></div>
+        <div class="radio-bar-line"></div><div class="radio-bar-line"></div>
+        <div class="radio-ticker">♪ கோடை காலம் · Summer Special · 110 Drinks ♪ Dindigul FM ♪</div>
+      </div>
+    </div>
+  </div>
+  <div class="splash-name-wrap">
+    <div class="splash-name-label">Your Name</div>
+    <input class="splash-name-input" id="nameInput" type="text" placeholder="Enter your name…" maxlength="20">
+  </div>
+  <div class="splash-title">SUMMER <span>SIPS</span></div>
+  <div class="splash-sub">கோடை குளிர்பானங்கள்</div>
+  <div class="splash-brewing" id="brewingText">📻 Tuning in to Dindigul FM…</div>
+  <div class="splash-loader-wrap">
+    <div class="splash-loader-track"><div class="splash-loader-fill" id="splashFill"></div></div>
+    <div class="splash-pct" id="splashPct">0%</div>
+  </div>
+  <button class="splash-enter-btn" id="enterBtn" onclick="enterApp()">🥭 Let's Sip!</button>
+  <div class="kolam-row">
+    <div class="kd"></div><div class="kd"></div><div class="kd"></div>
+    <div class="kd"></div><div class="kd"></div><div class="kd"></div><div class="kd"></div>
+  </div>
+</div>
+
+<!-- ════ APP ════ -->
+<div id="app">
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-top">
+        <div>
+          <div class="shop-sign">
+            <div class="shop-sign-top">Est. Dindigul · Since 2026</div>
+            <div class="hero-name" id="heroName">Welcome Back!</div>
+          </div>
+          <div class="hero-title">SUMMER<em>SIPS</em></div>
+          <div class="hero-tamil">கோடை குளிர்பானங்கள்</div>
+        </div>
+        <div class="hero-streak" onclick="showStreakInfo()">
+          <div class="streak-fire">🔥</div>
+          <div class="streak-num" id="streakNum">1</div>
+          <div class="streak-lbl">Day Streak</div>
+        </div>
+      </div>
+      <div class="hero-xp-row">
+        <div class="xp-top">
+          <span class="xp-level" id="xpLevel">⚡ Level 1 — Sip Seeker</span>
+          <span class="xp-pts" id="xpPts">0 XP</span>
+        </div>
+        <div class="xp-track"><div class="xp-fill" id="xpFill" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="ornament">✦ ❋ ✦ ❋ ✦ ❋ ✦</div>
+  </div>
+
+  <!-- DRINK OF THE DAY -->
+  <div class="dotd" id="dotdBox">
+    <div class="dotd-inner">
+      <span class="dotd-star">🌟</span>
+      <div class="dotd-info">
+        <div class="dotd-eyebrow">Drink of the Day</div>
+        <div class="dotd-name" id="dotdName">Loading…</div>
+        <div class="dotd-sub" id="dotdSub"></div>
+      </div>
+      <button class="dotd-btn" id="dotdBtn">View</button>
+    </div>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="action-row">
+    <button class="action-btn spin" onclick="openWheel()">
+      <span class="btn-icon">🎡</span>
+      <div><div style="font-size:14px;font-family:'Abril Fatface',serif;">Spin</div><div style="font-size:10px;opacity:0.7;font-weight:400">the wheel</div></div>
+    </button>
+    <button class="action-btn random" onclick="openRandom()">
+      <span class="btn-icon">🎲</span>
+      <div><div style="font-size:14px;font-family:'Abril Fatface',serif;">Random</div><div style="font-size:10px;opacity:0.7;font-weight:400">surprise me</div></div>
+    </button>
+  </div>
+
+  <!-- PROGRESS -->
+  <div style="padding:12px 14px 4px;">
+    <div class="prog-panel">
+      <div class="prog-top">
+        <div class="prog-title">Your Journey</div>
+        <div class="prog-pct" id="progPct">0%</div>
+      </div>
+      <div class="prog-track"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
+      <div class="prog-sub">
+        <span class="prog-count" id="progCount">0 of 110 tried</span>
+        <span class="prog-mile" id="progMile"></span>
+      </div>
+      <div class="sec-bars">
+        <div class="sec-bar"><div class="sec-bar-label">🌅</div><div class="sec-bar-track"><div class="sec-bar-fill m" id="sbM" style="width:0%"></div></div><div class="sec-bar-num" id="sbMn">0/25</div></div>
+        <div class="sec-bar"><div class="sec-bar-label">☀️</div><div class="sec-bar-track"><div class="sec-bar-fill n" id="sbN" style="width:0%"></div></div><div class="sec-bar-num" id="sbNn">0/30</div></div>
+        <div class="sec-bar"><div class="sec-bar-label">🌇</div><div class="sec-bar-track"><div class="sec-bar-fill e" id="sbE" style="width:0%"></div></div><div class="sec-bar-num" id="sbEn">0/30</div></div>
+        <div class="sec-bar"><div class="sec-bar-label">🌙</div><div class="sec-bar-track"><div class="sec-bar-fill nt" id="sbNt" style="width:0%"></div></div><div class="sec-bar-num" id="sbNtn">0/25</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACHIEVEMENTS -->
+  <div style="padding:4px 14px 2px;"><span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);">🏆 Achievements</span></div>
+  <div class="ach-strip" id="achStrip"></div>
+
+  <!-- CONTROLS -->
+  <div class="controls" style="margin-top:10px;">
+    <div class="search-box">
+      <span style="font-size:16px;color:var(--muted);">⌕</span>
+      <input type="search" id="searchInput" placeholder="Search drinks, ingredients…">
+    </div>
+    <div class="filter-row">
+      <button class="chip on-all" data-f="all">All</button>
+      <button class="chip" data-f="morning">🌅 Morning</button>
+      <button class="chip" data-f="noon">☀️ Noon</button>
+      <button class="chip" data-f="evening">🌇 Evening</button>
+      <button class="chip" data-f="night">🌙 Night</button>
+      <button class="chip" data-f="fav">❤ Favs</button>
+      <button class="chip" data-f="tried">✓ Tried</button>
+      <button class="chip" data-f="untried">○ Untried</button>
+    </div>
+  </div>
+
+  <div class="content" id="mainContent"></div>
+  <div class="empty" id="emptyState"><div class="empty-icon">🌵</div><p>No drinks found.<br>Try another search!</p></div>
+</div>
+
+<!-- OVERLAYS -->
+<div class="overlay" id="overlay" onclick="closeSheet()"></div>
+<div class="sheet" id="sheet"><div id="sheetContent"></div></div>
+<div class="ing-spotlight" id="ingSpotlight" onclick="closeIngSpotlight()">
+  <div class="ing-card" onclick="event.stopPropagation()">
+    <div class="ing-card-handle"></div>
+    <div class="ing-card-emoji" id="ingEmoji">🌿</div>
+    <div class="ing-card-name" id="ingName">Ingredient</div>
+    <div class="ing-facts" id="ingFacts"></div>
+    <button class="ing-close" onclick="closeIngSpotlight()">Close ✕</button>
+  </div>
+</div>
+<div class="wheel-modal" id="wheelModal">
+  <div class="wheel-box">
+    <div class="wheel-title">🎡 Spin the Wheel!</div>
+    <div class="wheel-sub">Let fate decide your next sip</div>
+    <div class="wheel-wrap"><div class="wheel-pointer">▼</div><canvas id="wheelCanvas" width="200" height="200"></canvas></div>
+    <div class="wheel-result" id="wheelResult"><div class="wheel-result-name" id="wheelResultName"></div><div class="wheel-result-sub" id="wheelResultSub"></div></div>
+    <button class="wheel-spin-btn" id="wheelSpinBtn" onclick="spinWheel()">SPIN! 🎰</button>
+    <button class="wheel-close" onclick="closeWheel()">Maybe later</button>
+  </div>
+</div>
+<div class="random-modal" id="randomModal">
+  <div class="random-box">
+    <span class="random-emoji" id="randEmoji">🥤</span>
+    <div class="random-title" id="randName">Loading…</div>
+    <div class="random-time" id="randTime"></div>
+    <div class="random-ing" id="randIng"></div>
+    <div class="random-btns">
+      <button class="random-try" onclick="markCurrentRandom()">✓ Mark Tried</button>
+      <button class="random-again" onclick="openRandom()">🎲 Another!</button>
+    </div>
+    <button class="random-close" onclick="closeRandom()">Close</button>
+  </div>
+</div>
+<div class="levelup-popup" id="levelupPopup">
+  <div class="levelup-emoji">⚡</div>
+  <div class="levelup-text" id="levelupText">Level Up!</div>
+  <div class="levelup-sub" id="levelupSub">Keep sipping!</div>
+</div>
+<div class="toast" id="toast"></div>
+<button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<div class="bottom-nav">
+  <button class="bnav active" onclick="setFilter('all',this)"><span>🥤</span><span>All</span></button>
+  <button class="bnav" onclick="setFilter('fav',this)"><span>❤</span><span>Favs</span></button>
+  <button class="bnav" onclick="setFilter('tried',this)"><span>✓</span><span>Tried</span></button>
+  <button class="bnav" onclick="openRandom()"><span>🎲</span><span>Random</span></button>
+  <button class="bnav" onclick="openWheel()"><span>🎡</span><span>Spin</span></button>
+</div>
+<script>
+// ── INGREDIENT DB ──────────────────────────────────────────────────────────
+const ING_DB={
+  "amla":{emoji:"🫐",benefits:"Highest natural Vitamin C, lowers cortisol, liver detox",nutrients:"Vitamin C, Tannins, Gallic acid",best:"Empty stomach, morning"},
+  "honey":{emoji:"🍯",benefits:"Antibacterial, soothes throat, natural energy",nutrients:"Fructose, antioxidants, B vitamins",best:"Morning or before bed"},
+  "ginger":{emoji:"🫚",benefits:"Reduces inflammation, anti-nausea, boosts metabolism",nutrients:"Gingerol, Shogaol, Vitamin C",best:"Morning or evening"},
+  "turmeric":{emoji:"🟡",benefits:"Powerful anti-inflammatory, gut healing, curcumin",nutrients:"Curcumin, Manganese, Iron",best:"Morning shot or bedtime milk"},
+  "pomegranate":{emoji:"🔴",benefits:"Clinically raises testosterone, antioxidant-rich",nutrients:"Punicalagins, Vitamin C, Folate",best:"Morning on empty stomach"},
+  "beetroot":{emoji:"🟣",benefits:"Nitric oxide for circulation, iron-rich, anti-anemic",nutrients:"Nitrates, Folate, Iron, Potassium",best:"Morning pre-workout"},
+  "lemon":{emoji:"🍋",benefits:"Vitamin C, liver cleanse, alkalises body",nutrients:"Vitamin C, Citric acid, Flavonoids",best:"Morning warm water"},
+  "coconut":{emoji:"🥥",benefits:"Best natural electrolyte, kidney health",nutrients:"Potassium, Magnesium, Lauric acid",best:"Noon during peak heat"},
+  "watermelon":{emoji:"🍉",benefits:"Deep hydration, citrulline for circulation",nutrients:"Citrulline, Lycopene, Vitamin A",best:"12–4 PM"},
+  "banana":{emoji:"🍌",benefits:"Potassium, sustained energy, tryptophan for sleep",nutrients:"Potassium, B6, Tryptophan, Fibre",best:"Breakfast or pre-workout"},
+  "mango":{emoji:"🥭",benefits:"Vitamin A & C, energy booster, testosterone support",nutrients:"Vitamin A, C, Folate, Beta-carotene",best:"Morning or pre-workout"},
+  "tulsi":{emoji:"🌿",benefits:"Adaptogen, reduces stress hormones, antibacterial",nutrients:"Eugenol, Linalool, Vitamin K",best:"Empty stomach morning"},
+  "nannari":{emoji:"🌺",benefits:"Reduces body heat, purifies blood, cooling",nutrients:"Saponins, Flavonoids",best:"2–5 PM Dindigul classic"},
+  "tamarind":{emoji:"🟤",benefits:"Iron source, electrolytes, treats heat exhaustion",nutrients:"Iron, Tartaric acid, B vitamins",best:"Afternoon cooler"},
+  "aloe vera":{emoji:"🌵",benefits:"Gut lining repair, skin glow, reduces acidity",nutrients:"Acemannan, Vitamins A C E",best:"Early morning"},
+  "ashwagandha":{emoji:"🌾",benefits:"Reduces cortisol, supports testosterone, promotes sleep",nutrients:"Withanolides, Alkaloids, Iron",best:"30 mins before bed"},
+  "cardamom":{emoji:"🫙",benefits:"Calming, aids deep sleep, digestive",nutrients:"Cineole, Terpinene, Manganese",best:"Bedtime milk"},
+  "cinnamon":{emoji:"🪵",benefits:"Blood sugar control, warming, anti-microbial",nutrients:"Cinnamaldehyde, Calcium, Manganese",best:"After dinner"},
+  "saffron":{emoji:"🌟",benefits:"Mood-elevating, anti-anxiety, promotes deep sleep",nutrients:"Crocin, Safranal, Kaempferol",best:"Bedtime warm milk"},
+  "cumin":{emoji:"🌰",benefits:"Digestive enzymes, anti-gas, reduces bloating",nutrients:"Iron, Thymoquinone, Vitamin B",best:"After meals"},
+  "pineapple":{emoji:"🍍",benefits:"Bromelain digestive enzyme, anti-inflammatory",nutrients:"Bromelain, Vitamin C, Manganese",best:"Post-lunch"},
+  "mint":{emoji:"🌱",benefits:"Cooling, digestive, anti-bloat, refreshing",nutrients:"Menthol, Menthone, Vitamin A",best:"Afternoon cooler"},
+  "papaya":{emoji:"🧡",benefits:"Papain enzyme for digestion, skin brightening",nutrients:"Papain, Vitamin C, Lycopene",best:"Breakfast or evening"},
+  "sesame":{emoji:"⚪",benefits:"High zinc for testosterone, healthy fats, calcium",nutrients:"Zinc, Sesamin, Calcium, Iron",best:"Evening pre-workout"},
+  "dates":{emoji:"🟫",benefits:"Natural iron, slow energy, magnesium for sleep",nutrients:"Iron, Magnesium, Natural sugars",best:"Bedtime shake"},
+};
+
+// ── XP LEVELS ─────────────────────────────────────────────────────────────
+const LEVELS=[
+  {min:0,   max:99,  name:"Sip Seeker",    emoji:"🌱"},
+  {min:100, max:249, name:"Juice Rookie",  emoji:"🥤"},
+  {min:250, max:499, name:"Blend Master",  emoji:"🌿"},
+  {min:500, max:799, name:"Taste Warrior", emoji:"⚡"},
+  {min:800, max:1199,name:"Dindigul Pro",  emoji:"🏆"},
+  {min:1200,max:1799,name:"Summer Legend", emoji:"🔥"},
+  {min:1800,max:9999,name:"GOAT of Sips",  emoji:"👑"},
+];
+
+// ── ACHIEVEMENTS ──────────────────────────────────────────────────────────
+const ACHIEVEMENTS=[
+  {id:"first_sip",  icon:"🌅",name:"First Sip",    cond:s=>Object.values(s.tried).filter(Boolean).length>=1},
+  {id:"morning5",   icon:"☀️", name:"Early Bird",   cond:s=>Object.keys(s.tried).filter(k=>k.startsWith("M")&&s.tried[k]).length>=5},
+  {id:"t_king",     icon:"💪",name:"T-King",       cond:s=>["M21","M22","M23","E26","Nt24"].every(k=>s.tried[k])},
+  {id:"night_owl",  icon:"🌙",name:"Night Owl",    cond:s=>Object.keys(s.tried).filter(k=>k.startsWith("Nt")&&s.tried[k]).length>=5},
+  {id:"nannari",    icon:"🌺",name:"Nannari Fan",  cond:s=>s.tried["N09"]},
+  {id:"halfway",    icon:"🌳",name:"Halfway Hero", cond:s=>Object.values(s.tried).filter(Boolean).length>=55},
+  {id:"fav10",      icon:"❤️",name:"Fav Collector",cond:s=>Object.values(s.favs).filter(Boolean).length>=10},
+  {id:"obsessed",   icon:"🔁",name:"Obsessed!",   cond:s=>Object.values(s.count||{}).some(v=>v>=3)},
+  {id:"legend",     icon:"👑",name:"Legend",       cond:s=>Object.values(s.tried).filter(Boolean).length>=110},
+];
+
+// ── DRINKS DATA (compact) ─────────────────────────────────────────────────
+// [time, id, name, isCustom, emoji, xp, ingredients[], steps[], benefits[], bestFor]
+const D=[
+["morning","M01","Amla Honey Juice",0,"🫐",10,["3 fresh amla","1 tsp honey","Lemon juice","200ml water"],["Blend amla pieces with 200ml water.","Strain through a fine mesh sieve.","Add honey and squeeze of lemon.","Serve cold or over ice."],["20x Vitamin C of oranges","Lowers cortisol","Immune booster","Liver detox"],"Empty stomach"],
+["morning","M02","Lemon Honey Ginger",0,"🍋",10,["1 lemon","1 tsp honey","½ tsp ginger juice","250ml warm water"],["Squeeze lemon into warm water.","Extract fresh ginger juice.","Add ginger and honey. Stir.","Drink warm on empty stomach."],["Detoxifies liver","Boosts metabolism","Anti-bacterial","Aids digestion"],"Empty stomach"],
+["morning","M03","Beetroot Carrot Orange",0,"🥕",10,["1 small beetroot","1 carrot","1 orange","½ tsp ginger"],["Peel and chop beetroot, carrot, ginger.","Juice all together.","Add squeezed orange juice.","Add pinch of black salt. Chill."],["Iron-rich","Beta-carotene","Nitric oxide boost","Anti-anemic"],"6–8 AM"],
+["morning","M04","Ginger Turmeric Shot",0,"🔥",10,["1 tsp ginger juice","½ tsp turmeric","Pinch of pepper","Squeeze of lemon"],["Grate ginger and squeeze juice.","Mix with turmeric and pepper.","Add 30ml warm water and lemon.","Take it as a shot!"],["Powerful anti-inflammatory","Gut healing","Immunity boost","Cortisol reducer"],"Empty stomach"],
+["morning","M05","Orange Carrot Juice",0,"🍊",10,["2 oranges","1 carrot","½ tsp turmeric","1 tsp honey"],["Blend carrot with a little water.","Juice oranges fresh.","Combine, add turmeric and honey.","Strain and serve chilled."],["Vitamin C","Beta-carotene","Skin health","Eye protection"],"7–9 AM"],
+["morning","M06","Pomegranate Juice",0,"🔴",10,["1 full pomegranate","Pinch of black salt","Lemon juice"],["Deseed the pomegranate.","Blend seeds lightly 10 seconds.","Strain through muslin cloth.","Add black salt and lemon. Serve cold."],["Raises testosterone naturally","Rich in antioxidants","Heart health","Anti-inflammatory"],"Morning"],
+["morning","M07","Guava Lemon Juice",0,"🟢",10,["2 ripe guavas","Juice of 1 lemon","Pinch of black salt","Water"],["Chop guava including skin.","Blend with 150ml water.","Strain through sieve.","Add lemon and black salt. Chill."],["Highest Vitamin C in India","Antibacterial","Digestive fibre","Skin health"],"7–9 AM"],
+["morning","M08","Pineapple Turmeric Juice",0,"🍍",10,["1 cup pineapple","½ tsp turmeric","1 tsp ginger","Lemon"],["Blend pineapple and ginger with water.","Strain through fine mesh.","Stir in turmeric and lemon.","Serve chilled."],["Bromelain enzyme","Anti-inflammatory","Liver support","Digestion aid"],"Morning"],
+["morning","M09","Green Tea Iced",0,"🍵",10,["2 green tea bags","400ml water","Honey","Lemon","Mint"],["Brew tea 3 mins — don't over-steep.","Cool to room temperature.","Add honey and lemon.","Serve over ice with fresh mint."],["Antioxidant-rich","Boosts metabolism","Reduces cortisol","Brain focus"],"Morning"],
+["morning","M10","Tulsi Herbal Drink",0,"🌿",10,["10 fresh tulsi leaves","1 tsp honey","Lemon","250ml warm water"],["Wash tulsi leaves well.","Boil in water 5 mins.","Cool and strain.","Add honey and lemon. Drink warm."],["Adaptogen","Reduces stress hormones","Antibacterial","Immunity"],"Empty stomach"],
+["morning","M11","Aloe Vera Juice",0,"🌵",10,["2 tbsp fresh aloe vera gel","Lemon juice","1 tsp honey","200ml water"],["Slice aloe leaf, scoop clear gel.","Blend with water and lemon.","Strain fibrous bits.","Add honey. Serve cold immediately."],["Gut lining repair","Skin glow","Reduces acidity","Deep hydration"],"Early morning"],
+["morning","M12","Banana Oats Shake",0,"🍌",10,["1 banana","3 tbsp oats","200ml milk","1 tsp honey","Cinnamon"],["Soak oats in milk 5 mins.","Add banana, honey and cinnamon.","Blend completely smooth.","Serve chilled."],["Sustained energy","High fibre","Cholesterol reduction","Filling breakfast"],"Breakfast"],
+["morning","M13","Apple Cinnamon Smoothie",0,"🍎",10,["1 apple","½ tsp cinnamon","200ml curd","1 tsp honey"],["Core and chop the apple.","Blend apple, curd, cinnamon and honey.","Add pinch of cardamom.","Serve chilled."],["Blood sugar control","Gut health","Vitamin C","Anti-inflammatory"],"7–9 AM"],
+["morning","M14","Banana Almond Shake",0,"🥛",10,["1 banana","10 soaked almonds","200ml milk","1 tsp honey"],["Soak almonds overnight, peel.","Blend with banana and milk.","Add honey, blend again.","Serve cold."],["Brain fuel Vitamin E","Energy","Protein","Healthy fats"],"Breakfast"],
+["morning","M15","Lemon Chia Drink",0,"💧",10,["Juice of 2 lemons","1 tbsp chia seeds","1 tsp honey","300ml water"],["Soak chia seeds 15 mins — swell 10x.","Add lemon juice and honey.","Stir and serve cold.","Refrigerate overnight."],["Omega-3","Fibre","Vitamin C","Hydrating"],"Morning"],
+["morning","M16","Pineapple Ginger Juice",0,"🍍",10,["1 cup pineapple","1 tsp fresh ginger","Lemon","Pinch of pepper"],["Blend pineapple smooth.","Grate ginger, squeeze juice.","Strain, combine with ginger.","Add lemon and pepper. Serve cold."],["Bromelain aids digestion","Anti-nausea","Circulation boost","Anti-bloat"],"7–9 AM"],
+["morning","M17","Apple Oats Smoothie",0,"🍎",10,["1 apple","3 tbsp rolled oats","200ml milk","1 tsp jaggery","Cinnamon"],["Soak oats in milk 10 mins.","Core and chop apple.","Blend all with jaggery and cinnamon.","Serve chilled."],["Sustained energy","Fibre","Heart health","Filling"],"7–9 AM"],
+["morning","M18","Cucumber Detox Water",0,"🥒",10,["1 cucumber sliced","2 lemons sliced","10 mint leaves","1L water"],["Slice cucumber and lemons thinly.","Combine in jar with mint and cold water.","Refrigerate overnight.","Drink first thing in morning."],["Kidney cleanse","Reduces bloating","Alkalises body","Skin glow"],"Empty stomach"],
+["morning","M19","Herbal Cooling Decoction",0,"🌾",10,["1 tsp coriander seeds","1 tsp fennel seeds","1 tsp cumin","400ml water"],["Combine seeds in a pot.","Boil in water 8 mins.","Cool completely and strain.","Add lemon if desired. Sip slowly."],["Liver cleanse","Reduces body heat","Digestive enzymes","Ayurvedic classic"],"Empty stomach"],
+["morning","M20","Orange Banana Smoothie",0,"🍊",10,["2 oranges juiced","1 banana","100ml curd","1 tsp honey"],["Juice oranges fresh.","Blend with banana, curd and honey.","Serve immediately.","Add ice cubes."],["Vitamin C + potassium","Energy","Gut-friendly probiotic","Filling"],"Breakfast"],
+["morning","M21","Mango Banana Power Shake",1,"🥭",25,["1 ripe Banganapalli mango","1 banana","200ml milk","1 tsp honey","Pinch of cardamom"],["Peel and chop mango, slice banana.","Blend all until creamy.","Add cardamom, blend 5 more seconds.","Serve chilled with ice."],["Energy booster","Vitamin C","Potassium","Pre-workout fuel","Testosterone support"],"Pre-workout"],
+["morning","M22","Amla Ginger Citrus Blast",1,"⚡",25,["3 amla","1 tsp grated ginger","Juice of 1 lemon","1 tsp honey","200ml water"],["Blend amla with water.","Strain well through fine mesh.","Mix in ginger, lemon and honey.","Serve very cold."],["Highest natural Vitamin C","Lowers cortisol","Liver detox","Immunity"],"Empty stomach"],
+["morning","M23","Pomegranate Beetroot T-Booster",1,"💪",25,["½ cup pomegranate seeds","½ beetroot boiled","Lemon juice","Pinch of black salt"],["Boil beetroot, cool and chop.","Blend pomegranate seeds lightly.","Juice beetroot separately.","Combine, add lemon and black salt."],["Clinically raises testosterone","Iron-rich","Nitric oxide boost","Heart health"],"Morning men"],
+["morning","M24","Papaya Coconut Glow Smoothie",1,"🌸",25,["1 cup papaya","3 tbsp fresh coconut milk","5 soaked almonds","1 tsp honey"],["Peel soaked almonds.","Blend papaya smooth.","Add coconut milk, almonds and honey.","Blend creamy. Serve chilled."],["Papain enzyme","Skin glow","Vitamin E","Gut health"],"Breakfast"],
+["morning","M25","Guava Ginger Green Blast",1,"🌿",25,["2 ripe guavas","1 tsp grated ginger","Lemon","Handful of mint","Water"],["Blend guava and mint with water.","Strain through sieve.","Add ginger juice and lemon.","Serve cold over ice."],["Antibacterial","Anti-inflammatory","Highest Vitamin C","Skin health"],"7–9 AM"],
+["noon","N01","Tender Coconut Water",0,"🥥",10,["Fresh tender coconut water","Squeeze of lime"],["Get fresh tender coconut.","Pour water into glass.","Add lime if desired.","Drink fresh and cold."],["Best natural electrolyte","Kidney health","Rehydrates","Heat stroke prevention"],"Anytime"],
+["noon","N02","Nungu Coconut Cooler",0,"🌴",10,["Palm nungu (ice apple)","Tender coconut water","Pinch of cardamom"],["Peel and slice nungu.","Place in glass.","Pour coconut water over.","Add cardamom. Serve very cold."],["Deep cooling","Prevents heat stroke","Natural electrolyte","Light on stomach"],"12–3 PM"],
+["noon","N03","Watermelon Mint Juice",0,"🍉",10,["2 cups watermelon","10 mint leaves","Lime juice","Pinch of rock salt"],["Blend watermelon smooth.","Strain fibrous bits.","Add mint, lime and rock salt.","Serve over plenty of ice."],["Deep hydration","Reduces body heat","Citrulline for circulation","Anti-bloat"],"12–4 PM"],
+["noon","N04","Muskmelon Lime Juice",0,"🍈",10,["1 cup muskmelon","Lime juice","Rock salt","Cold water"],["Peel and deseed muskmelon.","Blend with cold water.","Strain, add lime and rock salt.","Serve chilled with ice."],["Cooling","Vitamin A","Digestive","Reduces acidity"],"Noon"],
+["noon","N05","Mango Lassi",0,"🥭",10,["1 cup mango pulp","150ml thick curd","1 tsp jaggery","Pinch of cardamom"],["Blend ripe mango pulp smooth.","Add thick curd and jaggery.","Blend until frothy.","Add cardamom. Serve over ice."],["Probiotic","Protein","Cools body","Vitamin A"],"12–2 PM"],
+["noon","N06","Cucumber Mint Cooler",0,"🥒",10,["1 cucumber","10 mint leaves","Lime","Rock salt","Cold water"],["Blend cucumber and mint with cold water.","Strain through fine mesh.","Add lime and rock salt.","Serve chilled."],["Silica for skin","Anti-bloat","Kidney-friendly","Refreshing"],"1–4 PM"],
+["noon","N07","Buttermilk Neer Mor",0,"🥛",10,["Thin curd","Water","Curry leaves","Green chilli","Ginger","Mustard","Rock salt"],["Dilute curd with water 1:3.","Tadka with mustard, curry leaves, ginger.","Mix tadka into buttermilk.","Add salt, green chilli. Serve cold."],["Best Dindigul probiotic","Cools body","Relieves gas","Digestion"],"Post-lunch"],
+["noon","N08","Sweet Lime Juice",0,"🍋",10,["4 mosambi (sweet lime)","1 tsp honey","Rock salt","Cumin powder"],["Juice mosambi fresh.","Add honey, rock salt and cumin.","Stir well.","Serve chilled."],["Vitamin C","Digestive tonic","Liver cleanser","Relieves nausea"],"Noon"],
+["noon","N09","Nannari Sherbet",0,"🌺",10,["2 tbsp nannari syrup","Cold water","Lemon","Pinch of rock salt"],["Mix nannari syrup in cold water.","Add lemon and rock salt.","Stir well.","Serve very cold — Dindigul's finest!"],["Reduces body heat","Purifies blood","Classic Dindigul drink","Cooling"],"2–5 PM"],
+["noon","N10","Watermelon Lime Slush",0,"🍉",10,["3 cups watermelon","Lime juice","Pinch of salt","Ice cubes"],["Blend watermelon with ice.","Add lime and salt.","Blend to slush texture.","Pour and serve immediately."],["Deep hydration","Cooling","Electrolytes","Citrulline"],"12–4 PM"],
+["noon","N11","Lychee Juice",0,"🍒",10,["10–12 fresh lychees","Water","1 tsp lemon juice"],["Peel and deseed lychees.","Blend with a little water.","Strain for clear juice.","Add lemon. Serve chilled."],["Vitamin C","Skin health","Antioxidant","Anti-inflammatory"],"Afternoon"],
+["noon","N12","Tamarind Ginger Cooler",0,"🌶️",10,["Tamarind water","1 tsp jeera powder","Jaggery","Black salt","Ginger","Mint"],["Soak tamarind, extract pulp.","Strain tamarind water.","Mix in jeera, jaggery, black salt, ginger.","Garnish with mint. Serve cold."],["Electrolyte-rich","Treats heat exhaustion","Digestive","Iron source"],"2–5 PM"],
+["noon","N13","Masala Buttermilk",0,"🥛",10,["Thin curd","Water","Roasted cumin","Black pepper","Coriander","Green chilli"],["Dilute curd with water.","Dry roast cumin, grind with pepper.","Add masala to buttermilk.","Whisk and serve cold."],["Probiotic","Aids digestion","Replaces electrolytes","Cooling"],"Post-lunch"],
+["noon","N14","Sugarcane Juice",0,"🎋",10,["Fresh sugarcane juice","1 tsp ginger juice","Lime","Black salt"],["Get freshly pressed sugarcane juice.","Add ginger, lime and black salt.","Stir, serve over ice.","Best consumed immediately."],["Instant energy","Liver tonic","Rehydrates","Iron-rich"],"Anytime"],
+["noon","N15","Aam Panna",0,"🥭",10,["2 boiled raw mangoes","Jeera powder","Black salt","Jaggery","Mint"],["Boil raw mangoes, cool, extract pulp.","Mix with jaggery, jeera, black salt.","Dilute with cold water.","Add mint. Serve over ice."],["Prevents heat stroke","Iron source","Electrolyte balance","Cooling"],"2–5 PM"],
+["noon","N16","Peanut Banana Smoothie",0,"🥜",10,["1 banana","1 tbsp groundnut butter","200ml milk"],["Blend peanuts with milk first.","Add banana. Blend smooth.","Add honey if needed.","Serve chilled."],["Protein","Healthy fats","Zinc for testosterone","Energy sustaining"],"Lunch"],
+["noon","N17","Papaya Pineapple Smoothie",0,"🍍",10,["1 cup papaya","1 cup pineapple","100ml curd","1 tsp honey"],["Chop papaya and pineapple.","Blend all together.","Serve immediately.","Add ice cubes."],["Double digestive enzymes","Gut health","Anti-bloat","Vitamin C"],"Post-lunch"],
+["noon","N18","Coconut Mint Cooler",0,"🥥",10,["200ml tender coconut water","10 mint leaves","Lime juice","1 tsp honey"],["Blend mint with a little coconut water.","Strain.","Mix with remaining coconut water, lime, honey.","Serve very cold."],["Electrolytes","Cooling","Digestive","Natural sweetness"],"12–3 PM"],
+["noon","N19","Lime Soda",0,"🫧",10,["2 limes","200ml soda water","1 tsp honey","Pinch of salt"],["Squeeze lime into glass.","Add honey and rock salt.","Top with chilled soda.","Serve immediately."],["Vitamin C","Rehydrating","Cooling","Digestive aid"],"Afternoon"],
+["noon","N20","Salted Lemon Cooler",0,"🍋",10,["2 lemons","Rock salt","Roasted cumin powder","300ml cold water"],["Squeeze lemons into cold water.","Add rock salt and cumin.","Stir, adjust seasoning.","Serve over ice."],["Electrolytes","Prevents heat exhaustion","Digestive","Vitamin C"],"2–5 PM"],
+["noon","N21","Grape Mint Juice",0,"🍇",10,["1 cup grapes","8 mint leaves","Lemon","Pinch of black salt"],["Blend grapes and mint.","Strain through fine mesh.","Add lemon and black salt.","Serve chilled."],["Resveratrol antioxidant","Cooling","Liver health","Anti-aging"],"Noon"],
+["noon","N22","Carrot Mango Smoothie",0,"🥕",10,["1 medium carrot boiled","1 cup mango pulp","100ml milk","Honey"],["Blend boiled carrot smooth.","Add mango, milk and honey.","Blend together.","Strain if needed. Serve cold."],["Beta-carotene","Vitamin A","Energy","Filling"],"Noon snack"],
+["noon","N23","Fruity Detox Water",0,"🍓",10,["1 lemon sliced","½ cucumber sliced","Mint leaves","½ orange sliced","1L water"],["Slice all fruits thinly.","Combine in jar with mint.","Fill with cold water.","Refrigerate 2 hrs. Sip throughout."],["Kidney cleanse","Vitamin C","Reduces bloating","Skin hydration"],"Throughout afternoon"],
+["noon","N24","Papaya Banana Smoothie",0,"🍌",10,["1 cup papaya","1 banana","100ml curd","1 tsp honey"],["Chop papaya and banana.","Blend with curd and honey.","Serve immediately.","Add pinch of cardamom."],["Papain enzyme","Potassium","Gut health","Probiotic"],"Light lunch"],
+["noon","N25","Cucumber Lemon Juice",0,"🥒",10,["1 cucumber","Juice of 2 lemons","Rock salt","Water","Mint"],["Blend cucumber with water.","Strain well.","Add lemon, rock salt and mint.","Serve very cold."],["Silica for skin","Anti-bloat","Kidney-friendly","Hydrating"],"Afternoon"],
+["noon","N26","Mango Coconut Noon Smoothie",1,"🥥",25,["1 cup ripe mango pulp","200ml fresh coconut milk","1 tsp honey","Pinch of cardamom"],["Blend mango with coconut milk.","Add honey and cardamom.","Blend 5 more seconds.","Serve chilled over ice."],["Cooling","Medium-chain fats","Vitamin A","Energy sustaining"],"12–2 PM"],
+["noon","N27","Watermelon Basil Cooler",1,"🍉",25,["2 cups watermelon","5 tulsi leaves","Lime","Pinch of black salt","Ice"],["Blend watermelon with tulsi.","Strain through fine mesh.","Add lime and black salt.","Serve over ice immediately."],["Anti-inflammatory","Fever reducing","Deep hydration","Citrulline"],"Noon heat relief"],
+["noon","N28","Pineapple Lemon Ginger Juice",1,"🍍",25,["1 cup pineapple","1 tsp ginger","Lemon juice","1 tsp honey","Cold water"],["Blend pineapple with water.","Extract ginger juice.","Strain pineapple, combine with ginger.","Add lemon and honey. Serve chilled."],["Bromelain digestive enzyme","Anti-nausea","Circulation boost","Anti-bloat"],"Post-lunch"],
+["noon","N29","Cucumber Coconut Hydrator",1,"🌊",25,["½ cucumber blended","200ml tender coconut water","Lemon juice","Mint"],["Blend cucumber.","Strain. Combine with coconut water.","Add lemon and fresh mint.","Serve over ice during peak heat."],["Ultimate heat hydration","Silica for skin","Kidney-friendly","Electrolytes"],"Peak afternoon heat"],
+["noon","N30","Tamarind Jal Jeera Special",1,"✨",25,["Tamarind water","1 tsp jeera powder","Black salt","Jaggery","Mint","Lime"],["Soak tamarind 20 mins, strain well.","Dissolve jaggery. Add jeera and black salt.","Add lime and fresh mint.","Serve very cold. Dindigul classic!"],["Electrolytes","Prevents heat exhaustion","Iron","Digestive tonic"],"2–5 PM"],
+["evening","E01","Hibiscus Iced Tea",0,"🌺",10,["Dried hibiscus flowers","Honey","Lemon","Cold water"],["Boil hibiscus in water 10 mins.","Cool completely.","Add honey and lemon.","Serve over ice with mint."],["Lowers blood pressure","Antioxidant","Kidney protection","Cooling"],"4–7 PM"],
+["evening","E02","Lemongrass Iced Tea",0,"🌾",10,["2 lemongrass stalks","400ml water","Honey","Lemon","Ice"],["Crush lemongrass to release flavour.","Boil in water 10 mins.","Cool and strain.","Add honey and lemon. Serve over ice."],["Anti-anxiety","Digestive","Anti-microbial","Reduces bloating"],"Evening"],
+["evening","E03","Ginger Lemon Cooler",0,"🍋",10,["1-inch ginger","Juice of 2 lemons","1 tsp honey","300ml cold water"],["Grate ginger, squeeze juice.","Mix with lemon, honey and cold water.","Stir well.","Serve cold."],["Anti-inflammatory","Digestive","Anti-nausea","Metabolism boost"],"4–7 PM"],
+["evening","E04","Strawberry Banana Smoothie",0,"🍓",10,["6 strawberries or jamun","1 banana","100ml curd","Honey"],["Hull strawberries.","Blend with banana, curd and honey.","Serve immediately.","Add ice cubes."],["Antioxidant anthocyanins","Probiotic","Skin brightening","Vitamin C"],"Evening snack"],
+["evening","E05","Mixed Fruit Smoothie",0,"🍹",10,["Mango banana papaya guava","100ml curd","Honey"],["Chop all fruits.","Blend with curd and honey.","Serve cold immediately.","Adjust sweetness."],["Broad spectrum vitamins","Gut health","Energy replenishment","Probiotic"],"4–6 PM"],
+["evening","E06","Jackfruit Smoothie",0,"🫐",10,["1 cup ripe jackfruit pods","100ml milk","1 tsp honey","Cardamom"],["Remove and deseed jackfruit pods.","Blend with milk, honey, cardamom.","Serve chilled.","Dindigul seasonal special!"],["Vitamin B6","Potassium","Fibre","Seasonal Dindigul treat"],"Evening"],
+["evening","E07","Chikku Sapota Smoothie",0,"🟤",10,["2 ripe chikku","200ml milk","1 tsp honey","Pinch of cardamom"],["Peel and deseed chikku.","Blend with milk, honey and cardamom.","Serve chilled.","Best when very ripe."],["Natural iron","Calcium","Energy-dense","Calms nervous system"],"Evening snack"],
+["evening","E08","Dragon Fruit Smoothie",0,"🐉",10,["1 ripe dragon fruit","100ml coconut milk","1 tsp honey"],["Cut dragon fruit, scoop flesh.","Blend with coconut milk and honey.","Serve cold.","Stunning pink colour!"],["Antioxidant-rich","Gut-friendly prebiotic fibre","Skin health","Hydrating"],"Evening"],
+["evening","E09","Pineapple Mint Smoothie",0,"🍍",10,["1 cup pineapple","10 mint leaves","100ml coconut milk","Honey"],["Blend all together.","Adjust sweetness.","Serve over ice.","Add mint sprig for garnish."],["Bromelain enzyme","Cooling","Anti-bloat","Refreshing"],"4–6 PM"],
+["evening","E10","Rose Lemon Water",0,"🌹",10,["1 tsp rose water","Lemon juice","1 tsp honey","300ml water","Ice"],["Mix rose water with lemon.","Add honey and cold water.","Stir well.","Serve over ice."],["Calming","Reduces skin inflammation","Antioxidant","Refreshing"],"Evening"],
+["evening","E11","Basil Seed Sabja Drink",0,"⚫",10,["1 tbsp basil seeds soaked 20 mins","Rose water","Lemon","Honey","Cold water"],["Soak sabja seeds 20 mins — swell 10x.","Mix with rose water, lemon, honey.","Add cold water.","Serve cold — unique texture!"],["Gut cooling","Weight management","Blood sugar control","Hydrating"],"4–7 PM"],
+["evening","E12","Kokum Sherbet",0,"🟣",10,["Dried kokum soaked in water","Jaggery","Rock salt","Cumin","Mint"],["Soak kokum 30 mins.","Extract deep red juice.","Add jaggery, rock salt and cumin.","Garnish with mint. Serve cold."],["Alkalises body","Prevents acidity","Liver tonic","Reduces bloating"],"Evening"],
+["evening","E13","Watermelon Yogurt Smoothie",0,"🍉",10,["2 cups watermelon","150ml thick curd","1 tsp honey","Pinch of cardamom"],["Blend watermelon first.","Add curd, honey and cardamom.","Blend together.","Serve immediately."],["Probiotic + deep hydration","Cooling","Protein","Gut health"],"4–6 PM"],
+["evening","E14","Avocado Banana Smoothie",0,"🥑",10,["½ avocado","1 banana","200ml milk","1 tsp honey","Pinch of cardamom"],["Scoop avocado flesh.","Blend with banana, milk, honey, cardamom.","Serve immediately.","Add handful of ice."],["Healthy fats","Magnesium sleep aid","Brain fuel","Testosterone support"],"Evening"],
+["evening","E15","Jackfruit Milk Shake",0,"🧃",10,["1 cup ripe jackfruit","200ml full-fat milk","1 tsp honey","Cardamom"],["Deseed jackfruit pods.","Blend with milk, honey, cardamom.","Serve chilled.","Seasonal Dindigul special!"],["Protein","Fibre","B vitamins","Natural sweetness"],"Evening"],
+["evening","E16","Chocolate Banana Smoothie",0,"🍫",10,["1 banana","1 tbsp cacao powder","200ml milk","1 tsp honey"],["Blend banana with milk.","Add cacao and honey.","Blend smooth.","Serve chilled — tastes like dessert!"],["Magnesium from cacao","Energy","Mood lifter","Protein"],"Evening treat"],
+["evening","E17","Mint Soda",0,"🫧",10,["10 fresh mint leaves","Lime juice","Rock salt","200ml soda"],["Muddle mint in glass.","Add lime and rock salt.","Top with chilled soda.","Serve immediately."],["Digestive","Refreshing","Anti-bloat","Cooling"],"Evening"],
+["evening","E18","Ginger Soda",0,"⚡",10,["1 tsp ginger juice","Lime juice","1 tsp honey","200ml soda water"],["Mix ginger juice with honey and lime.","Taste and adjust.","Top with chilled soda.","Serve immediately — it fizzes!"],["Anti-nausea","Digestive","Metabolism boost","Refreshing"],"Evening"],
+["evening","E19","Berry Yogurt Smoothie",0,"🫐",10,["Jamun or black plum or berries","150ml thick curd","Honey"],["Deseed jamun or prepare berries.","Blend with curd and honey.","Adjust sweetness.","Serve cold."],["Anthocyanins","Probiotic","Blood sugar control","Anti-aging"],"Evening snack"],
+["evening","E20","Cold Brew Coffee",0,"☕",10,["2 tbsp coarse ground coffee","400ml cold water"],["Combine coffee and cold water in jar.","Stir well and cover.","Refrigerate 12–18 hours.","Strain. Serve over ice."],["Sustained energy no acidity","Antioxidant","Alertness","No blood sugar spike"],"4–6 PM"],
+["evening","E21","Palm Sugar Lemon Drink",0,"🍋",10,["1 tbsp palm sugar karupatti","Lemon","Cold water"],["Dissolve palm sugar in warm water.","Let cool.","Add lemon and cold water.","Serve chilled."],["Natural low-GI sweetener","Iron","Cooling","Vitamin B complex"],"Evening"],
+["evening","E22","Guava Yogurt Smoothie",0,"🟢",10,["2 ripe guavas","150ml curd","1 tsp honey","Pinch of cardamom"],["Blend guava with curd and honey.","Strain if needed.","Add cardamom.","Serve cold."],["Highest Vitamin C","Probiotic","Digestive fibre","Skin health"],"Evening snack"],
+["evening","E23","Lychee Coconut Cooler",0,"🍒",10,["8 fresh lychees","100ml tender coconut water","Lime","Honey"],["Peel and deseed lychees.","Blend with coconut water.","Add lime and honey.","Serve very cold."],["Vitamin C","Electrolytes","Anti-inflammatory","Skin health"],"4–6 PM"],
+["evening","E24","Peanut Milk Shake",0,"🥜",10,["2 tbsp groundnut butter","200ml milk","1 tsp honey","Cardamom"],["Blend peanuts with a little milk.","Add remaining milk, honey, cardamom.","Blend smooth.","Serve chilled."],["Protein","Zinc for testosterone","Healthy fats","Filling"],"Evening snack"],
+["evening","E25","Beet Banana Smoothie",0,"🟣",10,["½ small beetroot boiled","1 banana","150ml milk","1 tsp honey"],["Boil beetroot, cool and chop.","Blend with banana, milk and honey.","Serve immediately.","Beautiful deep pink colour!"],["Iron","Nitric oxide for circulation","Potassium","Energy"],"Evening"],
+["evening","E26","Banana Date Sesame Shake",1,"💛",25,["1 banana","3 seedless dates","1 tsp gingelly sesame oil","200ml milk"],["Blend banana, dates and milk.","Add gingelly oil.","Blend 10 more seconds.","Serve cold — zinc powerhouse!"],["High zinc for testosterone","Slow energy release","Muscle recovery","Healthy fats"],"Pre-workout"],
+["evening","E27","Papaya Lime Refresher",1,"🧡",25,["1 cup papaya","Juice of 1 lime","1 tsp honey","Pinch of rock salt","Ice"],["Blend papaya smooth.","Add lime, honey and rock salt.","Blend with ice.","Serve immediately."],["Papain enzyme","Skin brightening","Vitamin C","Digestive"],"Evening snack"],
+["evening","E28","Mango Ginger Lassi",1,"🥭",25,["1 cup mango pulp","150ml thick curd","1 tsp grated ginger","Jaggery"],["Blend mango and curd.","Stir in ginger juice.","Add jaggery to sweeten.","Serve cold."],["Probiotic gut health","Anti-inflammatory ginger","Protein","Vitamin A"],"Post-workout"],
+["evening","E29","Hibiscus Lemon Iced Tea",1,"🌸",25,["Dried hibiscus chembarathi","Lemon","Honey","Cold water","Ice"],["Brew hibiscus 10 mins.","Cool completely.","Add lemon and honey.","Serve over ice with mint sprig."],["Lowers blood pressure","Antioxidant","Kidney care","Cooling"],"4–7 PM"],
+["evening","E30","Rose Milk Probiotic Cooler",1,"🌹",25,["200ml chilled thick curd","1 tbsp rose syrup gulab","Pinch of cardamom","Ice"],["Blend curd with rose syrup and cardamom.","Serve very cold over ice.","Garnish with dried rose petals if available.","Tastes like dessert!"],["Probiotic","Calming","Anti-inflammatory","Dessert-worthy"],"Evening"],
+["night","Nt01","Turmeric Milk",0,"🌙",10,["200ml warm milk","½ tsp turmeric","Pinch of pepper","1 tsp coconut oil","Jaggery"],["Warm milk gently.","Stir in turmeric and black pepper.","Add coconut oil and jaggery.","Drink warm, slowly."],["Anti-inflammatory","Heals gut lining","Promotes deep sleep","Calming"],"9–10 PM"],
+["night","Nt02","Cardamom Milk",0,"🫙",10,["200ml warm milk","3 cardamom pods crushed","1 tsp honey"],["Crush cardamom pods.","Boil milk with cardamom 3 mins.","Strain.","Add honey. Drink warm."],["Calming","Aids deep sleep","Tryptophan pathway","Digestive"],"Before bed"],
+["night","Nt03","Badam Milk",0,"🥛",10,["10 soaked almonds peeled","200ml warm milk","1 tsp honey","Saffron","Cardamom"],["Peel soaked almonds, blend with a little milk.","Add to warmed milk with honey and cardamom.","Add saffron steeped in 1 tbsp warm milk.","Drink warm."],["Brain-boosting Vitamin E","Calcium","Promotes deep sleep","Anti-aging"],"Before bed"],
+["night","Nt04","Honey Ginger Tea",0,"🍵",10,["1-inch ginger","1 tsp honey","1 tsp lemon","250ml warm water"],["Grate ginger, steep in warm water 5 mins.","Strain.","Add honey and lemon.","Sip slowly while warm."],["Anti-inflammatory","Soothes throat","Digestive","Calming"],"8–10 PM"],
+["night","Nt05","Chamomile Tea",0,"🌼",10,["2 chamomile tea bags","400ml water","Honey","Lemon"],["Brew chamomile 5 mins.","Cool completely.","Add honey.","Serve chilled."],["Promotes sleep","Reduces anxiety","Anti-inflammatory","Gut soothing"],"9 PM onwards"],
+["night","Nt06","Cinnamon Apple Tea",0,"🍎",10,["1 stick cinnamon","1 apple slice","1 tsp honey","300ml warm water"],["Boil cinnamon and apple in water.","Steep 8 mins.","Strain and pour.","Add honey. Drink warm."],["Blood sugar control","Warming","Digestive","Calming"],"After dinner"],
+["night","Nt07","Turmeric Ginger Tea",0,"🌿",10,["½ tsp turmeric","½ tsp ginger powder","1 tsp honey","1 tsp lemon","250ml warm water"],["Mix turmeric and ginger in warm water.","Add honey and lemon.","Stir thoroughly.","Drink warm after dinner."],["Powerful anti-inflammatory","Gut healing","Reduces cortisol","Sleep aid"],"After dinner"],
+["night","Nt08","Clove Herbal Water",0,"🫙",10,["4–5 cloves","300ml warm water","½ tsp honey"],["Boil cloves in water 5 mins.","Strain.","Add honey.","Sip warm."],["Anti-bacterial","Reduces toothache","Digestive","Anti-bloating"],"After dinner"],
+["night","Nt09","Jeera Coriander Digestive",0,"🌾",10,["1 tsp cumin","1 tsp coriander seeds","350ml water","Lemon"],["Boil seeds in water 5 mins.","Cool and strain.","Add lemon.","Sip before bed."],["Reduces bloating","Digestive enzymes","Ayurvedic classic","Anti-gas"],"Before bed"],
+["night","Nt10","Ragi Ambli",0,"🟤",10,["3 tbsp ragi finger millet flour","400ml water","Pinch of salt"],["Mix ragi in cold water to paste.","Add to 400ml water on medium heat.","Stir continuously — thin porridge.","Cool and serve. Can add curd."],["Iron","Calcium","Cooling","Sustained overnight energy"],"Before bed"],
+["night","Nt11","Cooling Herbal Tea",0,"🌿",10,["Mint tulsi fennel seeds","Honey","Lemon"],["Boil mint, tulsi, fennel in water.","Steep 8 mins.","Strain.","Add honey and lemon. Drink warm."],["Cooling","Digestive","Reduces acidity","Promotes sleep"],"8–10 PM"],
+["night","Nt12","Cold Sukku Coffee",0,"☕",10,["Dry ginger sukku","1 tsp coffee decoction","Warm milk","Jaggery"],["Prepare sukku decoction.","Mix with coffee and warm milk.","Add jaggery.","Sip warm after dinner."],["Digestive","Anti-bloat","Warming","Classic South Indian night drink"],"After dinner"],
+["night","Nt13","Rose Milk",0,"🌹",10,["200ml chilled milk","1 tbsp rose syrup","Pinch of cardamom"],["Mix rose syrup into chilled milk.","Add cardamom.","Stir well.","Serve cold."],["Calming","Cooling","Anti-inflammatory","Delicious bedtime treat"],"Before bed"],
+["night","Nt14","Jigarthanda",0,"🍨",10,["Milk","Nannari syrup","China grass jelly","Ice cream"],["Dissolve China grass in warm milk, cool to set.","Layer nannari syrup at bottom.","Add chilled thin milk.","Top with jelly and ice cream."],["Cooling","Energy","Calcium","Iconic regional drink"],"Night treat"],
+["night","Nt15","Palm Fruit Milk",0,"🌴",10,["2 ripe palm fruit nungu pulp","200ml cold milk","1 tsp honey"],["Peel palm fruit, extract white pulp.","Blend with cold milk and honey.","Serve chilled.","Traditional Tamil summer classic."],["Cooling","Light","Natural electrolytes","Traditional Tamil drink"],"Before bed"],
+["night","Nt16","Mint Green Tea",0,"🍃",10,["1 green tea bag","8 fresh mint leaves","1 tsp honey","300ml warm water"],["Brew green tea in warm water 3 mins.","Add fresh mint leaves.","Steep 2 more mins.","Strain, add honey. Serve warm."],["Antioxidant","Calming","Digestive","Mild metabolism boost"],"Early night"],
+["night","Nt17","Coriander Lemon Cooler",0,"🌿",10,["1 tsp coriander seeds","1 tsp lemon juice","Rock salt","300ml water"],["Boil coriander seeds in water 5 mins.","Cool and strain.","Add lemon and rock salt.","Serve warm or at room temp."],["Anti-inflammatory","Reduces body heat","Digestive","Kidney-friendly"],"Night"],
+["night","Nt18","Lavender Herbal Tea",0,"💜",10,["1 tsp dried lavender petals","Honey","Warm water"],["Steep lavender in hot water 5 mins.","Strain carefully.","Add honey.","Drink warm for sleep."],["Deep sleep induction","Reduces anxiety","Calming nervous system","Anti-inflammatory"],"9–10 PM"],
+["night","Nt19","Almond Saffron Milk",0,"🌟",10,["8 soaked almonds","3 saffron strands","200ml warm milk","1 tsp honey","Cardamom"],["Peel soaked almonds, blend with a little milk.","Steep saffron in 1 tbsp warm milk.","Combine with warmed milk.","Add saffron, honey, cardamom. Drink warm."],["Deep sleep","Anti-anxiety","Vitamin E","Hormone support"],"9–10 PM"],
+["night","Nt20","Spiced Warm Rasam",0,"🌶️",10,["Thin rasam tamarind tomato spices"],["Prepare thin rasam with tamarind, tomato, cumin, pepper.","Add curry leaves and coriander.","Serve hot as drinking soup.","Extremely comforting after dinner."],["Digestive","Anti-inflammatory spices","Vitamin C","Warming"],"After dinner"],
+["night","Nt21","Turmeric Golden Milk",1,"✨",25,["200ml warm milk","½ tsp turmeric","Pinch of black pepper","1 tsp coconut oil","Jaggery"],["Warm milk gently.","Stir in turmeric and pepper — boosts curcumin 2000%.","Add coconut oil and jaggery.","Drink warm before bed."],["Anti-inflammatory","Heals gut lining","Promotes deep sleep","Testosterone support"],"9–10 PM"],
+["night","Nt22","Banana Dates Bedtime Shake",1,"🌙",25,["1 banana","3 dates","200ml warm milk","Pinch of nutmeg","1 tsp honey"],["Blend banana and dates with warm milk.","Add nutmeg — natural sleep inducer.","Add honey.","Serve warm or slightly cooled."],["Magnesium + tryptophan for sleep","Zinc for testosterone","Melatonin pathway","Calming"],"30 mins before bed"],
+["night","Nt23","Jeera Fennel Digestive Tea",1,"🫖",25,["1 tsp cumin jeera","1 tsp fennel sombu","300ml water","Lemon"],["Boil jeera and sombu in water.","Steep 7 mins.","Strain.","Add lemon. Sip warm after dinner."],["Reduces gas and bloating","Anti-acidity","Digestive repair","Calming"],"After dinner"],
+["night","Nt24","Ashwagandha Warm Milk",1,"💪",25,["200ml warm milk","½ tsp ashwagandha powder","1 tsp honey","Pinch of cardamom"],["Warm milk gently.","Whisk in ashwagandha until dissolved.","Add honey and cardamom.","Drink warm 30 mins before bed."],["Adaptogen reduces cortisol","Supports testosterone","Promotes deep sleep","Stress relief"],"30 mins before bed"],
+["night","Nt25","Saffron Cardamom Milk",1,"🌟",25,["200ml warm full-fat milk","4 saffron strands","2 cardamom pods","1 tsp honey"],["Steep saffron in 1 tbsp warm milk 5 mins.","Boil milk with crushed cardamom.","Combine and add honey.","Sip slowly. Deeply calming."],["Mood-elevating","Anti-anxiety","Deep sleep promoter","Skin glow","Anti-aging"],"9–10 PM"],
+];
+
+// ── STATE ─────────────────────────────────────────────────────────────────
+const SK='dretro_v2';
+let S={tried:{},favs:{},count:{},xp:0,level:0,streak:0,lastSeen:null,name:''};
+try{const r=localStorage.getItem(SK);if(r){const p=JSON.parse(r);S={...S,...p};}}catch(e){}
+function save(){try{localStorage.setItem(SK,JSON.stringify(S));}catch(e){}}
+
+// ── LEVELS & XP ──────────────────────────────────────────────────────────
+function getLevel(xp){return LEVELS.findLast(l=>xp>=l.min)||LEVELS[0];}
+function calcXP(){
+  let xp=0;
+  D.forEach(d=>{const cnt=S.count[d[1]]||0;if(cnt>0)xp+=d[5]*cnt;});
+  return xp;
+}
+function updateXPUI(){
+  const xp=calcXP();S.xp=xp;
+  const lv=getLevel(xp);
+  const prevLv=getLevel(xp-10);
+  const nxt=LEVELS[LEVELS.indexOf(lv)+1];
+  const pct=nxt?Math.round((xp-lv.min)/(nxt.min-lv.min)*100):100;
+  document.getElementById('xpLevel').textContent=`${lv.emoji} Level ${LEVELS.indexOf(lv)+1} — ${lv.name}`;
+  document.getElementById('xpPts').textContent=`${xp} XP`;
+  document.getElementById('xpFill').style.width=pct+'%';
+  // level up popup
+  if(lv.min>prevLv.min&&xp===lv.min){
+    showLevelUp(lv);
+  }
+}
+function showLevelUp(lv){
+  const el=document.getElementById('levelupPopup');
+  document.getElementById('levelupText').textContent=`${lv.emoji} ${lv.name}!`;
+  document.getElementById('levelupSub').textContent=`Level ${LEVELS.indexOf(lv)+1} unlocked — keep sipping!`;
+  el.classList.add('show');
+  playSound('levelup');
+  fireConfetti();
+  setTimeout(()=>el.classList.remove('show'),3000);
+}
+
+// ── STREAK ────────────────────────────────────────────────────────────────
+function updateStreak(){
+  const today=new Date().toDateString();
+  const yest=new Date(Date.now()-86400000).toDateString();
+  if(S.lastSeen!==today){
+    S.streak=S.lastSeen===yest?(S.streak||0)+1:1;
+    S.lastSeen=today;save();
+  }
+  document.getElementById('streakNum').textContent=S.streak||1;
+}
+function showStreakInfo(){showToast(`🔥 ${S.streak||1} day streak! Keep sipping, ${S.name||'Dev'}!`);}
+
+// ── ACHIEVEMENTS ──────────────────────────────────────────────────────────
+function buildAchievements(){
+  const strip=document.getElementById('achStrip');
+  strip.innerHTML='';
+  ACHIEVEMENTS.forEach(a=>{
+    const unlocked=a.cond(S);
+    const div=document.createElement('div');
+    div.className=`ach-badge${unlocked?' unlocked':' locked'}`;
+    div.innerHTML=`<div class="ach-icon">${a.icon}</div><div class="ach-name">${a.name}</div>`;
+    div.onclick=()=>showToast(unlocked?`✅ ${a.name} unlocked!`:`🔒 ${a.name} — keep going!`);
+    strip.appendChild(div);
+  });
+}
+
+// ── DOTD ──────────────────────────────────────────────────────────────────
+function setupDOTD(){
+  const day=new Date().getDate();
+  const d=D[day%D.length];
+  document.getElementById('dotdName').textContent=d[4]+' '+d[2];
+  document.getElementById('dotdSub').textContent='🕐 '+d[9]+' · '+d[0].toUpperCase();
+  document.getElementById('dotdBtn').onclick=()=>openSheet(d[1]);
+}
+
+// ── SECTIONS ─────────────────────────────────────────────────────────────
+const SECS=[
+  {id:'morning',emoji:'🌅',label:'Morning Drinks',time:'6 AM – 11 AM'},
+  {id:'noon',   emoji:'☀️', label:'Noon & Afternoon',time:'11 AM – 4 PM'},
+  {id:'evening',emoji:'🌇',label:'Evening Drinks', time:'4 PM – 8 PM'},
+  {id:'night',  emoji:'🌙',label:'Night & Bedtime',time:'8 PM – 10 PM'},
+];
+const SECN={morning:'M',noon:'N',evening:'E',night:'Nt'};
+let curF='all',curQ='',curRandId=null;
+
+// ── BUILD ─────────────────────────────────────────────────────────────────
+function build(){
+  const cont=document.getElementById('mainContent');
+  cont.innerHTML='';
+  SECS.forEach(sec=>{
+    // kolam divider
+    const kdiv=document.createElement('div');
+    kdiv.className='kolam-div';
+    kdiv.innerHTML=`<div class="kolam-line"></div><div class="kolam-center"><span>✦</span><span>❋</span><span>✦</span></div><div class="kolam-line"></div>`;
+    cont.appendChild(kdiv);
+
+    const wrap=document.createElement('div');
+    wrap.dataset.section=sec.id;
+    const sd=D.filter(d=>d[0]===sec.id);
+
+    const hdr=document.createElement('div');
+    hdr.className=`sec-hdr ${sec.id}`;
+    hdr.innerHTML=`
+      <div class="sec-hdr-badge">${sec.emoji}</div>
+      <div class="sec-hdr-info">
+        <div class="sec-hdr-title">${sec.label}</div>
+        <div class="sec-hdr-sub">${sec.time}</div>
+      </div>
+      <div class="sec-hdr-count" id="shc-${sec.id}">0/${sd.length}</div>`;
+    wrap.appendChild(hdr);
+
+    const grid=document.createElement('div');
+    grid.className='cards-grid';
+    sd.forEach((d,i)=>grid.appendChild(makeCard(d,i)));
+    wrap.appendChild(grid);
+    cont.appendChild(wrap);
+  });
+  updateStats();
+}
+
+function makeCard(d,idx){
+  const [time,id,name,isCustom,emoji,xp,ingredients,,benefits,bestFor]=d;
+  const cnt=S.count[id]||0;
+  const card=document.createElement('div');
+  card.className=`dcard ${time}${isCustom?' is-custom':''}${S.tried[id]?' tried-card':''}${S.favs[id]?' fav-card':''}`;
+  card.dataset.id=id;card.dataset.time=time;
+  card.dataset.srch=`${name} ${ingredients.join(' ')} ${benefits.join(' ')}`.toLowerCase();
+  card.style.animationDelay=(idx*0.03)+'s';
+  card.innerHTML=`
+    <div class="card-stamp-top"></div>
+    <div class="tried-stamp">TRIED</div>
+    <div class="card-try-count${cnt>0?' show':''}">×${cnt}</div>
+    <div class="card-body">
+      <div class="card-top">
+        <span class="card-emoji">${emoji}</span>
+        <div class="card-actions">
+          <button class="ca-btn fav${S.favs[id]?' on':''}" onclick="toggleFav('${id}',this);event.stopPropagation();">${S.favs[id]?'❤️':'🤍'}</button>
+          <button class="ca-btn chk${S.tried[id]?' on':''}" onclick="toggleTried('${id}',this);event.stopPropagation();">✓</button>
+        </div>
+      </div>
+      <div class="card-name">${name}${isCustom?'<span class="custom-badge">✦</span>':''}</div>
+      <div class="card-time">${bestFor.split('/')[0].trim()}</div>
+      <div class="card-ing">${ingredients.slice(0,2).join(' · ')}</div>
+      <button class="card-open-btn" onclick="openSheet('${id}')">🎫 View Recipe</button>
+    </div>`;
+  return card;
+}
+
+// ── SHEET ─────────────────────────────────────────────────────────────────
+function openSheet(id){
+  const d=D.find(x=>x[1]===id);if(!d)return;
+  const [time,,name,isCustom,emoji,xp,ingredients,steps,benefits,bestFor]=d;
+  const cnt=S.count[id]||0;
+  const tpill={morning:'var(--m-bg)',noon:'var(--n-bg)',evening:'var(--e-bg)',night:'var(--nt-bg)'};
+  const tcolor={morning:'var(--m-dk)',noon:'var(--n-dk)',evening:'var(--e-dk)',night:'var(--nt-dk)'};
+  document.getElementById('sheetContent').innerHTML=`
+    <div class="ticket-stub ${time}">
+      <div class="ticket-num">🎫 TICKET #${id} · DINDIGUL SUMMER SIPS</div>
+      <span class="ticket-emoji">${emoji}</span>
+      <div class="ticket-title">${name}${isCustom?'<span class="custom-badge" style="font-size:10px">✦ CUSTOM</span>':''}</div>
+      <div class="ticket-time-pill" style="background:${tpill[time]};color:${tcolor[time]};">🕐 ${bestFor} · +${xp} XP</div>
+    </div>
+    <div class="ticket-tear">
+      <div class="tear-circle-l"></div>
+      <div class="tear-line"></div>
+      <div class="tear-circle-r"></div>
+    </div>
+    <div class="ticket-counter-row">
+      <div class="ticket-counter">
+        <span class="counter-label">Times Tried</span>
+        <div class="counter-controls">
+          <button class="counter-btn" onclick="adjustCount('${id}',-1)">−</button>
+          <div class="counter-num" id="cnt-${id}">${cnt}</div>
+          <button class="counter-btn" onclick="adjustCount('${id}',1)">+</button>
+        </div>
+        <span class="obsessed-badge${cnt>=3?' show':''}" id="obs-${id}">🔁 OBSESSED!</span>
+      </div>
+    </div>
+    <div class="sheet-btns">
+      <button class="s-btn s-try${S.tried[id]?' on':''}" id="stry-${id}" onclick="toggleTried('${id}',null,this)">
+        ${S.tried[id]?'✓ Tried! Unmark?':'Mark as Tried'}
+      </button>
+      <button class="s-btn s-fav${S.favs[id]?' on':''}" id="sfav-${id}" onclick="toggleFav('${id}',null,this)">
+        ${S.favs[id]?'❤️ Saved':'🤍 Save'}
+      </button>
+    </div>
+    <div class="sheet-sec">
+      <div class="sheet-sec-title">Ingredients</div>
+      <div class="ing-chips ${time}">${ingredients.map(i=>{
+        const key=Object.keys(ING_DB).find(k=>i.toLowerCase().includes(k));
+        return `<span class="ing-chip" onclick="showIngSpotlight('${key||''}','${i}')">${i}${key?' 🔍':''}</span>`;
+      }).join('')}</div>
+    </div>
+    <div class="sheet-sec">
+      <div class="sheet-sec-title">Recipe</div>
+      <div class="steps-list ${time}">${steps.map((s,i)=>`
+        <div class="step-row">
+          <div class="step-n">${i+1}</div>
+          <div class="step-txt">${s}</div>
+        </div>`).join('')}</div>
+    </div>
+    <div class="sheet-sec">
+      <div class="sheet-sec-title">Health Benefits</div>
+      <div class="ben-chips ${time}">${benefits.map(b=>`<span class="ben-chip">${b}</span>`).join('')}</div>
+    </div>`;
+  document.getElementById('overlay').classList.add('on');
+  document.getElementById('sheet').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+function closeSheet(){
+  document.getElementById('overlay').classList.remove('on');
+  document.getElementById('sheet').classList.remove('on');
+  document.body.style.overflow='';
+}
+
+// ── COUNT ─────────────────────────────────────────────────────────────────
+function adjustCount(id,delta){
+  S.count[id]=Math.max(0,(S.count[id]||0)+delta);
+  if(S.count[id]>0)S.tried[id]=true;
+  save();
+  const el=document.getElementById(`cnt-${id}`);if(el)el.textContent=S.count[id];
+  const obs=document.getElementById(`obs-${id}`);if(obs)obs.className=`obsessed-badge${S.count[id]>=3?' show':''}`;
+  // update card try counter
+  const card=document.querySelector(`.dcard[data-id="${id}"]`);
+  if(card){
+    const tc=card.querySelector('.card-try-count');
+    if(tc){tc.textContent='×'+S.count[id];tc.className=`card-try-count${S.count[id]>0?' show':''}`;};
+    card.classList.toggle('tried-card',S.count[id]>0);
+    const cb=card.querySelector('.ca-btn.chk');if(cb)cb.classList.toggle('on',S.count[id]>0);
+  }
+  if(delta>0){playSound('success');fireConfetti();}
+  updateStats();buildAchievements();updateXPUI();
+  if(S.count[id]===3)showToast('🔁 OBSESSED! You love this drink!');
+  else if(delta>0)showToast(`+${D.find(x=>x[1]===id)?.[5]||10} XP gained!`);
+  else showToast('Count updated');
+}
+
+// ── TOGGLE ────────────────────────────────────────────────────────────────
+function toggleTried(id,cardBtn,sheetBtn){
+  if(S.tried[id]){
+    S.tried[id]=false;S.count[id]=0;
+  } else {
+    S.tried[id]=true;if(!S.count[id])S.count[id]=1;
+  }
+  save();
+  const card=document.querySelector(`.dcard[data-id="${id}"]`);
+  if(card){
+    card.classList.toggle('tried-card',!!S.tried[id]);
+    const cb=cardBtn||card.querySelector('.ca-btn.chk');if(cb)cb.classList.toggle('on',!!S.tried[id]);
+    const tc=card.querySelector('.card-try-count');
+    if(tc){tc.textContent='×'+(S.count[id]||0);tc.className=`card-try-count${(S.count[id]||0)>0?' show':''}`;};
+  }
+  const sb=sheetBtn||document.getElementById(`stry-${id}`);
+  if(sb){sb.className=`s-btn s-try${S.tried[id]?' on':''}`;sb.textContent=S.tried[id]?'✓ Tried! Unmark?':'Mark as Tried';}
+  const cnt=document.getElementById(`cnt-${id}`);if(cnt)cnt.textContent=S.count[id]||0;
+  if(S.tried[id]){fireConfetti();playSound('success');}
+  updateStats();applyFilter();buildAchievements();updateXPUI();
+  showToast(S.tried[id]?'🎉 Tried! +XP earned!':'⭕ Unmarked');
+}
+function toggleFav(id,cardBtn,sheetBtn){
+  S.favs[id]=!S.favs[id];save();
+  const card=document.querySelector(`.dcard[data-id="${id}"]`);
+  if(card){
+    card.classList.toggle('fav-card',!!S.favs[id]);
+    const fb=cardBtn||card.querySelector('.ca-btn.fav');
+    if(fb){fb.textContent=S.favs[id]?'❤️':'🤍';fb.classList.toggle('on',!!S.favs[id]);}
+  }
+  const sf=sheetBtn||document.getElementById(`sfav-${id}`);
+  if(sf){sf.className=`s-btn s-fav${S.favs[id]?' on':''}`;sf.textContent=S.favs[id]?'❤️ Saved':'🤍 Save';}
+  updateStats();buildAchievements();
+  showToast(S.favs[id]?'❤️ Saved to favourites!':'Removed from favourites');
+}
+
+// ── STATS ─────────────────────────────────────────────────────────────────
+function updateStats(){
+  const tot=D.length;
+  const tried=Object.values(S.tried).filter(Boolean).length;
+  const pct=Math.round(tried/tot*100);
+  document.getElementById('progFill').style.width=pct+'%';
+  document.getElementById('progPct').textContent=pct+'%';
+  document.getElementById('progCount').textContent=`${tried} of ${tot} tried`;
+  const ms=[[10,'🌱 Keep sipping!'],[25,'🌿 Quarter done!'],[55,'🌳 Halfway hero!'],[80,'🏆 Almost legend!'],[tot,'👑 ALL 110! GOAT!']];
+  let msg='';for(const[n,m]of ms)if(tried>=n)msg=m;
+  document.getElementById('progMile').textContent=msg;
+  SECS.forEach(sec=>{
+    const sd=D.filter(d=>d[0]===sec.id);
+    const st=sd.filter(d=>S.tried[d[1]]).length;
+    const p2=Math.round(st/sd.length*100);
+    const k=SECN[sec.id];
+    const sb=document.getElementById('sb'+k);if(sb)sb.style.width=p2+'%';
+    const sbn=document.getElementById('sb'+k+'n');if(sbn)sbn.textContent=`${st}/${sd.length}`;
+    const shc=document.getElementById('shc-'+sec.id);if(shc)shc.textContent=`${st}/${sd.length}`;
+  });
+}
+
+// ── FILTER ────────────────────────────────────────────────────────────────
+function applyFilter(){
+  let vis=0;
+  document.querySelectorAll('.dcard').forEach(card=>{
+    const id=card.dataset.id,time=card.dataset.time,srch=card.dataset.srch||'';
+    const mQ=!curQ||srch.includes(curQ);
+    let mF=true;
+    if(curF==='fav')mF=!!S.favs[id];
+    else if(curF==='tried')mF=!!S.tried[id];
+    else if(curF==='untried')mF=!S.tried[id];
+    else if(['morning','noon','evening','night'].includes(curF))mF=time===curF;
+    card.classList.toggle('hidden',!(mQ&&mF));
+    if(mQ&&mF)vis++;
+  });
+  SECS.forEach(sec=>{
+    const wrap=document.querySelector(`[data-section="${sec.id}"]`);
+    if(!wrap)return;
+    const v=wrap.querySelectorAll('.dcard:not(.hidden)').length;
+    wrap.style.display=v>0?'block':'none';
+  });
+  document.getElementById('emptyState').classList.toggle('on',vis===0);
+}
+function setFilter(f,btn){
+  curF=f;
+  document.querySelectorAll('.chip').forEach(c=>{c.className='chip'+(c.dataset.f===f?` on-${f}`:'');});
+  if(btn){document.querySelectorAll('.bnav').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+  applyFilter();window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── INGREDIENT SPOTLIGHT ──────────────────────────────────────────────────
+function showIngSpotlight(key,label){
+  if(!key||!ING_DB[key]){showToast('No data for this ingredient yet!');return;}
+  const data=ING_DB[key];
+  document.getElementById('ingEmoji').textContent=data.emoji;
+  document.getElementById('ingName').textContent=label;
+  document.getElementById('ingFacts').innerHTML=`
+    <div class="ing-fact"><div class="ing-fact-icon">💚</div><div class="ing-fact-text"><div class="ing-fact-label">Health Benefits</div><div class="ing-fact-val">${data.benefits}</div></div></div>
+    <div class="ing-fact"><div class="ing-fact-icon">🔬</div><div class="ing-fact-text"><div class="ing-fact-label">Key Nutrients</div><div class="ing-fact-val">${data.nutrients}</div></div></div>
+    <div class="ing-fact"><div class="ing-fact-icon">🕐</div><div class="ing-fact-text"><div class="ing-fact-label">Best Time</div><div class="ing-fact-val">${data.best}</div></div></div>`;
+  document.getElementById('ingSpotlight').classList.add('on');
+}
+function closeIngSpotlight(){document.getElementById('ingSpotlight').classList.remove('on');}
+
+// ── SPIN WHEEL ────────────────────────────────────────────────────────────
+const WI=[
+  {label:'🌅 Morning',color:'#E8940A',time:'morning'},
+  {label:'☀️ Noon',color:'#0A6B6B',time:'noon'},
+  {label:'🌇 Evening',color:'#2D6A2D',time:'evening'},
+  {label:'🌙 Night',color:'#8B2500',time:'night'},
+  {label:'🎲 Random',color:'#5C3010',time:'any'},
+  {label:'💪 T-Boost',color:'#8B1A00',time:'tboost'},
+  {label:'😴 Sleep',color:'#1C3060',time:'sleep'},
+  {label:'❤️ Favs',color:'#7B0000',time:'fav'},
+];
+let wAngle=0,spinning=false;
+function drawWheel(){
+  const cv=document.getElementById('wheelCanvas');if(!cv)return;
+  const ctx=cv.getContext('2d'),cx=100,cy=100,r=95,sl=Math.PI*2/WI.length;
+  ctx.clearRect(0,0,200,200);
+  WI.forEach((item,i)=>{
+    const s=wAngle+sl*i,e=s+sl;
+    ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,r,s,e);ctx.closePath();
+    ctx.fillStyle=item.color;ctx.fill();
+    ctx.strokeStyle='rgba(244,163,0,0.4)';ctx.lineWidth=1.5;ctx.stroke();
+    ctx.save();ctx.translate(cx,cy);ctx.rotate(s+sl/2);
+    ctx.textAlign='right';ctx.fillStyle='rgba(255,248,236,0.9)';
+    ctx.font='bold 10px Outfit,sans-serif';ctx.fillText(item.label,r-6,4);ctx.restore();
+  });
+  ctx.beginPath();ctx.arc(cx,cy,12,0,Math.PI*2);
+  ctx.fillStyle=var_('--cream');ctx.fill();
+  ctx.strokeStyle=var_('--border');ctx.lineWidth=2;ctx.stroke();
+}
+function var_(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+function openWheel(){document.getElementById('wheelModal').classList.add('on');document.getElementById('wheelResult').classList.remove('show');drawWheel();}
+function closeWheel(){document.getElementById('wheelModal').classList.remove('on');}
+function spinWheel(){
+  if(spinning)return;spinning=true;
+  document.getElementById('wheelSpinBtn').textContent='Spinning…';
+  document.getElementById('wheelResult').classList.remove('show');
+  playSound('spin');
+  const extra=Math.PI*2*(5+Math.random()*5);
+  const tSlice=Math.floor(Math.random()*WI.length);
+  const sl=Math.PI*2/WI.length;
+  const tAngle=Math.PI*2-sl*tSlice-sl/2;
+  const totalRot=extra+tAngle-(wAngle%(Math.PI*2));
+  let start=null,prev=null;
+  const dur=3200;
+  function ani(ts){
+    if(!start){start=ts;prev=ts;}
+    const dt=ts-prev;prev=ts;
+    const elapsed=ts-start,t=Math.min(elapsed/dur,1);
+    const ease=1-Math.pow(1-t,4);
+    wAngle+=(totalRot/dur)*dt;
+    drawWheel();
+    if(t<1)requestAnimationFrame(ani);
+    else{
+      spinning=false;
+      document.getElementById('wheelSpinBtn').textContent='SPIN AGAIN! 🎰';
+      const item=WI[tSlice];
+      let pool;
+      if(item.time==='any')pool=D;
+      else if(item.time==='fav'){pool=D.filter(d=>S.favs[d[1]]);if(!pool.length)pool=D;}
+      else if(item.time==='tboost')pool=D.filter(d=>d[1].match(/M21|M22|M23|E26|Nt24/));
+      else if(item.time==='sleep')pool=D.filter(d=>d[0]==='night');
+      else pool=D.filter(d=>d[0]===item.time);
+      const pick=pool[Math.floor(Math.random()*pool.length)];
+      if(pick){
+        document.getElementById('wheelResultName').textContent=pick[4]+' '+pick[2];
+        document.getElementById('wheelResultSub').textContent='🕐 '+pick[9]+' · Tap to view recipe';
+        const wr=document.getElementById('wheelResult');wr.classList.add('show');
+        wr.onclick=()=>{closeWheel();openSheet(pick[1]);};
+        playSound('ding');
+      }
+    }
+  }
+  requestAnimationFrame(ani);
+}
+
+// ── RANDOM ────────────────────────────────────────────────────────────────
+function openRandom(){
+  const untried=D.filter(d=>!S.tried[d[1]]);
+  const pool=untried.length?untried:D;
+  const d=pool[Math.floor(Math.random()*pool.length)];
+  curRandId=d[1];
+  document.getElementById('randEmoji').textContent=d[4];
+  document.getElementById('randName').textContent=d[2];
+  document.getElementById('randTime').textContent='🕐 '+d[9]+' · '+d[0].toUpperCase();
+  document.getElementById('randIng').innerHTML='<b>Ingredients:</b> '+d[6].join(', ');
+  document.getElementById('randomModal').classList.add('on');
+  playSound('pop');
+}
+function closeRandom(){document.getElementById('randomModal').classList.remove('on');curRandId=null;}
+function markCurrentRandom(){
+  if(!curRandId)return;
+  if(!S.tried[curRandId]){S.tried[curRandId]=true;S.count[curRandId]=(S.count[curRandId]||0)+1;}
+  save();
+  const card=document.querySelector(`.dcard[data-id="${curRandId}"]`);
+  if(card){card.classList.add('tried-card');const cb=card.querySelector('.ca-btn.chk');if(cb)cb.classList.add('on');}
+  updateStats();buildAchievements();updateXPUI();applyFilter();
+  fireConfetti();playSound('success');showToast('✓ Marked as tried! +XP!');closeRandom();
+}
+
+// ── CONFETTI ──────────────────────────────────────────────────────────────
+function fireConfetti(){
+  const cols=['#F4A300','#D94F2B','#2D6A2D','#0D6B6B','#FFF8EC','#8B2500','#FFD166','#C8860A'];
+  for(let i=0;i<45;i++){
+    const c=document.createElement('div');c.className='confetti-piece';
+    c.style.cssText=`left:${Math.random()*100}vw;top:-10px;background:${cols[Math.floor(Math.random()*cols.length)]};width:${Math.random()*10+6}px;height:${Math.random()*10+6}px;border-radius:${Math.random()>.5?'50%':'2px'};animation-duration:${Math.random()*1+0.8}s;animation-delay:${Math.random()*0.5}s;`;
+    document.body.appendChild(c);setTimeout(()=>c.remove(),2500);
+  }
+}
+
+// ── SOUND ─────────────────────────────────────────────────────────────────
+function playSound(type){
+  try{
+    const ac=new(window.AudioContext||window.webkitAudioContext)();
+    const o=ac.createOscillator(),g=ac.createGain();o.connect(g);g.connect(ac.destination);
+    if(type==='success'){
+      o.frequency.setValueAtTime(523,ac.currentTime);o.frequency.setValueAtTime(659,ac.currentTime+0.1);o.frequency.setValueAtTime(784,ac.currentTime+0.2);
+      g.gain.setValueAtTime(0.15,ac.currentTime);g.gain.exponentialRampToValueAtTime(0.001,ac.currentTime+0.5);
+      o.start(ac.currentTime);o.stop(ac.currentTime+0.5);
+    }else if(type==='ding'){
+      o.frequency.setValueAtTime(880,ac.currentTime);g.gain.setValueAtTime(0.12,ac.currentTime);g.gain.exponentialRampToValueAtTime(0.001,ac.currentTime+0.4);o.start(ac.currentTime);o.stop(ac.currentTime+0.4);
+    }else if(type==='pop'){
+      o.frequency.setValueAtTime(400,ac.currentTime);o.frequency.exponentialRampToValueAtTime(800,ac.currentTime+0.1);g.gain.setValueAtTime(0.1,ac.currentTime);g.gain.exponentialRampToValueAtTime(0.001,ac.currentTime+0.2);o.start(ac.currentTime);o.stop(ac.currentTime+0.2);
+    }else if(type==='spin'){
+      o.type='sawtooth';o.frequency.setValueAtTime(200,ac.currentTime);o.frequency.exponentialRampToValueAtTime(600,ac.currentTime+0.3);g.gain.setValueAtTime(0.04,ac.currentTime);g.gain.exponentialRampToValueAtTime(0.001,ac.currentTime+0.3);o.start(ac.currentTime);o.stop(ac.currentTime+0.3);
+    }else if(type==='levelup'){
+      [523,659,784,1047].forEach((f,i)=>{const o2=ac.createOscillator(),g2=ac.createGain();o2.connect(g2);g2.connect(ac.destination);o2.frequency.setValueAtTime(f,ac.currentTime+i*0.12);g2.gain.setValueAtTime(0.15,ac.currentTime+i*0.12);g2.gain.exponentialRampToValueAtTime(0.001,ac.currentTime+i*0.12+0.3);o2.start(ac.currentTime+i*0.12);o2.stop(ac.currentTime+i*0.12+0.3);});return;
+    }
+  }catch(e){}
+}
+
+// ── TOAST ─────────────────────────────────────────────────────────────────
+let tt;
+function showToast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>el.classList.remove('on'),2200);}
+
+// ── SPLASH / NAME ENTRY ───────────────────────────────────────────────────
+const BREWING=['📻 Tuning in to Dindigul FM…','🥭 Squeezing the mangoes…','🌿 Picking fresh tulsi leaves…','☀️ Heating up to 42°C outside…','🌺 Brewing nannari sherbet…','💧 Chilling tender coconut…','🎵 Playing summer hits…','🔥 Almost ready, da!'];
+let brewIdx=0,pct=0;
+const brewEl=document.getElementById('brewingText');
+const pctEl=document.getElementById('splashPct');
+const freqEl=document.getElementById('radioFreq');
+const freqs=['98.3 FM','91.1 FM','104.7 FM','88.9 FM'];
+
+// rotate brewing messages
+const brewInterval=setInterval(()=>{
+  brewIdx=(brewIdx+1)%BREWING.length;
+  if(brewEl)brewEl.textContent=BREWING[brewIdx];
+},700);
+// animate % counter
+const pctInterval=setInterval(()=>{
+  pct=Math.min(pct+2,100);
+  if(pctEl)pctEl.textContent=pct+'%';
+  if(pct>=100){clearInterval(pctInterval);setTimeout(()=>{const btn=document.getElementById('enterBtn');if(btn)btn.classList.add('show');},200);}
+},100);
+// rotate freq
+const freqInterval=setInterval(()=>{
+  const f=freqs[Math.floor(Math.random()*freqs.length)];
+  if(freqEl)freqEl.textContent=f;
+},800);
+
+function enterApp(){
+  clearInterval(brewInterval);clearInterval(pctInterval);clearInterval(freqInterval);
+  const nm=document.getElementById('nameInput').value.trim()||'Dev';
+  S.name=nm;save();
+  document.getElementById('heroName').textContent=`${nm}'s Sips`;
+  document.getElementById('splash').classList.add('hide');
+  setTimeout(()=>{document.getElementById('splash').style.display='none';},1000);
+}
+
+// also allow pressing Enter on name input
+document.getElementById('nameInput').addEventListener('keydown',e=>{if(e.key==='Enter'){const btn=document.getElementById('enterBtn');if(btn.classList.contains('show'))enterApp();}});
+// pre-fill name if saved
+if(S.name){document.getElementById('nameInput').value=S.name;}
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+build();applyFilter();updateStreak();updateXPUI();buildAchievements();setupDOTD();
+if(S.name)document.getElementById('heroName').textContent=`${S.name}'s Sips`;
+
+document.getElementById('searchInput').addEventListener('input',e=>{curQ=e.target.value.toLowerCase().trim();applyFilter();});
+document.querySelectorAll('.chip').forEach(c=>c.addEventListener('click',()=>setFilter(c.dataset.f)));
+window.addEventListener('scroll',()=>document.getElementById('scrollTop').classList.toggle('on',scrollY>500));
+document.getElementById('sheet').addEventListener('touchstart',e=>{window._sy=e.touches[0].clientY;},{passive:true});
+document.getElementById('sheet').addEventListener('touchmove',e=>{if(e.touches[0].clientY-window._sy>90)closeSheet();},{passive:true});
+</script></body></html>
