@@ -1,45 +1,71 @@
-<svg width="700" height="40" viewBox="0 0 700 40" xmlns="http://www.w3.org/2000/svg">
-  <rect width="700" height="40" rx="8" fill="#FAF6EF" stroke="#D9CCBA" stroke-width="1.5"/>
+<svg width="700" height="50" viewBox="0 0 700 50" xmlns="http://www.w3.org/2000/svg">
+  <rect width="700" height="50" rx="10" fill="#FAF6EF" stroke="#D9CCBA" stroke-width="1.5"/>
 
-  <!-- Quote 1 -->
-  <text x="350" y="26" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#7C5832" opacity="0">
+  <!-- 7 quotes, total cycle = 56s, each visible for 8s -->
+  <!-- Pattern per quote: fade in (1s) → hold (6s) → fade out (1s) → invisible (48s) -->
+  <!-- keyTimes: 0 | 1/56 | 7/56 | 8/56 | 1 -->
+
+  <!-- Q1: 0s–8s -->
+  <text x="350" y="30" text-anchor="middle" font-family="Georgia, serif" font-size="13.5" fill="#7C5832">
     💧 Water is fine but have you tried nannari sherbet at 2pm in Dindigul?
-    <animate attributeName="opacity" values="0;1;1;0" dur="56s" begin="0s" repeatCount="indefinite"/>
+    <animate attributeName="opacity"
+      values="0;0;1;1;0;0"
+      keyTimes="0;0.000;0.018;0.125;0.143;1"
+      dur="56s" begin="0s" repeatCount="indefinite"/>
   </text>
 
-  <!-- Quote 2 -->
-  <text x="350" y="26" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#C1440E" opacity="0">
+  <!-- Q2: 8s–16s -->
+  <text x="350" y="30" text-anchor="middle" font-family="Georgia, serif" font-size="13.5" fill="#C1440E">
     🥭 Dindigul summer survival kit: 110 drinks, 0 excuses, infinite sweat.
-    <animate attributeName="opacity" values="0;1;1;0" dur="56s" begin="8s" repeatCount="indefinite"/>
+    <animate attributeName="opacity"
+      values="0;0;1;1;0;0"
+      keyTimes="0;0.143;0.161;0.268;0.286;1"
+      dur="56s" begin="0s" repeatCount="indefinite"/>
   </text>
 
-  <!-- Quote 3 -->
-  <text x="350" y="26" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#5C7A5A" opacity="0">
-    🌴 My gym routine: walk to the kitchen, blend something, pretend it's pre-workout.
-    <animate attributeName="opacity" values="0;1;1;0" dur="56s" begin="16s" repeatCount="indefinite"/>
+  <!-- Q3: 16s–24s -->
+  <text x="350" y="30" text-anchor="middle" font-family="Georgia, serif" font-size="13.5" fill="#5C7A5A">
+    🌴 My gym routine: walk to kitchen, blend something, pretend it's pre-workout.
+    <animate attributeName="opacity"
+      values="0;0;1;1;0;0"
+      keyTimes="0;0.286;0.304;0.411;0.429;1"
+      dur="56s" begin="0s" repeatCount="indefinite"/>
   </text>
 
-  <!-- Quote 4 -->
-  <text x="350" y="26" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#0E7490" opacity="0">
+  <!-- Q4: 24s–32s -->
+  <text x="350" y="30" text-anchor="middle" font-family="Georgia, serif" font-size="13.5" fill="#0E7490">
     ☀️ Dindigul heat said 42°C. I said hold my pomegranate juice.
-    <animate attributeName="opacity" values="0;1;1;0" dur="56s" begin="24s" repeatCount="indefinite"/>
+    <animate attributeName="opacity"
+      values="0;0;1;1;0;0"
+      keyTimes="0;0.429;0.447;0.554;0.571;1"
+      dur="56s" begin="0s" repeatCount="indefinite"/>
   </text>
 
-  <!-- Quote 5 -->
-  <text x="350" y="26" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#7C5832" opacity="0">
-    🌙 Ashwagandha milk at 10pm hits different when you've been on a laptop since 8am.
-    <animate attributeName="opacity" values="0;1;1;0" dur="56s" begin="32s" repeatCount="indefinite"/>
+  <!-- Q5: 32s–40s -->
+  <text x="350" y="30" text-anchor="middle" font-family="Georgia, serif" font-size="13.5" fill="#6B3F1A">
+    🌙 Ashwagandha milk at 10pm hits different after 12hrs on a laptop.
+    <animate attributeName="opacity"
+      values="0;0;1;1;0;0"
+      keyTimes="0;0.571;0.589;0.696;0.714;1"
+      dur="56s" begin="0s" repeatCount="indefinite"/>
   </text>
 
-  <!-- Quote 6 -->
-  <text x="350" y="26" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#C1440E" opacity="0">
+  <!-- Q6: 40s–48s -->
+  <text x="350" y="30" text-anchor="middle" font-family="Georgia, serif" font-size="13.5" fill="#C1440E">
     🍋 Data analyst by day. Juice researcher by summer. Legend by 110 drinks.
-    <animate attributeName="opacity" values="0;1;1;0" dur="56s" begin="40s" repeatCount="indefinite"/>
+    <animate attributeName="opacity"
+      values="0;0;1;1;0;0"
+      keyTimes="0;0.714;0.732;0.839;0.857;1"
+      dur="56s" begin="0s" repeatCount="indefinite"/>
   </text>
 
-  <!-- Quote 7 -->
-  <text x="350" y="26" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#5C7A5A" opacity="0">
+  <!-- Q7: 48s–56s -->
+  <text x="350" y="30" text-anchor="middle" font-family="Georgia, serif" font-size="13.5" fill="#5C7A5A">
     🌿 Amma said drink water. I said I'll have 109 other options first.
-    <animate attributeName="opacity" values="0;1;1;0" dur="56s" begin="48s" repeatCount="indefinite"/>
+    <animate attributeName="opacity"
+      values="0;0;1;1;0;0"
+      keyTimes="0;0.857;0.875;0.982;1.000;1"
+      dur="56s" begin="0s" repeatCount="indefinite"/>
   </text>
+
 </svg>
