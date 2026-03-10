@@ -1,5 +1,5 @@
 # 📻 Dindigul Summer Sips Tracker
-### *A man. A laptop. 42°C heat. 110 drinks. Zero chill. Infinite sweat.*
+### *A man. A laptop. 35°C heat. 110 drinks. Zero chill. Infinite sweat.*
 ### *"Naan oru thadavai sonna, nooru thadavai sonna maadiri" — Rajinikanth. Also me. About juice.*
 
 <p align="center">
@@ -50,9 +50,10 @@
   <img src="https://img.shields.io/badge/Fonts_Used-4_(Non_Negotiable)-8B2500?style=for-the-badge&labelColor=1C0A00" />
 
 </p>
+
 <p align="center">
 
-<!-- ROW 6 — Nannari -->
+<!-- ROW 8 — Nannari -->
   <img src="https://img.shields.io/badge/Nannari_Sherbet-The_GOAT-F4A300?style=for-the-badge&labelColor=1C0A00" />
   <img src="https://img.shields.io/badge/Nannari_Tried-7_Times_in_Testing-D94F2B?style=for-the-badge&labelColor=1C0A00" />
   <img src="https://img.shields.io/badge/Nannari_Haters-Touch_Grass-2D6A2D?style=for-the-badge&labelColor=1C0A00" />
@@ -61,7 +62,7 @@
 <p align="center">
 
 <!-- ROW 7 — Dindigul Heat -->
-  <img src="https://img.shields.io/badge/Dindigul_Temp-42°C_and_Rising-D94F2B?style=for-the-badge&labelColor=1C0A00" />
+  <img src="https://img.shields.io/badge/Dindigul_Temp-35°C_and_Rising-D94F2B?style=for-the-badge&labelColor=1C0A00" />
   <img src="https://img.shields.io/badge/Laptop_Fan-Running_at_Max_RPM-8B2500?style=for-the-badge&labelColor=1C0A00" />
   <img src="https://img.shields.io/badge/Hosted-GitHub_Pages_(Free_Forever)-2D6A2D?style=for-the-badge&labelColor=1C0A00" />
   <img src="https://img.shields.io/badge/Offline_Ready-Like_Amma's_Recipes-C8860A?style=for-the-badge&labelColor=1C0A00" />
@@ -73,7 +74,7 @@
 ## 🌴 Origin Story (A Tragedy in 3 Acts)
 
 **Act 1 — The Innocent Beginning**
-> It was May. It was 42°C. I opened my laptop and said *"I should drink more water this summer."*
+> It was May. It was 35°C. I opened my laptop and said *"I should drink more water this summer."*
 > This was my villain origin story.
 
 **Act 2 — The Point of No Return**
@@ -260,7 +261,7 @@ Appa discovered this feature. He now taps every single ingredient with the energ
 - **Postage stamp perforated borders** — `outline: 2px dashed` has never felt more powerful
 - **Kolam ✦❋✦ dividers** — hand-drawn energy, zero hands involved
 - **Cracked paint SVG texture** — the header has seen battles
-- **Barber-pole animated progress bar** — a static bar in 2025 is a missed opportunity and I will not apologise
+- **Barber-pole animated progress bar** — a static bar in 2026 is a missed opportunity and I will not apologise
 
 **Amma's full design review:**
 *"Enna oru colour? Kaண்ணu koosum. Yaar padikka solra ithaya?"*
@@ -291,7 +292,7 @@ The science is real. The drama around the science is also real. Both coexist pea
 |------|------|
 | **Hero** | Nannari Sherbet (N09). Carries every scene. Never disappoints. |
 | **Comedy Track** | The barber-pole progress bar. Spinning forever. |
-| **Villain** | 35°C Dindigul heat. The reason this whole thing exists. |
+| **Villain** | 42°C Dindigul heat. The reason this whole thing exists. |
 | **Love Interest** | Tender Coconut Water (N01). Always there. Always refreshing. Never lets you down. |
 | **Item Number** | Jigarthanda (Nt14). Arrives unexpectedly. Steals the scene. Everyone claps. |
 | **Emotional BGM Scene** | Turmeric Golden Milk (Nt21). 9 PM. Warm. Quiet. Healing. |
@@ -373,17 +374,75 @@ Try all 110 drinks before October.
 
 ---
 
-## 🙏 Credits
+## 👨‍⚕️ A Message From Dr. Karishma (Wife. OBG Resident. Saveetha Medical College.)
 
-**Built by:** Devpriyadharsan Balan Saravanan — Data Analyst · Dindigul, Tamil Nadu
+> *"He told me he was 'working on a data project' this summer.*
+> *I came home to a vintage radio loading screen, confetti animations, and a spin wheel — for juice.*
+> *I am a doctor. I study obstetrics. I bring life into this world.*
+> *He built achievement badges for drinking nannari sherbet.*
+> *I have no further questions.*
+> *The turmeric milk in Nt01 is clinically solid though. I approve that one.*
+> *— Dr. P. Karishma, M.B.B.S., doing her Masters in OBG at Saveetha, and married to this."*
 
-**Amma:** Provided critical UX feedback (*"yaar padikka solra ithaya"*), zero pull requests, 100% cultural accuracy, and the closing quote of this README. She remains uncredited in the codebase. She does not care.
+<p align="center">
+  <img src="https://img.shields.io/badge/Dr._Karishma-Approved_Nt01_Only-D94F2B?style=for-the-badge&labelColor=1C0A00" />
+  <img src="https://img.shields.io/badge/OBG_Masters-Saveetha_Medical_College-2D6A2D?style=for-the-badge&labelColor=1C0A00" />
+  <img src="https://img.shields.io/badge/Husband_Status-Building_Juice_Apps-8B2500?style=for-the-badge&labelColor=1C0A00" />
+  <img src="https://img.shields.io/badge/Medical_Opinion-'The_turmeric_milk_is_fine'-C8860A?style=for-the-badge&labelColor=1C0A00" />
+</p>
 
-**Appa:** Tapped every ingredient spotlight with the authority of a WebMD senior editor. Updated diet: not at all. Confidence level: maximum.
+**Fun fact:** Karishma studies real human medicine at Saveetha. Meanwhile her husband assigned XP points to pomegranate juice and built a canvas-drawn spinning wheel for drink selection. One of us is saving lives. One of us is farming nannari achievement badges. No further comment.
 
-**Nannari Sherbet:** The real hero. N09. Main character energy. 7 test runs. Carried the whole project.
+> *Like Nayanthara in any movie — she carries everything with calm, competence, and zero time for nonsense. Lady Superstar energy. Fully certified.*
 
-**GitHub Pages:** Hosting this for free since day one. True producer energy. No cuts. No royalties.
+---
+
+## 🦜 Simba — Chief Taste Tester, Albino Cockatiel
+
+*The only team member who showed up every single day without being asked.*
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Simba-Chief_Taste_Tester-F4A300?style=for-the-badge&labelColor=1C0A00" />
+  <img src="https://img.shields.io/badge/Species-Albino_Cockatiel-D94F2B?style=for-the-badge&labelColor=1C0A00" />
+  <img src="https://img.shields.io/badge/Age-4.5_Years_Old-2D6A2D?style=for-the-badge&labelColor=1C0A00" />
+  <img src="https://img.shields.io/badge/Contribution-Moral_Support_%26_Screaming-8B2500?style=for-the-badge&labelColor=1C0A00" />
+  <img src="https://img.shields.io/badge/Opinion_on_Coding-Loud-C8860A?style=for-the-badge&labelColor=1C0A00" />
+  <img src="https://img.shields.io/badge/Approved_Drinks-Whatever_I_Was_Drinking-0D6B6B?style=for-the-badge&labelColor=1C0A00" />
+</p>
+
+Simba is a cockatiel who:
+
+- ✅ Supervised every single coding session from a distance of 30cm
+- ✅ Screamed every time the laptop fan got loud (valid feedback)
+- ✅ Tilted his head at the spinning wheel animation like he was reviewing the physics
+- ✅ Showed zero interest in the drinks but maximum interest in the blender sounds
+- ✅ Provided ambient noise that GitHub Copilot cannot replicate
+- ✅ Has never filed a bug report but his presence fixed at least three bugs
+- ❌ Did not drink any of the 110 drinks (vet said no, we respected this)
+- ❌ Cannot read the README but would probably bite it if printed
+
+**Simba's design feedback:** *[loud whistle]* — experts are divided on whether this means he liked it or hated it. We chose to interpret it as approval.
+
+**Simba's review of the radio loading screen:** *[head tilt. pause. another head tilt. walked away.]* — identical to Amma's review. Possibly conspiring.
+
+> *Like Rajini's loyal friend in every film — always present, always dramatic, never explains himself, steals every scene without trying.*
+
+**Simba's favourite drink from this list:** Tender Coconut Water (N01). He didn't drink it. But he watched me drink it with intense focus. We count this.
+
+---
+
+## 🙏 Credits (Full Cast & Crew)
+
+| Role | Person / Entity | Contribution | Paid? |
+|------|----------------|-------------|-------|
+| 👨‍💻 Built by | Devpriyadharsan Balan Saravanan | Everything. All 117,742 chars. | In XP only. |
+| 👩‍⚕️ Medical Advisor | Dr. P. Karishma (OBG, Saveetha) | Approved Nt01. Tolerated everything else. | With great patience. |
+| 🦜 Chief Tester | Simba the Albino Cockatiel | Moral support. Loud opinions. Head tilts. | In mango bites. |
+| 👩‍🍳 Cultural Director | Amma | UX feedback. Walking away. Quote of the year. | She doesn't care about credits. |
+| 🔬 Senior Researcher | Appa | Ingredient spotlight tapping. Zero diet changes. | In confidence. |
+| 🌺 Main Character | Nannari Sherbet (N09) | Carried. The. Whole. Thing. | 7 test sessions. |
+| 🌐 Producer | GitHub Pages | Hosting this circus for free since day one. | Nothing. Legends. |
+| 🎵 BGM | Laptop fan at max RPM | Set the mood. Every. Single. Day. | Thermal throttling. |
 
 📍 Dindigul, TN &nbsp;|&nbsp; 🔗 [LinkedIn](https://www.linkedin.com/in/devpriyadharsan) &nbsp;|&nbsp; 🐙 [GitHub](https://github.com/devpriyadharsan5) &nbsp;|&nbsp; 🌐 [Portfolio](https://www.datascienceportfol.io/devpriyadharsan)
 
@@ -395,20 +454,32 @@ MIT. Do whatever you want.
 
 Fork it. Put your city in it. Make a Chennai version with filter coffee. Make a Madurai version with jigarthanda energy. Make a Tirunelveli version with extra spice. Make a Coimbatore version. Make a Trichy version. Make an Erode version. We form a league. We cover all of Tamil Nadu. One drink at a time.
 
-Only rule: **Do not say Nannari Sherbet is overrated.** This repository does not have the error handling for that. It will crash. Emotionally.
+Only rule: **Do not say Nannari Sherbet is overrated.** This repository does not have the error handling for that. It will crash. Emotionally. Simba will also be upset. You don't want that.
 
 ---
 
 <p align="center">
   <b>Built with 🥭 Banganapalli mango, excessive CSS, four fonts, and a laptop fan running at cinema-interval-crowd noise levels.</b>
+  <br>
+  <b>Supervised by 🦜 Simba. Medically cleared by 👩‍⚕️ Dr. Karishma (Nt01 only). Roasted by Amma.</b>
   <br><br>
-  <i>கோடை குளிர்பானங்கள் · Dindigul Summer 2025</i>
+  <i>கோடை குளிர்பானங்கள் · Dindigul Summer 2026</i>
   <br><br>
   <img src="https://img.shields.io/badge/Made_in-Dindigul,_Tamil_Nadu-F4A300?style=for-the-badge&labelColor=1C0A00" />
   <img src="https://img.shields.io/badge/Powered_by-Nannari_Sherbet-D94F2B?style=for-the-badge&labelColor=1C0A00" />
   <img src="https://img.shields.io/badge/Certified-Amma_Watched_and_Walked_Away-2D6A2D?style=for-the-badge&labelColor=1C0A00" />
+  <img src="https://img.shields.io/badge/🦜_Simba-Supervised_and_Screamed-8B2500?style=for-the-badge&labelColor=1C0A00" />
+  <img src="https://img.shields.io/badge/Dr._Karishma-Approved_Nt01_Turmeric_Milk-C8860A?style=for-the-badge&labelColor=1C0A00" />
   <br><br>
   <i>"innum juice kudikkalaya? computer-la juice kudikka mudiyuma?"</i>
   <br>
   <b>— Amma, March 2026. The quote that started it all.</b>
+  <br><br>
+  <i>"The turmeric milk is fine."</i>
+  <br>
+  <b>— Dr. Karishma, reluctantly.</b>
+  <br><br>
+  <i>[loud whistle]</i>
+  <br>
+  <b>— Simba, on everything.</b>
 </p>
