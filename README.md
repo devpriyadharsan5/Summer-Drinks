@@ -1,4 +1,4 @@
-# 📻 Dindigul Summer Sips Tracker
+# 📻 Dindigul Summer Sips Tracker 🚀 **[Open Live Website](https://devpriyadharsan5.github.io/Summer-Drinks/)**
 ### *A man. A laptop. 35°C heat. 110 drinks. Zero chill. Infinite sweat.*
 ### *"Naan oru thadavai sonna, nooru thadavai sonna maadiri" — Rajinikanth. Also me. About juice.*
 
@@ -17,22 +17,6 @@
 </p>
 <p align="center">
 
-<!-- ROW 2 — Amma -->
-  <img src="https://img.shields.io/badge/Amma_Approval-Pending_Since_May-8B2500?style=for-the-badge&labelColor=1C0A00" />
-  <img src="https://img.shields.io/badge/Amma_Quote-Computer_la_juice_kudikka_mudiyuma-C8860A?style=for-the-badge&labelColor=1C0A00" />
-  <img src="https://img.shields.io/badge/Appa_Status-Tapping_Ingredient_Cards-2D6A2D?style=for-the-badge&labelColor=1C0A00" />
-
-</p>
-<p align="center">
-
-<!-- ROW 3 — Tamil Movie -->
-  <img src="https://img.shields.io/badge/Rajini_Mode-Activated-F4A300?style=for-the-badge&labelColor=1C0A00&logo=data:image/png;base64,iVBORw0KGgo=" />
-  <img src="https://img.shields.io/badge/Thalapathy_Approved-Mass_Overload-D94F2B?style=for-the-badge&labelColor=1C0A00" />
-  <img src="https://img.shields.io/badge/Nayanthara_Would_Drink_This-Lady_Superstar_Certified-8B2500?style=for-the-badge&labelColor=1C0A00" />
-  <img src="https://img.shields.io/badge/Kamal_Haasan_Would_Analyse_This-Intellectually_Hydrated-0D6B6B?style=for-the-badge&labelColor=1C0A00" />
-
-</p>
-<p align="center">
 
 <!-- ROW 4 — Dev Roast -->
   <img src="https://img.shields.io/badge/Social_Life-Traded_For_This-8B2500?style=for-the-badge&labelColor=1C0A00" />
